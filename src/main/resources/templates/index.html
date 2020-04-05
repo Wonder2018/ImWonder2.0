@@ -6,7 +6,7 @@
         <title>I'm Wonder</title>
         <link rel="stylesheet" href="./assets/css/reset.css" />
         <link rel="stylesheet" href="./assets/css/imwonder.css" />
-        <link rel="stylesheet" href="./assets/fonts/icon/iconfont.css">
+        <link rel="stylesheet" href="./assets/fonts/icon/iconfont.css" />
         <link rel="stylesheet" href="./assets/css/index.css" />
         <script src="assets/js/jquery-3.4.1.min.js"></script>
     </head>
@@ -30,22 +30,49 @@
             </div>
             <section class="container clearfix">
                 <ul class="news fr">
-                    <li class="news-card clearfix"><div class="blog-search"><input type="text" class="blog-search-inp" placeholder="输入关键词搜索" /><label for="" class="blog-search-btn"><span class="iconfont icon-search"></span></label></div></li>
+                    <li class="news-card clearfix">
+                        <div class="blog-search">
+                            <input type="text" class="blog-search-inp" placeholder="输入关键词搜索" /><label class="blog-search-btn"
+                                ><span class="iconfont icon-search"></span
+                            ></label>
+                        </div>
+                    </li>
                     <li class="news-card news-imwonder">
-                        <img src="assets/img/index/face.gif" alt="" class="wonder-face">
-                        <img src="assets/img/index/Wonder2019-Black.png" alt="" class="wonder-sign">
+                        <img src="assets/img/index/face.gif" alt="" class="wonder-face" />
+                        <img src="assets/img/index/Wonder2019-Black.png" alt="" class="wonder-sign" />
                         <label class="wonder-motto">拼命去争取成功，但不要期望一定会成功。</label>
                         <ul class="wonder-stat-list">
-                            <li class="wonder-stat-item"><span class="stat-key">博客</span><br><span class="stat-value">123</span></li>
-                            <li class="wonder-stat-item"><span class="stat-key">动态</span><br><span class="stat-value">456</span></li>
-                            <li class="wonder-stat-item"><span class="stat-key">评论</span><br><span class="stat-value">1334</span></li>
+                            <li class="wonder-stat-item"><span class="stat-key">博客</span><br /><span class="stat-value">123</span></li>
+                            <li class="wonder-stat-item"><span class="stat-key">动态</span><br /><span class="stat-value">456</span></li>
+                            <li class="wonder-stat-item"><span class="stat-key">评论</span><br /><span class="stat-value">1334</span></li>
                         </ul>
                         <ul class="wonder-snsl-list">
                             <li class="wonder-snsl-item"><span class="iconfont icon-mail"></span></li>
                             <li class="wonder-snsl-item"><span class="iconfont icon-github"></span></li>
                         </ul>
                     </li>
-                    <li class="news-card">info</li>
+                    <li class="news-card latest-article">
+                        <label class="news-card-title">最近文章</label>
+                        <ul class="latest-article-list">
+                            <li class="latest-article-item">
+                                <label class="latest-article-title">Title 标题 Title 标题 <span class="latest-article-readnum">12232</span></label>
+                                <label class="latest-article-posttime fr">6.28</label>
+                            </li>
+                            <li class="latest-article-item">
+                                <label class="latest-article-title">Title 标题 Title 标题 <span class="latest-article-readnum">12232</span></label>
+                                <label class="latest-article-posttime fr">6.28</label>
+                            </li>
+                            <li class="latest-article-item">
+                                <label class="latest-article-title">Title 标题 Title 标题 <span class="latest-article-readnum">12232</span></label>
+                                <label class="latest-article-posttime fr">6.28</label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="news-card msg-board">
+                        <label class="news-card-title">留言板</label>
+                        <div class="msg-board-bulletchat"></div>
+                        <button class="msg-board-lam">给我留言</button>
+                    </li>
                 </ul>
                 <ul class="blog-list fl">
                     <li class="blog-card clearfix">
@@ -131,6 +158,17 @@
                             正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
                         </div>
                         <label class="blog-readmore">继续阅读 <span class="blog-readnum">23238</span></label>
+                    </li>
+                    <li class="pagelist">
+                        <label class="setpage pageUp">&lt;</label>
+                        <label class="setpage">1</label>
+                        <label class="setpage">2</label>
+                        <label class="setpage">3</label>
+                        <label class="setpage">...</label>
+                        <label class="setpage">10</label>
+                        <label class="setpage">11</label>
+                        <label class="setpage">12</label>
+                        <label class="setpage pageDown">&gt;</label>
                     </li>
                 </ul>
             </section>

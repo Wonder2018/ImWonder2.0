@@ -1,5 +1,13 @@
 @charset "utf-8";
 
+/* 
+    RESET
+*/
+
+html{
+    color: #444;
+}
+
 /*
     NAV
 */
@@ -37,10 +45,6 @@
     position: absolute;
 }
 
-html.gray>body>.titlepage{
-    background: inherit;
-}
-
 .title {
     bottom: 14rem;
     left: 29rem;
@@ -52,6 +56,7 @@ html.gray>body>.titlepage{
 .tag {
     bottom: 12.3rem;
     left: 29.7rem;
+    color: #000;
     font-size: 1.8rem;
 }
 
@@ -61,7 +66,7 @@ html.gray>body>.titlepage{
 .content {
     position: relative;
     min-height: 100%;
-    padding: 0 14% 10rem;
+    padding: 0 14% 40rem;
 }
 
 .cover-box {
@@ -115,6 +120,16 @@ body,
     margin-top: 3rem;
 }
 
+.news-card-title{
+    display: block;
+    padding: 0.4rem 3rem 0;
+    border-bottom: .1rem solid #929292;
+    line-height: 5rem;
+    font-size: 2.1rem;
+}
+
+
+/* Search */
 .blog-search{
     float: left;
     width: 100%;
@@ -127,11 +142,11 @@ body,
     height: 4rem;
     width: 100%;
     padding: .5rem 2rem;
+    border: 0;
+    border-radius: 1.2rem 0 0 1.2rem;
     background-color: rgba(0,0,0,0);
     line-height: 3rem;
     font-size: 1.7rem;
-    border: 0;
-    border-radius: 1.2rem 0 0 1.2rem;
 }
 
 .blog-search-btn{
@@ -142,22 +157,26 @@ body,
     width: 4rem;
     padding: .5rem;
     margin-right: -4rem;
+    background-color: #d84a4a;
     line-height: 3rem;
+    color: #fff;
     border-radius: 0 1.2rem 1.2rem 0;
 }
 
+
+/* ImWonder */
 .news-imwonder{
     padding: 2rem;
     text-align: center;
 }
 
 .wonder-face{
+    display: block;
     width: 10rem;
-    border-radius: 10rem;
+    margin: 3rem auto;
     border: 0.6rem solid #fff;
     box-shadow: 0.3rem 0.3rem 1rem #000;
-    margin: 3rem auto;
-    display: block;
+    border-radius: 10rem;
 }
 
 .wonder-sign{
@@ -177,6 +196,12 @@ body,
     line-height: 2.7rem;
 }
 
+.wonder-stat-item:nth-child(2){
+    border-width: 0 .2rem;
+    border-style: solid;
+    border-color: #888;
+}
+
 .wonder-stat-item{
     display: inline-block;
     padding: 0.2rem 1rem;
@@ -192,19 +217,78 @@ body,
 }
 
 .wonder-snsl-list{
-    text-align: center;
-    word-spacing: 1.8rem;
     width: 26rem;
     margin: 3rem auto;
+    text-align: center;
+    word-spacing: 1.8rem;
 }
 
 .wonder-snsl-item{
     display: inline-block;
-    background-color: #868;
     height: 4rem;
     width: 4rem;
+    background-color: #868;
     border-radius: 4rem;
     line-height: 4rem;
+    color: #fff;
+}
+
+
+/* Latest Article */
+.latest-article{
+
+}
+
+.latest-article-list{
+    padding: 0 2rem;
+}
+
+.latest-article-item{
+    height: 5rem;
+    padding: 0 1rem;
+    border-bottom: .1rem solid #929292;
+    line-height: 5rem;
+    font-size: 1.6rem;
+}
+
+.latest-article-title{
+
+}
+
+.latest-article-readnum{
+    padding: 0.2em 0.5em;
+    border-radius: 1em;
+    background-color: #d84a4a;
+    color: #fff;
+}
+
+.latest-article-posttime{
+}
+
+
+/* Msg Board */
+.msg-board{
+    padding-bottom: 2em;
+}
+
+.msg-board-bulletchat{
+    height: 20em;
+    margin: 2em 3em;
+    background: #66ccff;
+    border-radius: 0.5em;
+}
+
+.msg-board-lam{
+    display: block;
+    height: 3em;
+    margin: 0em auto;
+    padding: 0 2em;
+    border: 0;
+    line-height: 3em;
+    background: #d84a4a;
+    border-radius: 2em;
+    color: #fff;
+    font-weight: 600;
 }
 
 /*
@@ -313,9 +397,49 @@ body,
     color: #d84a4a;
 }
 
+/* 
+    SetPage
+*/
+.pagelist{
+    font-size: 2.1rem;
+    margin: 1em 0;
+    text-align: center;
+    word-spacing: -0.5em;
+    font-weight: 800;
+    color: #d84a4a;
+}
+
+.setpage{
+    display: inline-block;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    background-color: rgba(255, 255, 255, 0.67);
+}
+
+.pageUp{
+    border-radius: 1.2rem 0 0 1.2rem;
+}
+
+.pageDown{
+    border-radius: 0 1.2rem 1.2rem 0;
+}
+
+/*
+    Footer
+*/
+
 .verso {
     position: absolute;
+    width: 100%;
+    left: 0;
     bottom: 0;
     box-sizing: border-box;
-    padding: 0 20%;
+    padding: 0 20% 8em;
+    color: #fff;
+}
+
+.copyright{
+    text-align: center;
+    font-size: 1.7rem;
 }
