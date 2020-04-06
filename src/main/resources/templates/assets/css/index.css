@@ -4,8 +4,29 @@
     RESET
 */
 
-html{
+html {
     color: #444;
+}
+
+.msg-board-lam.hvr-radial-out:hover:before {
+    -webkit-transform: scale(20);
+    transform: scale(20);
+}
+
+.msg-board-lam.hvr-radial-out:before {
+    width: 0.5em;
+    height: 0.5em;
+    margin: auto;
+}
+
+.blog-readmore.hvr-sweep-to-right {
+    position: static;
+    overflow: hidden;
+}
+
+.blog-readmore.hvr-sweep-to-right:hover > .blog-readnum {
+    color: #2098d1;
+    transition: 0.3s;
 }
 
 /*
@@ -28,8 +49,8 @@ html{
     ICONFONT
 */
 
-.iconfont{
-    margin: 0 .5rem;
+.iconfont {
+    margin: 0 0.5rem;
 }
 
 /*
@@ -76,7 +97,7 @@ html{
     right: 0;
     left: 0;
     bottom: 0;
-    z-index: -1;    
+    z-index: -1;
 }
 
 .cover-box > .cover-paint {
@@ -106,56 +127,55 @@ body,
     INFO CARD
 */
 
-.news{
+.news {
     width: 30%;
     margin-top: 10rem;
 }
 
-.news-card{
+.news-card {
     border-radius: 1.2rem;
     background-color: rgba(255, 255, 255, 0.67);
 }
 
-.news-card+.news-card{
+.news-card + .news-card {
     margin-top: 3rem;
 }
 
-.news-card-title{
+.news-card-title {
     display: block;
     padding: 0.4rem 3rem 0;
-    border-bottom: .1rem solid #929292;
+    border-bottom: 0.1rem solid #929292;
     line-height: 5rem;
     font-size: 2.1rem;
 }
 
-
 /* Search */
-.blog-search{
+.blog-search {
     float: left;
     width: 100%;
     box-sizing: border-box;
     padding-right: 4rem;
 }
 
-.blog-search-inp{
+.blog-search-inp {
     box-sizing: border-box;
     height: 4rem;
     width: 100%;
-    padding: .5rem 2rem;
+    padding: 0.5rem 2rem;
     border: 0;
     border-radius: 1.2rem 0 0 1.2rem;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     line-height: 3rem;
     font-size: 1.7rem;
 }
 
-.blog-search-btn{
+.blog-search-btn {
     display: block;
     float: right;
     box-sizing: border-box;
     height: 4rem;
     width: 4rem;
-    padding: .5rem;
+    padding: 0.5rem;
     margin-right: -4rem;
     background-color: #d84a4a;
     line-height: 3rem;
@@ -163,14 +183,13 @@ body,
     border-radius: 0 1.2rem 1.2rem 0;
 }
 
-
 /* ImWonder */
-.news-imwonder{
+.news-imwonder {
     padding: 2rem;
     text-align: center;
 }
 
-.wonder-face{
+.wonder-face {
     display: block;
     width: 10rem;
     margin: 3rem auto;
@@ -179,51 +198,50 @@ body,
     border-radius: 10rem;
 }
 
-.wonder-sign{
+.wonder-sign {
     display: block;
     width: 15rem;
     margin: 2rem auto;
 }
 
-.wonder-motto{
+.wonder-motto {
     font-size: 1.5rem;
     text-align: center;
 }
 
-.wonder-stat-list{
+.wonder-stat-list {
     margin: 2rem auto;
     font-size: 2.7rem;
     line-height: 2.7rem;
 }
 
-.wonder-stat-item:nth-child(2){
-    border-width: 0 .2rem;
+.wonder-stat-item:nth-child(2) {
+    border-width: 0 0.2rem;
     border-style: solid;
     border-color: #888;
 }
 
-.wonder-stat-item{
+.wonder-stat-item {
     display: inline-block;
     padding: 0.2rem 1rem;
     width: 6rem;
 }
 
-.stat-key{
+.stat-key {
     font-size: 1.4rem;
 }
 
-.stat-value{
-
+.stat-value {
 }
 
-.wonder-snsl-list{
+.wonder-snsl-list {
     width: 26rem;
     margin: 3rem auto;
     text-align: center;
     word-spacing: 1.8rem;
 }
 
-.wonder-snsl-item{
+.wonder-snsl-item {
     display: inline-block;
     height: 4rem;
     width: 4rem;
@@ -233,52 +251,48 @@ body,
     color: #fff;
 }
 
-
 /* Latest Article */
-.latest-article{
-
+.latest-article {
 }
 
-.latest-article-list{
+.latest-article-list {
     padding: 0 2rem;
 }
 
-.latest-article-item{
+.latest-article-item {
     height: 5rem;
     padding: 0 1rem;
-    border-bottom: .1rem solid #929292;
+    border-bottom: 0.1rem solid #929292;
     line-height: 5rem;
     font-size: 1.6rem;
 }
 
-.latest-article-title{
-
+.latest-article-title {
 }
 
-.latest-article-readnum{
+.latest-article-readnum {
     padding: 0.2em 0.5em;
     border-radius: 1em;
     background-color: #d84a4a;
     color: #fff;
 }
 
-.latest-article-posttime{
+.latest-article-posttime {
 }
 
-
 /* Msg Board */
-.msg-board{
+.msg-board {
     padding-bottom: 2em;
 }
 
-.msg-board-bulletchat{
+.msg-board-bulletchat {
     height: 20em;
     margin: 2em 3em;
     background: #66ccff;
     border-radius: 0.5em;
 }
 
-.msg-board-lam{
+.msg-board-lam {
     display: block;
     height: 3em;
     margin: 0em auto;
@@ -400,7 +414,7 @@ body,
 /* 
     SetPage
 */
-.pagelist{
+.pagelist {
     font-size: 2.1rem;
     margin: 1em 0;
     text-align: center;
@@ -409,7 +423,7 @@ body,
     color: #d84a4a;
 }
 
-.setpage{
+.setpage {
     display: inline-block;
     height: 2em;
     width: 2em;
@@ -417,11 +431,11 @@ body,
     background-color: rgba(255, 255, 255, 0.67);
 }
 
-.pageUp{
+.pageUp {
     border-radius: 1.2rem 0 0 1.2rem;
 }
 
-.pageDown{
+.pageDown {
     border-radius: 0 1.2rem 1.2rem 0;
 }
 
@@ -439,7 +453,7 @@ body,
     color: #fff;
 }
 
-.copyright{
+.copyright {
     text-align: center;
     font-size: 1.7rem;
 }
