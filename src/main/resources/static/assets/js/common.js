@@ -1,9 +1,17 @@
+/*
+ * @Author: Wonder2019 
+ * @Date: 2020-04-16 16:46:09 
+ * @Last Modified by: Wonder2019
+ * @Last Modified time: 2020-04-16 16:49:24
+ */
 function fullGaussianBlur(image, round) {
     let cvs = document.createElement("canvas");
     stackBlur.processImage(image, cvs, round);
     return cvs.toDataURL("image/jpeg", 1);
 }
-
+/* Copy From StackBlur.js
+ * GitHub: https://github.com/flozz/StackBlur
+ */
 const stackBlur = {
     mulTable: [
         512, 512, 456, 512, 328, 456, 335, 512, 405, 328, 271, 456, 388, 335, 292, 512,

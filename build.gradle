@@ -6,8 +6,18 @@ plugins {
 }
 
 group = 'top.imwonder'
-version = '0.0.1-SNAPSHOT'
+version = '2.0.0'
 sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 
 repositories {
     maven { url 'https://maven.aliyun.com/repository/central'}
@@ -24,13 +34,8 @@ repositories {
 }
 
 dependencies {
-	implementation(
-        'org.springframework.boot:spring-boot-starter-web',
-        'org.springframework.boot:spring-boot-starter-thymeleaf'
-    )
-    implementation(
-        'org.projectlombok:lombok'
-    )
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation(
         'org.apache.shiro:shiro-core:1.5.1',
 		'org.apache.shiro:shiro-ehcache:1.5.1',
@@ -38,7 +43,10 @@ dependencies {
 		'org.apache.shiro:shiro-quartz:1.5.1',
 		'org.apache.shiro:shiro-spring:1.5.1'
     )
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
@@ -46,4 +54,14 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+task cacheToLocalMavenRepository(type: Copy) {
+    from new File(gradle.gradleUserHomeDir, 'caches/modules-2/files-2.1')
+    into repositories.mavenLocal().url
+    eachFile {
+        List<String> parts = it.path.split('/')
+        it.path = (parts[0]+ '/' + parts[1]).replace('.','/') + '/' + parts[2] + '/' + parts[4]
+    }
+    includeEmptyDirs false
 }

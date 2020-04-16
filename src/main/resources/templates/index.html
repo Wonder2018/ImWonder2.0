@@ -1,131 +1,210 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>I'm Wonder</title>
-        <link rel="stylesheet" href="./assets/css/reset.css" />
-        <link rel="stylesheet" href="./assets/css/imwonder.css" />
-        <link rel="stylesheet" href="./assets/css/public/hover-min.css">
-        <link rel="stylesheet" href="./assets/fonts/icon/iconfont.css" />
-        <link rel="stylesheet" href="./assets/css/index.css" />
-        <script src="assets/js/public/jquery-3.4.1.min.js"></script>
-        <script src="assets/js/public/L2Dwidget.min.js"></script>
-        <script src="assets/js/common.js"></script>
-        <script src="assets/js/index.js"></script>
-    </head>
-    <body>
-        <nav class="nav">
-            <div class="nav-btn hvr-underline-from-center">I'm Wonder</div>
-            <div class="nav-btn hvr-underline-from-center"><span class="iconfont icon-home"></span>主页</div>
-            <div class="nav-btn hvr-underline-from-center"><span class="iconfont icon-blog"></span>笔记</div>
-            <div class="nav-btn hvr-underline-from-center"><span class="iconfont icon-timeline"></span>时光轴</div>
-            <div class="nav-btn hvr-underline-from-center"><span class="iconfont icon-case-library"></span>案例库</div>
-            <div class="nav-btn hvr-underline-from-center"><span class="iconfont icon-chat-area"></span>讨论区</div>
-            <div class="nav-btn hvr-underline-from-center"><span class="iconfont icon-danni"></span>Danni</div>
-            <div class="nav-btn hvr-underline-from-center"><span class="iconfont icon-connect"></span>联系我</div>
-        </nav>
-        <header class="titlepage" style="outline: 1px solid #54c;">
-            <div class="title hvr-buzz-out">I'm Wonder</div>
-            <div class="tag">拼命去争取成功，但不要期望一定会成功。</div>
-        </header>
-        <div class="content">
-            <div class="cover-box">
-                <div class="cover-paint"><div style="position: absolute;"></div></div>
-            </div>
-            <section class="container clearfix">
-                <ul class="news fr">
-                    <li class="news-card clearfix">
-                        <div class="blog-search">
-                            <input type="text" class="blog-search-inp" placeholder="输入关键词搜索" /><button class="blog-search-btn hvr-radial-out"
-                                ><span class="iconfont icon-search"></span
-                            ></button>
-                        </div>
-                    </li>
-                    <li class="news-card news-imwonder">
-                        <img src="assets/img/index/face.gif" alt="" class="wonder-face" />
-                        <img src="assets/img/index/Wonder2019-Black.png" alt="" class="wonder-sign" />
-                        <label class="wonder-motto">拼命去争取成功，但不要期望一定会成功。</label>
-                        <ul class="wonder-stat-list">
-                            <li class="wonder-stat-item"><span class="stat-key">博客</span><br /><span class="stat-value">123</span></li>
-                            <li class="wonder-stat-item"><span class="stat-key">动态</span><br /><span class="stat-value">456</span></li>
-                            <li class="wonder-stat-item"><span class="stat-key">评论</span><br /><span class="stat-value">1334</span></li>
-                        </ul>
-                        <ul class="wonder-snsl-list">
-                            <li class="wonder-snsl-item hvr-radial-out"><span class="iconfont icon-mail"></span></li>
-                            <li class="wonder-snsl-item hvr-radial-out"><span class="iconfont icon-github"></span></li>
-                        </ul>
-                    </li>
-                    <li class="news-card latest-article">
-                        <label class="news-card-title">最近文章</label>
-                        <ul class="latest-article-list">
-                            <li class="latest-article-item">
-                                <label class="latest-article-title">Title 标题 Title 标题 <span class="latest-article-readnum">12232</span></label>
-                                <label class="latest-article-posttime fr">6.28</label>
-                            </li>
-                            <li class="latest-article-item">
-                                <label class="latest-article-title">Title 标题 Title 标题 <span class="latest-article-readnum">12232</span></label>
-                                <label class="latest-article-posttime fr">6.28</label>
-                            </li>
-                            <li class="latest-article-item">
-                                <label class="latest-article-title">Title 标题 Title 标题 <span class="latest-article-readnum">12232</span></label>
-                                <label class="latest-article-posttime fr">6.28</label>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="news-card msg-board">
-                        <label class="news-card-title">留言板</label>
-                        <div class="msg-board-bulletchat"></div>
-                        <button class="msg-board-lam hvr-radial-out">给我留言</button>
-                    </li>
-                </ul>
-                <ul class="blog-list fl">
-                    <li class="blog-card clearfix">
-                        <div class="blog-date"><span class="blog-date-month">6月</span><br /><span class="blog-date-day">28</span></div>
-                        <label class="blog-title">Title 标题 Title 标题</label>
-                        <ul class="blog-tag-list">
-                            <li class="blog-tag hvr-grow-rotate"><span class="iconfont icon-date"></span>20190628</li>
-                            <li class="blog-tag hvr-grow-rotate"><span class="iconfont icon-tag"></span>SpringMVC</li>
-                            <li class="blog-tag hvr-grow-rotate"><span class="iconfont icon-read-num"></span>2342323</li>
-                        </ul>
-                        <img class="blog-cover" src="assets/img/bg/img1.jpg" alt="" />
-                        <div class="blog-abstract">
-                            Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review
-                            预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-                            Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body
-                            正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
-                            Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review
-                            预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-                            Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body
-                            正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
-                        </div>
-                        <div class="blog-readmore hvr-sweep-to-right">继续阅读 <span class="blog-readnum">23238</span></div>
-                    </li>
-                    <li class="pagelist">
-                        <label class="setpage pageUp">&lt;</label>
-                        <label class="setpage">1</label>
-                        <label class="setpage">2</label>
-                        <label class="setpage">3</label>
-                        <label class="setpage">...</label>
-                        <label class="setpage">10</label>
-                        <label class="setpage">11</label>
-                        <label class="setpage">12</label>
-                        <label class="setpage pageDown">&gt;</label>
-                    </li>
-                </ul>
-            </section>
-            <footer class="verso">
-                <ul class="web-map">
-                    <li class="map-card fl"></li>
-                    <li class="map-card fl"></li>
-                    <li class="map-card fl"></li>
-                    <li class="map-card fl"></li>
-                </ul>
-                <div class="copyright">
-                    CopyRight Wonder&copy;2020<br />
-                    AllRight Reserved
-                </div>
-            </footer>
-        </div>
-    </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>I'm Wonder</title>
+		<link rel="stylesheet" href="./assets/css/reset.css" />
+		<link rel="stylesheet" href="./assets/css/imwonder.css" />
+		<link rel="stylesheet" href="./assets/css/public/hover-min.css" />
+		<link rel="stylesheet" href="./assets/fonts/icon/iconfont.css" />
+		<link rel="stylesheet" href="./assets/css/index.css" />
+		<script src="assets/js/public/jquery-3.4.1.min.js"></script>
+		<script src="assets/js/public/L2Dwidget.min.js"></script>
+        <script src="assets/js/public/jqcloud-1.0.4.js"></script>
+        <script src="assets/js/PreloadImg.js"></script>
+        <script src="assets/js/PreProgress.js"></script>
+        <script src="assets/js/SetBackgroundImage.js"></script>
+		<script src="assets/js/common.js"></script>
+		<script src="assets/js/index.js"></script>
+	</head>
+	<body>
+		<nav class="nav">
+			<a class="nav-btn hvr-underline-from-center">I'm Wonder</a>
+			<a href="#home" class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-home"></span>
+				主页
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-blog"></span>
+				笔记
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-timeline"></span>
+				时光轴
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-case-library"></span>
+				案例库
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-chat-area"></span>
+				讨论区
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-danni"></span>
+				Danni
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-connect"></span>
+				联系我
+			</a>
+		</nav>
+		<header class="titlepage" style="outline: 1px solid #54c;">
+			<div class="title hvr-buzz-out">I'm Wonder</div>
+			<div class="tag">拼命去争取成功，但不要期望一定会成功。</div>
+		</header>
+		<div class="content">
+			<div class="cover-box">
+				<div class="cover-paint"></div>
+			</div>
+			<section id="home" class="container clearfix">
+				<ul class="news fr">
+					<li class="news-card clearfix">
+						<div class="blog-search">
+							<input type="text" class="blog-search-inp" placeholder="输入关键词搜索" />
+							<button class="blog-search-btn hvr-radial-out">
+								<span class="iconfont icon-search"></span>
+							</button>
+						</div>
+					</li>
+					<li class="news-card news-imwonder">
+						<img src="assets/img/index/face.gif" alt="" class="wonder-face" />
+						<img src="assets/img/index/Wonder2019-Black.png" alt="" class="wonder-sign" />
+						<label class="wonder-motto">拼命去争取成功，但不要期望一定会成功。</label>
+						<ul class="wonder-stat-list">
+							<li class="wonder-stat-item">
+								<span class="stat-key">博客</span>
+								<br />
+								<span class="stat-value">123</span>
+							</li>
+							<li class="wonder-stat-item">
+								<span class="stat-key">动态</span>
+								<br />
+								<span class="stat-value">456</span>
+							</li>
+							<li class="wonder-stat-item">
+								<span class="stat-key">评论</span>
+								<br />
+								<span class="stat-value">1334</span>
+							</li>
+						</ul>
+						<ul class="wonder-snsl-list">
+							<li class="wonder-snsl-item hvr-radial-out"><span class="iconfont icon-mail"></span></li>
+							<li class="wonder-snsl-item hvr-radial-out"><span class="iconfont icon-github"></span></li>
+						</ul>
+					</li>
+					<li class="news-card latest-article">
+						<label class="news-card-title">最近文章</label>
+						<ul class="latest-article-list">
+							<li class="latest-article-item">
+								<label class="latest-article-title">
+									Title 标题 Title 标题
+									<span class="latest-article-readnum">12232</span>
+								</label>
+								<label class="latest-article-posttime fr">6.28</label>
+							</li>
+							<li class="latest-article-item">
+								<label class="latest-article-title">
+									Title 标题 Title 标题
+									<span class="latest-article-readnum">12232</span>
+								</label>
+								<label class="latest-article-posttime fr">6.28</label>
+							</li>
+							<li class="latest-article-item">
+								<label class="latest-article-title">
+									Title 标题 Title 标题
+									<span class="latest-article-readnum">12232</span>
+								</label>
+								<label class="latest-article-posttime fr">6.28</label>
+							</li>
+						</ul>
+					</li>
+					<li class="news-card tag-cloud">
+						<label class="news-card-title">标签云</label>
+						<div class="tag-cloud-board">
+							<a class="tag-cloud-item" href="#">SpringMVC</a>
+							<a class="tag-cloud-item" href="#">Tomcat</a>
+							<a class="tag-cloud-item" href="#">LinkedList</a>
+							<a class="tag-cloud-item" href="#">BankOS</a>
+							<a class="tag-cloud-item" href="#">Web</a>
+							<a class="tag-cloud-item" href="#">Java</a>
+							<a class="tag-cloud-item" href="#">JavaScript</a>
+							<a class="tag-cloud-item" href="#">Html</a>
+							<a class="tag-cloud-item" href="#">CSS</a>
+						</div>
+					</li>
+					<li class="news-card msg-board">
+						<label class="news-card-title">留言板</label>
+						<div class="msg-board-bulletchat"></div>
+						<button class="msg-board-lam hvr-radial-out">给我留言</button>
+					</li>
+				</ul>
+				<ul class="blog-list fl">
+					<li class="blog-card clearfix">
+						<div class="blog-date">
+							<span class="blog-date-month">6月</span>
+							<br />
+							<span class="blog-date-day">28</span>
+						</div>
+						<label class="blog-title">Title 标题 Title 标题</label>
+						<ul class="blog-tag-list">
+							<li class="blog-tag hvr-grow-rotate">
+								<span class="iconfont icon-date"></span>
+								20190628
+							</li>
+							<li class="blog-tag hvr-grow-rotate">
+								<span class="iconfont icon-tag"></span>
+								SpringMVC
+							</li>
+							<li class="blog-tag hvr-grow-rotate">
+								<span class="iconfont icon-read-num"></span>
+								2342323
+							</li>
+						</ul>
+						<img class="blog-cover" src="assets/img/bg/img1.jpg" alt="" />
+						<div class="blog-abstract">
+							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
+							Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
+							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
+							Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
+							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
+							Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
+							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
+							Review 预览
+						</div>
+						<div class="blog-readmore hvr-sweep-to-right">
+							继续阅读
+							<span class="blog-readnum">23238</span>
+						</div>
+					</li>
+					<li class="pagelist">
+						<label class="setpage pageUp">&lt;</label>
+						<label class="setpage">1</label>
+						<label class="setpage">2</label>
+						<label class="setpage">3</label>
+						<label class="setpage">...</label>
+						<label class="setpage">10</label>
+						<label class="setpage">11</label>
+						<label class="setpage">12</label>
+						<label class="setpage pageDown">&gt;</label>
+					</li>
+				</ul>
+			</section>
+			<footer class="verso">
+				<ul class="web-map">
+					<li class="map-card fl"></li>
+					<li class="map-card fl"></li>
+					<li class="map-card fl"></li>
+					<li class="map-card fl"></li>
+				</ul>
+				<div class="copyright">
+					CopyRight Wonder&copy;2020
+					<br />
+					AllRight Reserved
+				</div>
+			</footer>
+		</div>
+	</body>
 </html>
