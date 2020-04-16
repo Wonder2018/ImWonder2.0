@@ -1,0 +1,31 @@
+/*
+ * @Author: Wonder2019 
+ * @Date: 2020-04-16 21:29:15 
+ * @Last Modified by: Wonder2019
+ * @Last Modified time: 2020-04-16 21:29:44
+ */
+@charset "utf-8";
+html {
+	color: #444;
+}
+
+.msg-board-lam.hvr-radial-out:hover:before {
+	-webkit-transform: scale(20);
+	transform: scale(20);
+}
+
+.msg-board-lam.hvr-radial-out:before {
+	width: 0.5em;
+	height: 0.5em;
+	margin: auto;
+}
+
+.blog-readmore.hvr-sweep-to-right {
+	position: static;
+	overflow: hidden;
+}
+
+.blog-readmore.hvr-sweep-to-right:hover > .blog-readnum {
+	color: #2098d1;
+	transition: 0.3s;
+}

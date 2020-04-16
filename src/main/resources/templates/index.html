@@ -5,21 +5,29 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>I'm Wonder</title>
-		<link rel="stylesheet" href="./assets/css/reset.css" />
-		<link rel="stylesheet" href="./assets/css/imwonder.css" />
-		<link rel="stylesheet" href="./assets/css/public/hover-min.css" />
-		<link rel="stylesheet" href="./assets/fonts/icon/iconfont.css" />
-		<link rel="stylesheet" href="./assets/css/index.css" />
+		<link rel="stylesheet" href="assets/css/reset.css" />
+		<link rel="stylesheet" href="assets/css/imwonder.css" />
+		<link rel="stylesheet" href="assets/css/public/hover-min.css" />
+		<link rel="stylesheet" href="assets/fonts/icon/iconfont.css" />
+		<link rel="stylesheet" href="assets/css/cover-imwonder.css">
+		<link rel="stylesheet" href="assets/css/loading.css">
+		<link rel="stylesheet" href="assets/css/index.css" />
 		<script src="assets/js/public/jquery-3.4.1.min.js"></script>
 		<script src="assets/js/public/L2Dwidget.min.js"></script>
-        <script src="assets/js/public/jqcloud-1.0.4.js"></script>
-        <script src="assets/js/PreloadImg.js"></script>
-        <script src="assets/js/PreProgress.js"></script>
-        <script src="assets/js/SetBackgroundImage.js"></script>
+		<script src="assets/js/public/jqcloud-1.0.4.js"></script>
+		<script src="assets/js/PreloadImg.js"></script>
+		<script src="assets/js/PreProgress.js"></script>
+		<script src="assets/js/SetBackgroundImage.js"></script>
 		<script src="assets/js/common.js"></script>
 		<script src="assets/js/index.js"></script>
 	</head>
-	<body>
+	<body class="loading">
+		<div class="loading-cover">
+			<img src="" alt="" class="loading-icon" />
+			<div class="loading-prog">
+				<span class="loading-line" style="width: 0%;"><span>0%</span></span>
+			</div>
+		</div>
 		<nav class="nav">
 			<a class="nav-btn hvr-underline-from-center">I'm Wonder</a>
 			<a href="#home" class="nav-btn hvr-underline-from-center">

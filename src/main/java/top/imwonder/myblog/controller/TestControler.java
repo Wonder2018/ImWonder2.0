@@ -12,10 +12,10 @@ public class TestControler {
         return "index";
     }
 
-    @RequestMapping(value = "/info")
-    public String info(Model model) {
-        model.addAttribute("name", "wonder");
-        model.addAttribute("sex", "man");
-        return "info";
-    }
+    // @RequestMapping(value = "/error")
+    // public String info(Model model) {
+    //     model.addAttribute("name", "wonder");
+    //     model.addAttribute("sex", "man");
+    //     return "error";
+    // }
 }

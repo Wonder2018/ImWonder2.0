@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-04-16 11:01:17
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-04-16 17:34:41
+ * @Last Modified time: 2020-04-16 22:18:49
  */
 // Reset
 let blurRound = 20;
@@ -10,24 +10,47 @@ let changeTime = 5 * 1000;
 
 // Function
 function loadBackground(back, frount, progressId) {
-	let urls = ["assets/img/bg/img2.jpg"]
+	let urls = ["assets/img/bg/img2.jpg"];
 	// $.post(
 	// 	"bgis",
-		// function (urls) {
-			new PreloadImg(urls, true, function (imgs) {
-				new SetBackgroundImage(imgs, $(back)[0], $(frount)[0], blurRound, changeTime, true);
-				window[progressId].count++;
-			});
+	// function (urls) {
+	new PreloadImg(urls, true, function (imgs) {
+		new SetBackgroundImage(imgs, $(back)[0], $(frount)[0], blurRound, changeTime, false);
+		window[progressId].count++;
+	});
 	// 	},
 	// 	"json"
 	// );
 }
 
+function load(){
+	
+}
+
+function preLoading(percent) {
+	$(".loading-prog>.loading-line").animate({ width: percent }, 300, function () {
+		$(this).children().html(percent);
+		if (percent == "100%") {
+			$(this).children().html("加载完成!&nbsp;&nbsp;&nbsp;&nbsp;");
+			setTimeout(function () {
+				$(".loading-cover").fadeOut();
+				$(document.body).removeClass("loading");
+				setTimeout(function () {
+					let a = $(".loading-cover")[0];
+					document.body.removeChild(a);
+				}, 1000);
+			}, 100);
+		}
+	});
+}
+
 // On ready
 $(document).ready(function () {
-	let ppg = new PreProgress(true,function(){console.log("OK")})
-	ppg.addTask({fun:loadBackground,params:["body",".cover-box > .cover-paint",ppg.getId()]})
-	ppg.start()
+	let ppg = new PreProgress(true, function () {
+		preLoading("100%");
+	});
+	ppg.addTask({ fun: loadBackground, params: ["body", ".cover-box > .cover-paint", ppg.getId()] });
+	ppg.start();
 	// back = document.body;
 	// frount = $(".cover-box > .cover-paint")[0];
 	// Init Background
