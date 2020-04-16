@@ -1,17 +1,17 @@
 /*
- * @Author: Wonder2019 
- * @Date: 2020-04-16 16:45:49 
+ * @Author: Wonder2019
+ * @Date: 2020-04-16 16:45:49
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-04-16 22:05:54
+ * @Last Modified time: 2020-04-16 22:39:16
  */
 class PreProgress {
 	/**
-     * Creates an instance of PreProgress
-     * @param {boolean} [hasLock=true]
-     * @param {CallableFunction} callback when everything has done
-     * @memberof PreProgress
-     */
-    constructor(hasLock = true, callback) {
+	 * Creates an instance of PreProgress
+	 * @param {boolean} [hasLock=true]
+	 * @param {CallableFunction} callback when everything has done
+	 * @memberof PreProgress
+	 */
+	constructor(hasLock = true, callback) {
 		this.id = this.uuid(8);
 		window["ppg" + this.id] = this;
 		this.count = 0;
@@ -21,14 +21,14 @@ class PreProgress {
 		this.isLock = false;
 		this.tasks = [];
 		this.state = "empty";
-    }
-    getId(){
-        return "ppg" + this.id
-    }
+	}
+	getId() {
+		return "ppg" + this.id;
+	}
 	start() {
 		if (this.state != "ready") {
-            console.warn(`Illegal State >> ${this.state}`);
-            return
+			console.warn(`Illegal State >> ${this.state}`);
+			return;
 		}
 		this.isLock = true;
 		this.state = "progressing";
@@ -51,13 +51,13 @@ class PreProgress {
 		}, 300);
 	}
 	/**
-     *
-     *
-     * @param {Object} task
-     * @returns
-     * @memberof PreProgress
-     */
-    addTask(task) {
+	 *
+	 *
+	 * @param {Object} task
+	 * @returns
+	 * @memberof PreProgress
+	 */
+	addTask(task) {
 		if (this.hasLock && this.isLock) {
 			console.warn("This task queue has terminated");
 			return;

@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-04-16 11:01:17
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-04-16 22:18:49
+ * @Last Modified time: 2020-04-16 22:39:09
  */
 // Reset
 let blurRound = 20;
@@ -23,9 +23,7 @@ function loadBackground(back, frount, progressId) {
 	// );
 }
 
-function load(){
-	
-}
+function load() {}
 
 function preLoading(percent) {
 	$(".loading-prog>.loading-line").animate({ width: percent }, 300, function () {
@@ -46,6 +44,7 @@ function preLoading(percent) {
 
 // On ready
 $(document).ready(function () {
+	preLoading("70%");
 	let ppg = new PreProgress(true, function () {
 		preLoading("100%");
 	});
