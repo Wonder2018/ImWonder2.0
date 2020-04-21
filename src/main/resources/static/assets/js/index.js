@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-04-16 11:01:17
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-04-21 02:39:59
+ * @Last Modified time: 2020-04-21 11:52:36
  */
 // Reset
 let blurRound = 20;
@@ -40,7 +40,7 @@ function preLoading(percent) {
 			}, 100);
 		}
 	});
-}
+}  
 
 // On ready
 $(document).ready(function () {
