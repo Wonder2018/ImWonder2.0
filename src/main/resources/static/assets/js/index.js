@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-04-16 11:01:17
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-04-16 22:39:09
+ * @Last Modified time: 2020-04-21 02:39:59
  */
 // Reset
 let blurRound = 20;
@@ -87,7 +87,7 @@ $(document).ready(function () {
 L2Dwidget.init({
 	model: {
 		//jsonpath控制显示那个小萝莉模型，下面这个就是我觉得最可爱的小萝莉模型
-		jsonPath: "assets/live2d/miku/miku.model.json",
+		jsonPath: "assets/live2d/mikoto/mikoto.model.json",
 		scale: 1,
 	},
 	display: {
