@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-04-16 11:01:17
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-04-21 11:57:27
+ * @Last Modified time: 2020-04-27 17:43:06
  */
 // Reset
 let blurRound = 20;
@@ -55,6 +55,14 @@ $(document).ready(function () {
 	// Init Background
 	// setBackground("assets/img/bg/img2.jpg", document.body, document.querySelector());
 
+	if(navigator.userAgent.match(/(Trident\/7\.)|(edge)/)) {
+		document.body.addEventListener && document.body.addEventListener("mousewheel", function() {
+		  event.preventDefault();
+		  var wd = event.wheelDelta;
+		  var csp = window.pageYOffset;
+		  window.scrollTo(0, csp - wd);
+		});
+	  }
 	// Init Title Animation
 	$(window).scroll(function () {
 		let offset = $(".title").offset().top + $(".title").height() - $(window).scrollTop();
