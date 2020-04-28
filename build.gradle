@@ -36,7 +36,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation(
+    implementation('org.apache.commons:commons-lang3:3.10')
+	implementation('org.jsoup:jsoup:1.13.1')
+	implementation(
         'org.apache.shiro:shiro-core:1.5.1',
 		'org.apache.shiro:shiro-ehcache:1.5.1',
 		'org.apache.shiro:shiro-web:1.5.1',
