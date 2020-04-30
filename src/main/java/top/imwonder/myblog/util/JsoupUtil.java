@@ -1,4 +1,4 @@
-package top.imwonder.util;
+package top.imwonder.myblog.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;

@@ -1,4 +1,4 @@
-package top.imwonder;
+package top.imwonder.myblog.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.apache.commons.lang3.StringUtils;
 
-import top.imwonder.util.JsoupUtil;
+import top.imwonder.myblog.util.JsoupUtil;
 
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
@@ -24,11 +24,11 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
 	@Override
 	public Map<String, String[]> getParameterMap() {
-		//Map<String, String[]> result = super.getParameterMap();
+		// Map<String, String[]> result = super.getParameterMap();
 		Map<String, String[]> result = new HashMap<String, String[]>();
-		for(Entry<String, String[]> e : super.getParameterMap().entrySet()) {
+		for (Entry<String, String[]> e : super.getParameterMap().entrySet()) {
 			String[] vs = e.getValue();
-			if(vs != null) {
+			if (vs != null) {
 				for (int i = 0; i < vs.length; i++) {
 					vs[i] = JsoupUtil.clean(vs[i]);
 				}
