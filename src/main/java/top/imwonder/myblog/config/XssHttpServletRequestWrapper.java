@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.apache.commons.lang3.StringUtils;
 
-import top.imwonder.myblog.util.JsoupUtil;
+import top.imwonder.util.JsoupUtil;
 
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 

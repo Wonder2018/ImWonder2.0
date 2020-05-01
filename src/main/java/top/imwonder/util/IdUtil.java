@@ -1,4 +1,4 @@
-package top.imwonder.myblog.util;
+package top.imwonder.util;
 
 import java.util.UUID;
 

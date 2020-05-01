@@ -71,7 +71,7 @@ public class WonderJdbcRealm extends JdbcRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		Object obj = principals.getPrimaryPrincipal();
-		log.info("pp:{}", obj);
+		log.info("user:{}", obj);
 		SimpleAuthorizationInfo ai = new SimpleAuthorizationInfo();
 		// List<UserRole> urs = userRoleDao.loadMore(" where c_user_id=?", new Object[] { obj });
 		// if(urs.isEmpty()) {

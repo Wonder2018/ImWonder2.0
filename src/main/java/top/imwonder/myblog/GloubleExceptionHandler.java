@@ -2,9 +2,9 @@
  * @Author: Wonder2019 
  * @Date: 2020-04-30 23:16:38 
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-04-30 23:17:20
+ * @Last Modified time: 2020-05-01 12:03:26
  */
-package top.imwonder.myblog.util;
+package top.imwonder.myblog;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import lombok.extern.slf4j.Slf4j;
+import top.imwonder.myblog.exception.WonderException;
 
 @Slf4j
 @ControllerAdvice

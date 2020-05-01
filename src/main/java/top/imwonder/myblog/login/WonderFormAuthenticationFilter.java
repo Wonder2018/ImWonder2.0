@@ -2,7 +2,7 @@
  * @Author: Wonder2019 
  * @Date: 2020-04-30 23:21:51 
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-05-01 00:03:19
+ * @Last Modified time: 2020-05-01 22:13:09
  */
 package top.imwonder.myblog.login;
 
@@ -24,7 +24,6 @@ public class WonderFormAuthenticationFilter extends FormAuthenticationFilter {
 
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
-        // TODO Auto-generated method stub
         String username = getUsername(request);
         String password = getPassword(request);
         boolean rememberMe = isRememberMe(request);
@@ -38,7 +37,6 @@ public class WonderFormAuthenticationFilter extends FormAuthenticationFilter {
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
         WebUtils.toHttp(request).getSession().setAttribute("loginFrom", getLoginUrl());
-        
         return super.onLoginSuccess(token, subject, request, response);
     }
 
@@ -64,7 +62,7 @@ public class WonderFormAuthenticationFilter extends FormAuthenticationFilter {
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        if(WebUtils.toHttp(request).getSession().getAttribute("loginFrom") == null){
+        if (WebUtils.toHttp(request).getSession().getAttribute("loginFrom") == null) {
             return super.onAccessDenied(request, response);
         }
         request.setAttribute("code", "404");
@@ -72,5 +70,5 @@ public class WonderFormAuthenticationFilter extends FormAuthenticationFilter {
         request.getRequestDispatcher("/error").forward(request, response);
         return false;
     }
-    
+
 }

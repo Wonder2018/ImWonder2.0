@@ -1,4 +1,4 @@
-package top.imwonder.myblog.util;
+package top.imwonder.util;
 /**
  * StringUtil
  * @description: 字符串工具类

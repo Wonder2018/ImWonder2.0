@@ -1,3 +1,9 @@
+/*
+ * @Author: Wonder2019 
+ * @Date: 2020-05-01 22:09:23 
+ * @Last Modified by:   Wonder2019 
+ * @Last Modified time: 2020-05-01 22:09:23 
+ */
 package top.imwonder.myblog.config;
 
 import org.springframework.context.annotation.Bean;
@@ -12,9 +18,6 @@ import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-/**
- * Created by qh on 2017/4/4.
- */
 @Configuration
 @EnableWebMvc
 @ImportResource({"classpath:applicationContext.xml"})
@@ -22,7 +25,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
-		// registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+		registry.addResourceHandler("/favicon.ico").addResourceLocations("classpath:/static/assets/img/favicon.ico");
 	}
 
     @Bean
