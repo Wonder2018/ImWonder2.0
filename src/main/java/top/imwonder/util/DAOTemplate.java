@@ -1,3 +1,9 @@
+/*
+ * @Author: Wonder2019 
+ * @Date: 2020-05-02 16:27:18 
+ * @Last Modified by: Wonder2019
+ * @Last Modified time: 2020-05-02 19:40:13
+ */
 package top.imwonder.util;
 
 import java.lang.reflect.Method;
@@ -5,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,25 +35,60 @@ public abstract class DAOTemplate<T> {
     protected String loadMoreSQL;
 
     protected boolean insertPK = true;
-    protected Class<T> clazz;
+
+    protected Class<T> domainType;
+    protected String tableName;
+    protected String[] pkColumns = new String[0];
+    protected String[] ckColumns = new String[0];
+
     private Method[] pkGetters;
     private Method[] pkSetters;
-    private Method[] comGetters;
-    private Method[] comSetters;
-    protected String[] pkColumns;
-    protected String[] comColumns;
-    protected String tableName;
+    private Method[] ckGetters;
+    private Method[] ckSetters;
 
-    public JdbcTemplate getJt(){
+    public JdbcTemplate getJt() {
         return jt;
     }
 
     protected void init() {
-        
+        loadColumnsMethod();
+        buildSQLs();
     }
 
-    protected void initColumns() {
-        
+    protected void loadColumnsMethod() {
+        Method methods[] = domainType.getMethods();
+        HashMap<String, Method> dataMap = new HashMap<>();
+        for (Method method : methods) {
+            if (method.getName().startsWith("set") && method.getParameterTypes().length == 1) {
+                dataMap.put(method.getName(), method);
+            }
+        }
+        pkSetters = new Method[pkColumns.length];
+        pkGetters = new Method[pkColumns.length];
+        initDataMethod(dataMap, pkColumns, pkSetters, pkGetters);
+        ckSetters = new Method[ckColumns.length];
+        ckGetters = new Method[ckColumns.length];
+        initDataMethod(dataMap, ckColumns, ckSetters, ckGetters);
+    }
+
+    private void initDataMethod(HashMap<String, Method> settersMap, String[] columns, Method[] setters,
+            Method[] getters) {
+        try {
+            for (int i = 0; i < columns.length; i++) {
+                String cccn = StringUtil.toCamelCase(columns[i], "_", true, true);
+                String methodName = "get" + cccn;
+                try {
+                    getters[i] = domainType.getMethod(methodName);
+                } catch (NoSuchMethodException e) {
+                    methodName = "is" + cccn;
+                    getters[i] = domainType.getMethod(methodName);
+                }
+                methodName = "set" + cccn;
+                setters[i] = settersMap.get(methodName);
+            }
+        } catch (NoSuchMethodException ex) {
+            throw new RuntimeException("no such method!", ex);
+        }
     }
 
     protected void buildSQLs() {
@@ -63,20 +105,20 @@ public abstract class DAOTemplate<T> {
         sqlBuffer.append("insert into ");
         sqlBuffer.append(tableName);
         sqlBuffer.append("(");
-        if(insertPK) {
-            for (String pk:pkColumns) {
+        if (insertPK) {
+            for (String pk : pkColumns) {
                 sqlBuffer.append(pk);
                 sqlBuffer.append(", ");
             }
         }
-        for(String cc:comColumns){
-            sqlBuffer.append(cc);
+        for (String ck : ckColumns) {
+            sqlBuffer.append(ck);
             sqlBuffer.append(" ,");
         }
         sqlBuffer.deleteCharAt(sqlBuffer.length() - 2);
         sqlBuffer.append(") values(");
-        int len = insertPK ? pkColumns.length + comColumns.length : comColumns.length;
-        for(int i = 0; i < len; i++){
+        int len = insertPK ? pkColumns.length + ckColumns.length : ckColumns.length;
+        for (int i = 0; i < len; i++) {
             sqlBuffer.append("?, ");
         }
         sqlBuffer.deleteCharAt(sqlBuffer.length() - 2);
@@ -84,7 +126,7 @@ public abstract class DAOTemplate<T> {
         insertSQL = sqlBuffer.toString();
     }
 
-    protected void buildDeleteSQL(){
+    protected void buildDeleteSQL() {
         StringBuffer sqlBuffer = new StringBuffer();
         sqlBuffer.append("delete from ");
         sqlBuffer.append(tableName);
@@ -92,57 +134,57 @@ public abstract class DAOTemplate<T> {
         deleteSQL = sqlBuffer.toString();
     }
 
-    protected void buildUpdateSQL(boolean updatePk){
+    protected void buildUpdateSQL(boolean updatePk) {
         StringBuffer sqlBuffer = new StringBuffer();
         sqlBuffer.append("update ");
         sqlBuffer.append(tableName);
         sqlBuffer.append(" set ");
-        for(String cc:comColumns){
-            sqlBuffer.append(cc);
+        for (String ck : ckColumns) {
+            sqlBuffer.append(ck);
             sqlBuffer.append("=?, ");
         }
-        if(updatePk){
-            for(String pk:pkColumns){
+        if (updatePk) {
+            for (String pk : pkColumns) {
                 sqlBuffer.append(pk);
                 sqlBuffer.append("=?, ");
             }
         }
         sqlBuffer.deleteCharAt(sqlBuffer.length() - 2);
         buildWhereClause(sqlBuffer);
-        if(updatePk) {
-        	updateSqlWithPk = sqlBuffer.toString();
-        }else {
-        	updateSQL = sqlBuffer.toString();
+        if (updatePk) {
+            updateSqlWithPk = sqlBuffer.toString();
+        } else {
+            updateSQL = sqlBuffer.toString();
         }
     }
 
-    protected void buildLoadOneSQL(){
+    protected void buildLoadOneSQL() {
         StringBuffer sqlBuffer = new StringBuffer();
         sqlBuffer.append("select ");
-        addSelectProjections(sqlBuffer);
+        addColumns(sqlBuffer);
         sqlBuffer.append(" from ");
         sqlBuffer.append(tableName);
         buildWhereClause(sqlBuffer);
         loadOneSQL = sqlBuffer.toString();
     }
 
-    protected void buildLoadMoreSQL(){
+    protected void buildLoadMoreSQL() {
         StringBuffer sqlBuffer = new StringBuffer();
         sqlBuffer.append("select ");
-        addSelectProjections(sqlBuffer);
+        addColumns(sqlBuffer);
         sqlBuffer.append(" from ");
         sqlBuffer.append(tableName);
         loadMoreSQL = sqlBuffer.toString();
     }
 
     // TODO Test 'foreach deleteCharAt' and 'if case' performance
-    protected void buildWhereClause(StringBuffer buffer){
+    protected void buildWhereClause(StringBuffer buffer) {
         buffer.append(" where ");
-        for(int i = 0;i < pkColumns.length;i ++){
-            if(i == 0){
+        for (int i = 0; i < pkColumns.length; i++) {
+            if (i == 0) {
                 buffer.append(pkColumns[i]);
                 buffer.append("=?");
-            }else{
+            } else {
                 buffer.append(" and ");
                 buffer.append(pkColumns[i]);
                 buffer.append("=?");
@@ -150,43 +192,44 @@ public abstract class DAOTemplate<T> {
         }
     }
 
-    private void addSelectProjections(StringBuffer buffer){
-        for (String pk:pkColumns) {
+    private void addColumns(StringBuffer buffer) {
+        for (String pk : pkColumns) {
             buffer.append(pk);
             buffer.append(", ");
         }
-        for(String cc:comColumns){
-            buffer.append(cc);
+        for (String ck : ckColumns) {
+            buffer.append(ck);
             buffer.append(", ");
         }
         buffer.deleteCharAt(buffer.length() - 2);
+        log.debug(buffer.toString());
     }
 
-    public void insert(T t){
-        jt.update(insertSQL, getInsertParamValues(t));
+    public int insert(T t) {
+        return jt.update(insertSQL, getInsertParamValues(t));
     }
 
-    public void delete(Object i){
-        delete(new Object[]{i});
+    public int delete(Object i) {
+        return delete(new Object[] { i });
     }
 
-    public void delete(Object[] i) {
-        jt.update(deleteSQL, i);
+    public int delete(Object[] i) {
+        return jt.update(deleteSQL, i);
     }
 
-    public void update(T t) {
-        jt.update(updateSQL, getUpdateParamValues(t, null));
+    public int update(T t) {
+        return jt.update(updateSQL, getUpdateParamValues(t, null));
     }
 
-    public void updateWithPk(T t, Object[] oldPks) {
-        jt.update(updateSqlWithPk, getUpdateParamValues(t, oldPks));
+    public int updateWithPk(T t, Object[] oldPks) {
+        return jt.update(updateSqlWithPk, getUpdateParamValues(t, oldPks));
     }
-    
+
     public ArrayList<T> loadMore(String clause, Object[] i) {
-        return jt.query(appendClause(loadMoreSQL, clause), i, new ResultSetExtractor<ArrayList<T>>(){
+        return jt.query(appendClause(loadMoreSQL, clause), i, new ResultSetExtractor<ArrayList<T>>() {
             public ArrayList<T> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 ArrayList<T> result = new ArrayList<T>();
-                while(rs.next())
+                while (rs.next())
                     result.add(wrapResult(rs));
                 return result;
             }
@@ -195,14 +238,13 @@ public abstract class DAOTemplate<T> {
     }
 
     public T loadOne(Object i) {
-        return loadOne(new Object[]{i});
+        return loadOne(new Object[] { i });
     }
 
-
     public T loadOne(Object[] i) {
-        return jt.query(loadOneSQL, i, new ResultSetExtractor<T>(){
+        return jt.query(loadOneSQL, i, new ResultSetExtractor<T>() {
             public T extractData(ResultSet rs) throws SQLException, DataAccessException {
-                if(rs.next())
+                if (rs.next())
                     return wrapResult(rs);
                 return null;
             }
@@ -210,8 +252,19 @@ public abstract class DAOTemplate<T> {
         });
     }
 
-    protected Object[] getInsertParamValues(T t){
-        int len = insertPK ? pkColumns.length + comColumns.length : comColumns.length;
+    public T loadOne(String clause, Object[] i) {
+        return jt.query(appendClause(loadMoreSQL, clause), i, new ResultSetExtractor<T>() {
+            public T extractData(ResultSet rs) throws SQLException, DataAccessException {
+                if (rs.next())
+                    return wrapResult(rs);
+                return null;
+            }
+
+        });
+    }
+
+    protected Object[] getInsertParamValues(T t) {
+        int len = insertPK ? pkColumns.length + ckColumns.length : ckColumns.length;
         Object[] objects = new Object[len];
         try {
             int i = 0;
@@ -220,89 +273,89 @@ public abstract class DAOTemplate<T> {
                     objects[i++] = method.invoke(t);
                 }
             }
-            for (Method method : comGetters) {
+            for (Method method : ckGetters) {
                 objects[i++] = method.invoke(t);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new RuntimeException("An error occurred (Insert)", ex);
         }
         return objects;
     }
 
-    protected Object[] getUpdateParamValues(T t, Object[] pks){
-        Object[] objects = new Object[pkColumns.length + comColumns.length + (pks == null ? 0 : pks.length)];
+    protected Object[] getUpdateParamValues(T t, Object[] pks) {
+        Object[] objects = new Object[pkColumns.length + ckColumns.length + (pks == null ? 0 : pks.length)];
         try {
             int i = 0;
-            for (Method method : comGetters) {
+            for (Method method : ckGetters) {
                 objects[i++] = method.invoke(t);
             }
             for (Method method : pkGetters) {
                 objects[i++] = method.invoke(t);
             }
-            if(pks != null && pks.length>0){
+            if (pks != null && pks.length > 0) {
                 for (Object pk : pks) {
                     objects[i++] = pk;
                 }
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new RuntimeException("An error occurred (Update)", ex);
         }
         return objects;
     }
 
-    protected String appendClause(String sql, String clause){
-        if(clause == null)
+    protected String appendClause(String sql, String clause) {
+        if (clause == null)
             return sql;
         return sql + " " + clause.trim();
     }
 
-    protected T wrapResult(ResultSet rs) throws SQLException{
-        int startIndex=1;
-        try{
-            T obj = clazz.newInstance();
-            for (Method method: pkSetters) {
-                method.invoke(obj, getObjectFromRs(method, rs, startIndex++));
+    protected T wrapResult(ResultSet rs) throws SQLException {
+        int startIndex = 1;
+        try {
+            T obj = domainType.newInstance();
+            for (Method method : pkSetters) {
+                method.invoke(obj, loadDomainData(method, rs, startIndex++));
             }
-            for (Method method: comSetters) {
-                method.invoke(obj, getObjectFromRs(method, rs, startIndex++));
+            for (Method method : ckSetters) {
+                method.invoke(obj, loadDomainData(method, rs, startIndex++));
             }
             return obj;
-        }catch(Exception ex){
-            if(ex instanceof SQLException)
+        } catch (Exception ex) {
+            if (ex instanceof SQLException)
                 throw (SQLException) ex;
             throw new RuntimeException("An error occurred (LoadData)", ex);
         }
     }
 
-    private Object getObjectFromRs(Method m, ResultSet rs, int i) throws SQLException {
-        Class<?> type = m.getParameterTypes()[0];
-        Class<?> st = type.getSuperclass();
-        if(st == null){//基本数据类型
-            char[] narr = type.getName().toCharArray();
-            narr[0] = (char)(narr[0] - 32);
-            try{
-                return ResultSet.class.getMethod("get" + new String(narr), int.class).invoke(rs, i);
-            }catch(Exception ex){
-                log.info("method name:{}", new String(narr));
+    private Object loadDomainData(Method setter, ResultSet rs, int index) throws SQLException {
+        Class<?> type = setter.getParameterTypes()[0];
+        Class<?> superType = type.getSuperclass();
+        if (superType == null) {// 基本数据类型
+            char[] typeName = type.getName().toCharArray();
+            typeName[0] = (char) (typeName[0] - 32);
+            try {
+                return ResultSet.class.getMethod("get" + new String(typeName), int.class).invoke(rs, index);
+            } catch (Exception ex) {
+                log.info("An error occurred (LoadData - getter: get{})", new String(typeName));
                 log.warn(ex.getMessage(), ex);
             }
-        }else if(st == Number.class){//基本数据类型的包装类
+        } else if (superType == Number.class) {// 基本数据类型的包装类
             String n = type.getSimpleName();
             Object result = null;
-            if(n.startsWith("Int")){
-                result = rs.getInt(i);
-            }else{
-                try{
-                    result = ResultSet.class.getMethod("get" + n, int.class).invoke(rs, i);
-                }catch(Exception ex){
+            if (n.startsWith("Int")) {
+                result = rs.getInt(index);
+            } else {
+                try {
+                    result = ResultSet.class.getMethod("get" + n, int.class).invoke(rs, index);
+                } catch (Exception ex) {
                     log.warn(ex.getMessage(), ex);
                 }
             }
             return rs.wasNull() ? null : result;
         }
-        if(type == Date.class){
-            return rs.getTimestamp(i);
+        if (type == Date.class) {
+            return rs.getTimestamp(index);
         }
-        return rs.getObject(i);
+        return rs.getObject(index);
     }
 }

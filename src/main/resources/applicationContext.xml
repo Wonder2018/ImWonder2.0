@@ -108,6 +108,7 @@
             <value>
                 /wonderlandsadmin/** = authcWonder 
                 /wonderpost/** = authcUsr
+                /** = anon
             </value>
         </property>
     </bean>

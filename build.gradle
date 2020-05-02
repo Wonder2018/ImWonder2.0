@@ -39,6 +39,7 @@ dependencies {
 		'org.springframework.boot:spring-boot-starter-web',
 		'org.springframework.boot:spring-boot-starter-jdbc'
 	)
+    implementation('com.github.theborakompanioni:thymeleaf-extras-shiro:2.0.0')
     implementation('org.apache.commons:commons-lang3:3.10')
 	implementation('org.jsoup:jsoup:1.13.1')
 	implementation(

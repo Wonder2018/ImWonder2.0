@@ -1,6 +1,18 @@
+/*
+ * @Author: Wonder2019 
+ * @Date: 2020-05-02 16:40:01 
+ * @Last Modified by: Wonder2019
+ * @Last Modified time: 2020-05-02 18:00:13
+ */
 package top.imwonder.util;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * StringUtil
+ * 
  * @description: 字符串工具类
  **/
 public class StringUtil {
@@ -49,5 +61,28 @@ public class StringUtil {
             }
         }
         return true;
+    }
+
+    public static String toCamelCase(String str,String regex,boolean isFirstAlphaUpperCase,boolean hasPerfix) {
+        StringBuffer bf = new StringBuffer();
+        Queue<String> qu = new LinkedList<>(Arrays.asList(str.toLowerCase().split(regex)));
+        if(hasPerfix){
+            qu.poll();
+        }
+        if(qu.size()<=0){
+            return "";
+        }
+        String head = qu.poll();
+        if(isFirstAlphaUpperCase){
+            bf.append(head.substring(0, 1).toUpperCase());
+            bf.append(head.substring(1));
+        }else{
+            bf.append(head);
+        }
+        for(String s:qu){
+            bf.append(s.substring(0, 1).toUpperCase());
+            bf.append(s.substring(1));
+        }
+        return bf.toString();
     }
 }
