@@ -15,7 +15,7 @@ import top.imwonder.myblog.login.util.LoginUtil;
 
 @Controller
 public class PosterLogin {
-    @RequestMapping(value = { "/wonderpost/login" })
+    @RequestMapping(value = { "/wonderpost/login", "/wonderpost/login.html" })
     public String posterLogin(HttpServletRequest req) {
         switch (LoginUtil.checkLonginState(req, "wonderpost")) {
             case PASS:

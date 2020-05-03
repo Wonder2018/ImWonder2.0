@@ -19,11 +19,11 @@ import top.imwonder.myblog.util.AbstractController;
 @Controller
 public class AdminLogin extends AbstractController {
 
-    @RequestMapping(value = { "/wonderlandsadmin/login" })
+    @RequestMapping(value = { "/wonderlandsadmin/login", "/wonderlandsadmin/login.html" })
     public String adminLogin(HttpServletRequest req) {
         switch (LoginUtil.checkLonginState(req, "wonderlandsadmin")) {
             case SKIP:
-                return "redirect:/wonderlandsadmin/index.html";
+                return "redirect:/wonderlandsadmin/index";
             case RESET:
                 Subject sub = SecurityUtils.getSubject();
                 sub.logout();

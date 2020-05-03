@@ -202,7 +202,6 @@ public abstract class DAOTemplate<T> {
             buffer.append(", ");
         }
         buffer.deleteCharAt(buffer.length() - 2);
-        log.debug(buffer.toString());
     }
 
     public int insert(T t) {
