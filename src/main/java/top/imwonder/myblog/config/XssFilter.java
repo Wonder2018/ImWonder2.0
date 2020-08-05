@@ -17,12 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class XssFilter implements Filter {
 
-	private static Logger logger = LoggerFactory.getLogger(XssFilter.class);
 	private static boolean IS_INCLUDE_RICH_TEXT = false;// 是否过滤富文本内容
 	public List<String> excludes = new ArrayList<String>();
 

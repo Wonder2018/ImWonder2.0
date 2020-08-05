@@ -2,10 +2,11 @@
  * @Author: Wonder2019 
  * @Date: 2020-04-16 16:46:09 
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-04-16 16:49:24
+ * @Last Modified time: 2020-08-05 20:28:05
  */
 function fullGaussianBlur(image, round) {
     let cvs = document.createElement("canvas");
+    console.log(image.crossOrigin)
     stackBlur.processImage(image, cvs, round);
     return cvs.toDataURL("image/jpeg", 1);
 }

@@ -39,6 +39,7 @@ dependencies {
 		'org.springframework.boot:spring-boot-starter-web',
 		'org.springframework.boot:spring-boot-starter-jdbc'
 	)
+    implementation('com.google.code.gson:gson:2.8.6')
     implementation('com.github.theborakompanioni:thymeleaf-extras-shiro:2.0.0')
     implementation('org.apache.commons:commons-lang3:3.10')
 	implementation('org.jsoup:jsoup:1.13.1')
@@ -49,6 +50,8 @@ dependencies {
 		'org.apache.shiro:shiro-quartz:1.5.1',
 		'org.apache.shiro:shiro-spring:1.5.1'
     )
+    implementation('com.qiniu:qiniu-java-sdk:7.2.29')
+	compile fileTree(dir:'lib',include:['*.jar'])
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'

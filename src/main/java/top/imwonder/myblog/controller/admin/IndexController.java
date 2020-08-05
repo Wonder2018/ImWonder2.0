@@ -11,4 +11,9 @@ public class IndexController {
     public String index() {
         return "wonderlandsadmin/index";
     }
+
+    @RequestMapping(value = { "/", "/wellcome", "/wellcome.html" })
+    public String wellcome() {
+        return "wonderlandsadmin/wellcome";
+    }
 }

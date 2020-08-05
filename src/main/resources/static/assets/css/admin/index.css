@@ -1,0 +1,86 @@
+/*
+ * @Author: Wonder2019 
+ * @Date: 2020-07-10 17:17:29 
+ * @Last Modified by: Wonder2019
+ * @Last Modified time: 2020-07-10 18:46:01
+ */
+@charset "utf-8";
+body {
+	overflow: hidden;
+}
+.logo,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: Ubuntu, "Segoe UI", "Microsoft Yahei", "Microsoft Jhenghei", sans-serif !important;
+}
+
+.main-header {
+	font-size: 2rem;
+	height: 2.5em;
+	line-height: 2.5em;
+}
+
+.logo {
+	display: block;
+	float: left;
+	width: 12em;
+	background-color: #357ca5;
+	text-align: center;
+	color: #fff;
+}
+
+.logo-mini {
+}
+
+.logo-lg {
+}
+
+.nav {
+	display: block;
+	margin-left: 12em;
+	background-color: #3c8dbc;
+}
+.main-sidebar {
+	font-size: 2rem;
+	float: left;
+	height: 100%;
+	width: 12em;
+	background-color: #222d32;
+}
+
+.sidebar {
+}
+
+.user-panel {
+}
+
+.sidebar-menu {
+}
+
+.main-content {
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0 0 0 24rem;
+    padding-bottom: 9.5rem;
+    background-color: #ecf0f5;
+}
+
+.main-content-iframe{
+    height: 100%;
+    width: 100%;
+}
+
+.main-footer {
+    position: absolute;
+    font-size: 1.8rem;
+    bottom: 5rem;
+    height: 2.5em;
+    width: 100%;
+    background-color: #fff;
+}

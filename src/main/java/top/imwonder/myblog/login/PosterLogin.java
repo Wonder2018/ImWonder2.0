@@ -12,9 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import top.imwonder.myblog.login.util.LoginUtil;
+import top.imwonder.myblog.util.AbstractController;
 
 @Controller
-public class PosterLogin {
+public class PosterLogin extends AbstractController {
     @RequestMapping(value = { "/wonderpost/login", "/wonderpost/login.html" })
     public String posterLogin(HttpServletRequest req) {
         switch (LoginUtil.checkLonginState(req, "wonderpost")) {

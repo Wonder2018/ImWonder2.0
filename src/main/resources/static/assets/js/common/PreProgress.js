@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-04-16 16:45:49
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-04-16 22:39:16
+ * @Last Modified time: 2020-08-05 21:08:46
  */
 class PreProgress {
 	/**
@@ -32,8 +32,8 @@ class PreProgress {
 		}
 		this.isLock = true;
 		this.state = "progressing";
-		for (const task of this.tasks) {
-			task.fun(...task.params);
+		for (let task of this.tasks) {
+			setTimeout(task.fun, 10, this.getId(), ...task.params);
 		}
 		this.checkProgress();
 	}
@@ -71,6 +71,13 @@ class PreProgress {
 			);
 		}
 	}
+
+	addAllTask(tasks) {
+		tasks.forEach((item) => {
+			this.addTask(item);
+		});
+	}
+
 	uuid(len, radix) {
 		let chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split("");
 		let uuid = [];

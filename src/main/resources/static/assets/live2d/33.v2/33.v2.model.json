@@ -1,0 +1,43 @@
+{
+    "version": "Sample 1.0.0",
+    "model": "moc/33.v2.moc",
+    "textures": [
+        "moc/33.v2.1024/texture_00.png",
+        "moc/33.v2.1024/texture_01.png",
+        "moc/33.v2.1024/texture_02.png",
+        "moc/33.v2.1024/texture_03.png"
+    ],
+    "motions": {
+        "idle": [
+            {
+                "file": "mtn/33.v2.idle-01.mtn",
+                "fade_in": 2000,
+                "fade_out": 2000
+            },
+            {
+                "file": "mtn/33.v2.idle-02.mtn",
+                "fade_in": 2000,
+                "fade_out": 2000
+            },
+            {
+                "file": "mtn/33.v2.idle-03.mtn",
+                "fade_in": 2000,
+                "fade_out": 2000
+            }
+        ],
+        "tap_body": [
+            {
+                "file": "mtn/33.v2.touch.mtn",
+                "fade_in": 150,
+                "fade_out": 100
+            }
+        ],
+        "thanking": [
+            {
+                "file": "mtn/33.v2.thanking.mtn",
+                "fade_in": 2000,
+                "fade_out": 2000
+            }
+        ]
+    }
+}
