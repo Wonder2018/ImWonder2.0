@@ -8,25 +8,27 @@
 		<link rel="stylesheet" href="/assets/css/reset.css" />
 		<link rel="stylesheet" href="/assets/css/imwonder.css" />
 		<link rel="stylesheet" href="/assets/css/public/hover-min.css" />
-		<link rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
+		<link rel="stylesheet" href="/assets/css/public/github-markdown.css" />
+		<link th:href="${iconfontUrl}" rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
 		<link rel="stylesheet" href="/assets/css/cover-imwonder.css" />
 		<link rel="stylesheet" href="/assets/css/loading.css" />
 		<link rel="stylesheet" href="/assets/css/common.css" />
 		<link rel="stylesheet" href="/assets/css/index.css" />
+		<link rel="stylesheet" href="/assets/css/blog/blogDetails.css" />
 		<script th:inline="JavaScript">
-            window.bgList = /*[[${bgList}]]*/ [];
-            window.blogInfo = /*[[${blogInfo}]]*/[];
-            window.commentList = /*[[${commentList}]]*/[];
+			window.bgList = /*[[${bgList}]]*/ [];
+			window.blogMarkdownUrl = /*[[${blogDetails.markdownId}]]*/ "";
 		</script>
 		<script src="/assets/js/public/jquery-3.4.1.min.js"></script>
 		<script src="/assets/js/public/L2Dwidget.min.js"></script>
 		<script src="/assets/js/public/jqcloud-1.0.4.js"></script>
+		<script src="/assets/js/public/marked-1.1.0.js"></script>
 		<script src="/assets/js/common/PreloadImg.js"></script>
 		<script src="/assets/js/common/PreProgress.js"></script>
 		<script src="/assets/js/common/SetBackgroundImage.js"></script>
 		<script src="/assets/js/common/background.js"></script>
-		<script src="/assets/js/common/common.js"></script>
 		<script src="/assets/js/blog/blogDetails.js"></script>
+		<script src="/assets/js/common/common.js"></script>
 	</head>
 	<body class="loading">
 		<div class="loading-cover">
@@ -153,29 +155,8 @@
 					</li>
 				</ul>
 				<ul class="blog-list fl">
-					<li class="blog-card clearfix">
-						<div class="blog-date">
-							<span class="blog-date-month">6月</span>
-							<br />
-							<span class="blog-date-day">28</span>
-						</div>
-						<label class="blog-title">Title 标题 Title 标题</label>
-						<ul class="blog-tag-list">
-							<li class="blog-tag hvr-grow-rotate">
-								<span class="iconfont icon-date"></span>
-								20190628
-							</li>
-							<li class="blog-tag hvr-grow-rotate">
-								<span class="iconfont icon-tag"></span>
-								SpringMVC
-							</li>
-							<li class="blog-tag hvr-grow-rotate">
-								<span class="iconfont icon-read-num"></span>
-								2342323
-							</li>
-						</ul>
-						<img class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
-						<div class="blog-abstract">
+					<li th:object="${blogDetails}" class="blog-card clearfix">
+						<div class="blog-content markdown-body">
 							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
 							Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
 							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
@@ -185,21 +166,21 @@
 							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
 							Review 预览
 						</div>
-						<div class="blog-readmore hvr-sweep-to-right">
-							继续阅读
-							<span class="blog-readnum">23238</span>
-						</div>
-					</li>
-					<li class="pagelist">
-						<label class="setpage pageUp">&lt;</label>
-						<label class="setpage">1</label>
-						<label class="setpage">2</label>
-						<label class="setpage">3</label>
-						<label class="setpage">...</label>
-						<label class="setpage">10</label>
-						<label class="setpage">11</label>
-						<label class="setpage">12</label>
-						<label class="setpage pageDown">&gt;</label>
+
+						<ul class="blog-tag-list">
+							<li class="blog-tag hvr-grow-rotate">
+								<span class="iconfont icon-date"></span>
+								<span th:text="*{#dates.format(postTime,'yyyyMMdd')}">20190628</span>
+							</li>
+							<li th:each="tag : *{tags}" class="blog-tag hvr-grow-rotate">
+								<span th:class="|iconfont icon-${tag.icon}|" class="iconfont icon-tag"></span>
+								<span th:text="${tag.name}">SpringMVC</span>
+							</li>
+							<li class="blog-tag hvr-grow-rotate">
+								<span class="iconfont icon-read-num"></span>
+								<span th:text="*{read}">2342323</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>

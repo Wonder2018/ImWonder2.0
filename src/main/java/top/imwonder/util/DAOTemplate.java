@@ -225,14 +225,17 @@ public abstract class DAOTemplate<T> {
     }
 
     public ArrayList<T> loadMore(String clause, Object[] i) {
-        return jt.query(appendClause(loadMoreSQL, clause), i, new ResultSetExtractor<ArrayList<T>>() {
+        return loadMoreBySQL(appendClause(loadMoreSQL, clause), i);
+    }
+
+    public ArrayList<T> loadMoreBySQL(String sql, Object[] i){
+        return jt.query(sql, i, new ResultSetExtractor<ArrayList<T>>() {
             public ArrayList<T> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 ArrayList<T> result = new ArrayList<T>();
                 while (rs.next())
                     result.add(wrapResult(rs));
                 return result;
             }
-
         });
     }
 

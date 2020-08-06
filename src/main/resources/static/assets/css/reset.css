@@ -123,3 +123,9 @@ a:hover,a:active {
 .hide {
     display: none
 }
+
+@media screen and (max-width: 1480px) {
+    html{
+        font-size: 56%;
+    }
+}

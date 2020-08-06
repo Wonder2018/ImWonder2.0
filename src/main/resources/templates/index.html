@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="/assets/css/reset.css" />
 		<link rel="stylesheet" href="/assets/css/imwonder.css" />
 		<link rel="stylesheet" href="/assets/css/public/hover-min.css" />
-		<link rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
+		<link th:href="${iconfontUrl}" rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
 		<link rel="stylesheet" href="/assets/css/cover-imwonder.css" />
 		<link rel="stylesheet" href="/assets/css/loading.css" />
 		<link rel="stylesheet" href="/assets/css/common.css" />
@@ -23,8 +23,8 @@
 		<script src="/assets/js/common/PreProgress.js"></script>
 		<script src="/assets/js/common/SetBackgroundImage.js"></script>
 		<script src="/assets/js/common/background.js"></script>
-		<script src="/assets/js/common/common.js"></script>
 		<script src="/assets/js/index.js"></script>
+		<script src="/assets/js/common/common.js"></script>
 	</head>
 	<body class="loading">
 		<div class="loading-cover">
@@ -155,42 +155,46 @@
 					</li>
 				</ul>
 				<ul class="blog-list fl">
-					<li class="blog-card clearfix">
+					<li th:each="article : ${articles}" class="blog-card clearfix">
 						<div class="blog-date">
-							<span class="blog-date-month">6月</span>
+							<span th:text="${#dates.format(article.postTime,'MMMMM')}" class="blog-date-month">6月</span>
 							<br />
-							<span class="blog-date-day">28</span>
+							<span th:text="${#dates.format(article.postTime,'dd')}" class="blog-date-day">28</span>
 						</div>
-						<label class="blog-title">Title 标题 Title 标题</label>
+						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
+							<label th:text="${article.title}" class="blog-title">Title 标题 Title 标题</label>
+						</a>
 						<ul class="blog-tag-list">
 							<li class="blog-tag hvr-grow-rotate">
 								<span class="iconfont icon-date"></span>
-								20190628
+								<span th:text="${#dates.format(article.postTime,'yyyyMMdd')}">20190628</span>
 							</li>
-							<li class="blog-tag hvr-grow-rotate">
-								<span class="iconfont icon-tag"></span>
-								SpringMVC
+							<li th:each="tag : ${article.tags}" class="blog-tag hvr-grow-rotate">
+								<span th:class="|iconfont icon-${tag.icon}|" class="iconfont icon-tag"></span>
+								<span th:text="${tag.name}">SpringMVC</span>
 							</li>
 							<li class="blog-tag hvr-grow-rotate">
 								<span class="iconfont icon-read-num"></span>
-								2342323
+								<span th:text="${article.read}">2342323</span>
 							</li>
 						</ul>
-						<img class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
-						<div class="blog-abstract">
-							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-							Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
-							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-							Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
-							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-							Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
-							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-							Review 预览
-						</div>
-						<div class="blog-readmore hvr-sweep-to-right">
-							继续阅读
-							<span class="blog-readnum">23238</span>
-						</div>
+						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
+							<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
+							<div th:text="${article.summary}" class="blog-abstract">
+								Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
+								Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review
+								预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body
+								正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
+								Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review
+								预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body
+								正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
+								Review 预览 Body 正文 Review 预览
+							</div>
+							<div class="blog-readmore hvr-sweep-to-right">
+								继续阅读
+								<span th:text="${article.read}" class="blog-readnum">23238</span>
+							</div>
+						</a>
 					</li>
 					<li class="pagelist">
 						<label class="setpage pageUp">&lt;</label>

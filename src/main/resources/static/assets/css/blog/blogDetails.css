@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+.blog-content{
+    text-align: left;
+}
+
+
+.blog-tag-list{
+    margin-top: 3em;   
+}
+
+.markdown-body h1, .markdown-body h2{
+    border-bottom: 1px solid #697079 !important;
+}

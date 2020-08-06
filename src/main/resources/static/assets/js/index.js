@@ -7,6 +7,15 @@
 
 // Init Live2D
 
+if (!window.wonderTask) {
+	window.wonderTask = [];
+}
+
+window.wonderTask.push({
+	fun: loadBackground,
+	params: ["body", ".cover-box > .cover-paint"],
+});
+
 $(window).scroll(function () {
 	let offset = $(".title").offset().top + $(".title").height() - $(window).scrollTop();
 	if (offset <= $(".nav").height()) {
@@ -14,27 +23,4 @@ $(window).scroll(function () {
 	} else {
 		$(".nav").removeClass("onview");
 	}
-});
-
-L2Dwidget.init({
-	model: {
-		//jsonpath控制显示那个小萝莉模型，下面这个就是我觉得最可爱的小萝莉模型
-		jsonPath: "assets/live2d/33.v2/33.v2.model.json",
-		scale: 1,
-	},
-	display: {
-		position: "right", //看板娘的表现位置
-		width: 150, //小萝莉的宽度
-		height: 300, //小萝莉的高度
-		hOffset: 0,
-		vOffset: -20,
-	},
-	mobile: {
-		show: true,
-		scale: 0.5,
-	},
-	react: {
-		opacityDefault: 0.7,
-		opacityOnHover: 0.2,
-	},
 });

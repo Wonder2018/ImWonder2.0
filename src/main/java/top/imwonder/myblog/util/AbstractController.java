@@ -2,7 +2,7 @@
  * @Author: Wonder2019 
  * @Date: 2020-05-02 17:59:25 
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-08-05 23:52:31
+ * @Last Modified time: 2020-08-06 11:55:40
  */
 package top.imwonder.myblog.util;
 
@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import top.imwonder.myblog.Env;
+import top.imwonder.myblog.SystemProperties;
 import top.imwonder.myblog.dao.OssResourceDAO;
 import top.imwonder.myblog.domain.OssResource;
 
@@ -32,6 +33,9 @@ public abstract class AbstractController {
     @Autowired
     private OssResourceDAO orDAO;
 
+    @Autowired
+    private SystemProperties sp;
+
     private static List<OssResource> orList;
 
     private static long lastUpdateBg = 0;
@@ -39,8 +43,7 @@ public abstract class AbstractController {
 
     @ModelAttribute
     public void initModel(Model model) {
-        log.info("in---");
-        model.addAttribute("teststr", "have fun!");
+        model.addAttribute("iconfontUrl", sp.getIconfontUrl());
     }
 
     protected void initBg(Model model) {
@@ -66,6 +69,15 @@ public abstract class AbstractController {
     // model.addAttribute("result", result);
     // model.addAttribute("page", p);
     // }
+
+    protected String calcOne(String orId){
+        List<OssResource> ors = orDAO.loadMore("where w_id =?", new Object[]{orId});
+        if(!ors.isEmpty()){
+            calcOne(ors.get(0));
+            return ors.get(0).getPath();
+        }
+        return "";
+    }
 
     protected void calcOne(OssResource or) {
         if (resource == null) {

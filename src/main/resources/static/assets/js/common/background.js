@@ -27,11 +27,3 @@ function loadBackground(progressId, back, front) {
 		window[progressId].count++;
 	});
 }
-if (!window.wonderTask) {
-	window.wonderTask = [];
-}
-window.wonderTask.push({
-	fun: loadBackground,
-	params: ["body", ".cover-box > .cover-paint"],
-});
-function preLoadTask() {}
