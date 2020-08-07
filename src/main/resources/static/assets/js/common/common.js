@@ -57,7 +57,7 @@ $(document).ready(function () {
 L2Dwidget.init({
 	model: {
 		//jsonpath控制显示那个小萝莉模型，下面这个就是我觉得最可爱的小萝莉模型
-		jsonPath: "assets/live2d/33.v2/33.v2.model.json",
+		jsonPath: "/assets/live2d/33.v2/33.v2.model.json",
 		scale: 1,
 	},
 	display: {

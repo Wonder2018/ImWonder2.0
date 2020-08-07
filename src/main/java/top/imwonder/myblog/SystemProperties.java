@@ -42,4 +42,15 @@ public class SystemProperties {
         }
 
     }
+
+    public void reload(){
+        try {
+            iconfontUrl = jt.queryForObject("select w_value from w_system_properties where w_name = 'iconfontUrl'", String.class);
+        } catch (Exception e) {
+            log.debug("can not found propertie 'iconfontUrl'");
+            jt.update("insert into w_system_properties (w_id, w_name, w_value) value(?,?,?)", IdUtil.uuid(),
+                    "iconfontUrl", "");
+            iconfontUrl = "";
+        }
+    }
 }

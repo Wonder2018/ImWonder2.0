@@ -12,3 +12,7 @@
 .markdown-body h1, .markdown-body h2{
     border-bottom: 1px solid #697079 !important;
 }
+
+.markdown-body .highlight pre, .markdown-body pre {
+    background-color: #d6fbd087 !important;
+}

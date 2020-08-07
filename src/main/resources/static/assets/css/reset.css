@@ -22,7 +22,7 @@ body {
     line-height: 1;
 }
 
-ol,ul {
+ul {
     list-style: none;
 }
 
@@ -52,10 +52,6 @@ html {
 ul {
     margin: 0;
     padding: 0;
-}
-
-li {
-    list-style: none;
 }
 
 .clearfix:before,.clearfix:after {

@@ -29,4 +29,7 @@ public class Article {
     private Integer read;
 
     private List<Tag> tags;
+
+    private List<ArticleResource> resourceList;
+    
 }

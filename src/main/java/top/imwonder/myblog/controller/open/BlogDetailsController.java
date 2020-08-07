@@ -11,9 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import top.imwonder.myblog.SystemProperties;
 import top.imwonder.myblog.dao.ArticleDAO;
+import top.imwonder.myblog.dao.ArticleResourceDAO;
 import top.imwonder.myblog.dao.TagDAO;
 import top.imwonder.myblog.domain.Article;
+import top.imwonder.myblog.domain.ArticleResource;
 import top.imwonder.myblog.domain.Tag;
 import top.imwonder.myblog.exception.WonderResourceNotFoundException;
 import top.imwonder.myblog.util.AbstractController;
@@ -31,6 +34,19 @@ public class BlogDetailsController extends AbstractController {
     @Autowired
     private TagDAO tagDAO;
 
+    @Autowired
+    private ArticleResourceDAO arrDAO;
+
+    @Autowired
+    private SystemProperties sp;
+
+    @RequestMapping(value = { "/updateIcon" })
+    public String upicon(Model model) {
+        sp.reload();
+        model.addAttribute("ok", "fun!");
+        return "json";
+    }
+
     @RequestMapping(value = { "/blogDetails", "/blogDetails.html" })
     public String blogDetails(String blogId, HttpServletRequest req, Model model) {
         String readList = (String) req.getSession().getAttribute("readList");
@@ -44,11 +60,17 @@ public class BlogDetailsController extends AbstractController {
             art.setMarkdownId(calcOne(art.getMarkdownId()));
             List<Tag> tags = tagDAO.loadMoreBySQL(sql, new Object[] { art.getId() });
             art.setTags(tags);
+            List<ArticleResource> resourceList = arrDAO.loadMore(" where w_article_id = ? order by w_order asc", new Object[] { blogId });
+            for (ArticleResource item : resourceList) {
+                item.setImageId(calcOne(item.getImageId()));
+            }
+            art.setResourceList(resourceList);
             String blogTag = String.format("-%s-", blogId);
             if (readList.indexOf(blogTag) == -1) {
-                jt.update("update w_article set w_read = ? where w_id = ?", new Object[] { art.getRead() + 1, blogId });
-                readList+=blogTag;
-                req.getSession().setAttribute("readList", readList);
+            jt.update("update w_article set w_read = ? where w_id = ?", new Object[] {
+            art.getRead() + 1, blogId });
+            readList += blogTag;
+            req.getSession().setAttribute("readList", readList);
             }
         } catch (Exception e) {
             log.debug(e.getMessage());
