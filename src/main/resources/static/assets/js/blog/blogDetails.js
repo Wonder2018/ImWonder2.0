@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-08-06 10:44:56
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-08-07 19:12:21
+ * @Last Modified time: 2020-08-10 10:12:50
  */
 
 let markedOpt = {
@@ -40,6 +40,15 @@ function renderMd(progressId) {
 		"text"
 	);
 }
+
+function initTagList(progressId) {
+	$(".tag-cloud-board").jQCloud(window.tagList, {
+		removeOverflowing: true,
+		shape: "rectangular",
+	});
+	window[progressId].count++;
+}
+
 if (!window.wonderTask) {
 	window.wonderTask = [];
 }
@@ -51,5 +60,10 @@ window.wonderTask.push({
 
 window.wonderTask.push({
 	fun: renderMd,
+	params: [],
+});
+
+window.wonderTask.push({
+	fun: initTagList,
 	params: [],
 });

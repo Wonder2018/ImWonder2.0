@@ -2,7 +2,7 @@
  * @Author: Wonder2019 
  * @Date: 2020-05-02 17:59:25 
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-08-06 11:55:40
+ * @Last Modified time: 2020-08-10 10:13:15
  */
 package top.imwonder.myblog.util;
 
@@ -15,6 +15,7 @@ import com.qiniu.util.Auth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -29,6 +30,9 @@ public abstract class AbstractController {
 
     @Autowired
     protected Env env;
+
+    @Autowired
+    private JdbcTemplate jt;
 
     @Autowired
     private OssResourceDAO orDAO;
@@ -57,6 +61,12 @@ public abstract class AbstractController {
             }
         }
         model.addAttribute("bgList", AbstractController.orList);
+    }
+
+    protected void listTag(Model model) {
+        String sql = "select b.w_id as tagId, b.w_name as text, a.count as weight, concat('/blog/search?tag=', b.w_id) as link from (select c.w_tag_id, count(c.w_article_id) as count from w_articl_tag c group by c.w_tag_id) a left join w_tag b on a.w_tag_id = b.w_id order by a.count desc;";
+        List<Map<String,Object>> tagList = jt.queryForList(sql);
+        model.addAttribute("tagList", tagList);
     }
 
     // protected void list(int rows, int page, Search search, DAOTemplate<?> dao,

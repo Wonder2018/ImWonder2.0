@@ -2,29 +2,42 @@
 <html lang="zh_CN">
 	<head>
 		<meta charset="UTF-8" />
-		<meta content='width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0' name='viewport'/>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<title th:text="${blogDetails.title}">Title - I'm Wonder</title>
+		<title th:text="|${blogDetails.title} - I'm Wonder|">Title - I'm Wonder</title>
 		<link rel="stylesheet" href="/assets/css/reset.css" />
 		<link rel="stylesheet" href="/assets/css/imwonder.css" />
 		<link rel="stylesheet" href="/assets/css/public/hover-min.css" />
 		<link rel="stylesheet" href="/assets/css/public/github-markdown.css" />
 		<link rel="stylesheet" href="/assets/css/public/highlight/googlecode.css" />
+		<link rel="stylesheet" href="/assets/css/public/jqcloud-1.0.4.css" />
 		<link th:href="${iconfontUrl}" rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
 		<link rel="stylesheet" href="/assets/css/cover-imwonder.css" />
 		<link rel="stylesheet" href="/assets/css/loading.css" />
-		<link rel="stylesheet" href="/assets/css/common.css" />
-		<link rel="stylesheet" href="/assets/css/index.css" />
 		<link rel="stylesheet" href="/assets/css/blog/blogDetails.css" />
+		<link rel="stylesheet" href="/assets/css/common.css" />
 		<script th:inline="JavaScript">
 			window.bgList = /*[[${bgList}]]*/ [];
+			/*[[${tagList}]]*/
+
+			window.tagList = [
+				{ text: "SpringMVC", weight: 10, link: "#" },
+				{ text: "Tomcat", weight: 11, link: "#" },
+				{ text: "LinkedList", weight: 34, link: "#" },
+				{ text: "BankOS", weight: 5, link: "#" },
+				{ text: "Web", weight: 15, link: "#" },
+				{ text: "Java", weight: 7, link: "#" },
+				{ text: "JavaScript", weight: 20, link: "#" },
+				{ text: "Html", weight: 8, link: "#" },
+				{ text: "CSS", weight: 6, link: "#" },
+			];
 			window.blogDetails = /*[[${blogDetails}]]*/ "";
 		</script>
 		<script src="/assets/js/public/jquery-3.4.1.min.js"></script>
 		<script src="/assets/js/public/L2Dwidget.min.js"></script>
 		<script src="/assets/js/public/jqcloud-1.0.4.js"></script>
+		<script src="/assets/js/public/highlight-10.1.2.min.js"></script>
 		<script src="/assets/js/public/marked-1.1.0.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
 		<script src="/assets/js/common/PreloadImg.js"></script>
 		<script src="/assets/js/common/PreProgress.js"></script>
 		<script src="/assets/js/common/SetBackgroundImage.js"></script>
@@ -40,7 +53,7 @@
 			</div>
 		</div>
 		<nav class="nav onview">
-			<a class="nav-btn hvr-underline-from-center">I'm Wonder</a>
+			<a href="/" class="nav-btn hvr-underline-from-center">I'm Wonder</a>
 			<a href="/" class="nav-btn hvr-underline-from-center">
 				<span class="iconfont icon-home"></span>
 				主页
@@ -113,42 +126,20 @@
 					<li class="news-card latest-article">
 						<label class="news-card-title">最近文章</label>
 						<ul class="latest-article-list">
-							<li class="latest-article-item">
-								<label class="latest-article-title">
-									Title 标题 Title 标题
-									<span class="latest-article-readnum">12232</span>
-								</label>
-								<label class="latest-article-posttime fr">6.28</label>
-							</li>
-							<li class="latest-article-item">
-								<label class="latest-article-title">
-									Title 标题 Title 标题
-									<span class="latest-article-readnum">12232</span>
-								</label>
-								<label class="latest-article-posttime fr">6.28</label>
-							</li>
-							<li class="latest-article-item">
-								<label class="latest-article-title">
-									Title 标题 Title 标题
-									<span class="latest-article-readnum">12232</span>
-								</label>
-								<label class="latest-article-posttime fr">6.28</label>
+							<li th:each="article : ${articles}" class="latest-article-item">
+								<a th:href="|/blog/blogDetails?blogId=${article.id}|" th:title="${article.title}"  href="#" title="Title 标题 Title 标题">
+									<label class="latest-article-title">
+										<span th:text="${article.title}" class="latest-article-title-text">Title 标题 Title 标题</span>
+										<span th:text="${article.read}" class="latest-article-readnum">12232</span>
+									</label>
+								</a>
+								<label th:text="${#dates.format(article.postTime,'M.dd')}" class="latest-article-posttime fr">6.28</label>
 							</li>
 						</ul>
 					</li>
 					<li class="news-card tag-cloud">
 						<label class="news-card-title">标签云</label>
-						<div class="tag-cloud-board">
-							<a class="tag-cloud-item" href="#">SpringMVC</a>
-							<a class="tag-cloud-item" href="#">Tomcat</a>
-							<a class="tag-cloud-item" href="#">LinkedList</a>
-							<a class="tag-cloud-item" href="#">BankOS</a>
-							<a class="tag-cloud-item" href="#">Web</a>
-							<a class="tag-cloud-item" href="#">Java</a>
-							<a class="tag-cloud-item" href="#">JavaScript</a>
-							<a class="tag-cloud-item" href="#">Html</a>
-							<a class="tag-cloud-item" href="#">CSS</a>
-						</div>
+						<div class="tag-cloud-board"></div>
 					</li>
 					<li class="news-card msg-board">
 						<label class="news-card-title">留言板</label>
@@ -159,14 +150,7 @@
 				<ul class="blog-list fl">
 					<li th:object="${blogDetails}" class="blog-card clearfix">
 						<div class="blog-content markdown-body">
-							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-							Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
-							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-							Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
-							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-							Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览
-							Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-							Review 预览
+							Body 正文 Review 预览
 						</div>
 
 						<ul class="blog-tag-list">

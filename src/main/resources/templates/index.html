@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="/assets/css/reset.css" />
 		<link rel="stylesheet" href="/assets/css/imwonder.css" />
 		<link rel="stylesheet" href="/assets/css/public/hover-min.css" />
+		<link rel="stylesheet" href="/assets/css/public/jqcloud-1.0.4.css" />
 		<link th:href="${iconfontUrl}" rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
 		<link rel="stylesheet" href="/assets/css/cover-imwonder.css" />
 		<link rel="stylesheet" href="/assets/css/loading.css" />
@@ -15,6 +16,19 @@
 		<link rel="stylesheet" href="/assets/css/index.css" />
 		<script th:inline="JavaScript">
 			window.bgList = /*[[${bgList}]]*/ [];
+			/*[[${tagList}]]*/
+
+			window.tagList = [
+				{ text: "SpringMVC", weight: 10, link: "#" },
+				{ text: "Tomcat", weight: 11, link: "#" },
+				{ text: "LinkedList", weight: 34, link: "#" },
+				{ text: "BankOS", weight: 5, link: "#" },
+				{ text: "Web", weight: 15, link: "#" },
+				{ text: "Java", weight: 7, link: "#" },
+				{ text: "JavaScript", weight: 20, link: "#" },
+				{ text: "Html", weight: 8, link: "#" },
+				{ text: "CSS", weight: 6, link: "#" },
+			];
 		</script>
 		<script src="/assets/js/public/jquery-3.4.1.min.js"></script>
 		<script src="/assets/js/public/L2Dwidget.min.js"></script>
@@ -34,7 +48,7 @@
 			</div>
 		</div>
 		<nav class="nav">
-			<a class="nav-btn hvr-underline-from-center">I'm Wonder</a>
+			<a href="/" class="nav-btn hvr-underline-from-center">I'm Wonder</a>
 			<a href="#home" class="nav-btn hvr-underline-from-center">
 				<span class="iconfont icon-home"></span>
 				主页
@@ -111,42 +125,20 @@
 					<li class="news-card latest-article">
 						<label class="news-card-title">最近文章</label>
 						<ul class="latest-article-list">
-							<li class="latest-article-item">
-								<label class="latest-article-title">
-									Title 标题 Title 标题
-									<span class="latest-article-readnum">12232</span>
-								</label>
-								<label class="latest-article-posttime fr">6.28</label>
-							</li>
-							<li class="latest-article-item">
-								<label class="latest-article-title">
-									Title 标题 Title 标题
-									<span class="latest-article-readnum">12232</span>
-								</label>
-								<label class="latest-article-posttime fr">6.28</label>
-							</li>
-							<li class="latest-article-item">
-								<label class="latest-article-title">
-									Title 标题 Title 标题
-									<span class="latest-article-readnum">12232</span>
-								</label>
-								<label class="latest-article-posttime fr">6.28</label>
+							<li th:each="article : ${articles}" class="latest-article-item">
+								<a th:href="|/blog/blogDetails?blogId=${article.id}|" th:title="${article.title}"  href="#" title="Title 标题 Title 标题">
+									<label class="latest-article-title">
+										<span th:text="${article.title}" class="latest-article-title-text">Title 标题 Title 标题</span>
+										<span th:text="${article.read}" class="latest-article-readnum">12232</span>
+									</label>
+								</a>
+								<label th:text="${#dates.format(article.postTime,'M.dd')}" class="latest-article-posttime fr">6.28</label>
 							</li>
 						</ul>
 					</li>
 					<li class="news-card tag-cloud">
 						<label class="news-card-title">标签云</label>
-						<div class="tag-cloud-board">
-							<a class="tag-cloud-item" href="#">SpringMVC</a>
-							<a class="tag-cloud-item" href="#">Tomcat</a>
-							<a class="tag-cloud-item" href="#">LinkedList</a>
-							<a class="tag-cloud-item" href="#">BankOS</a>
-							<a class="tag-cloud-item" href="#">Web</a>
-							<a class="tag-cloud-item" href="#">Java</a>
-							<a class="tag-cloud-item" href="#">JavaScript</a>
-							<a class="tag-cloud-item" href="#">Html</a>
-							<a class="tag-cloud-item" href="#">CSS</a>
-						</div>
+						<div class="tag-cloud-board"></div>
 					</li>
 					<li class="news-card msg-board">
 						<label class="news-card-title">留言板</label>
@@ -181,14 +173,7 @@
 						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
 							<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
 							<div th:text="${article.summary}" class="blog-abstract">
-								Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-								Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review
-								预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body
-								正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-								Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review
-								预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body
-								正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文 Review 预览 Body 正文
-								Review 预览 Body 正文 Review 预览
+								Body 正文 Review 预览 
 							</div>
 							<div class="blog-readmore hvr-sweep-to-right">
 								继续阅读

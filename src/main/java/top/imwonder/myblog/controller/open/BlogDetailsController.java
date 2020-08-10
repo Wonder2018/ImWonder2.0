@@ -1,6 +1,5 @@
 package top.imwonder.myblog.controller.open;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,17 +66,19 @@ public class BlogDetailsController extends AbstractController {
             art.setResourceList(resourceList);
             String blogTag = String.format("-%s-", blogId);
             if (readList.indexOf(blogTag) == -1) {
-            jt.update("update w_article set w_read = ? where w_id = ?", new Object[] {
-            art.getRead() + 1, blogId });
-            readList += blogTag;
-            req.getSession().setAttribute("readList", readList);
+                jt.update("update w_article set w_read = ? where w_id = ?", new Object[] { art.getRead() + 1, blogId });
+                readList += blogTag;
+                req.getSession().setAttribute("readList", readList);
             }
         } catch (Exception e) {
             log.debug(e.getMessage());
             throw new WonderResourceNotFoundException("404", "你要查看的博客不存在或已被删除！");
         }
         model.addAttribute("blogDetails", art);
+        List<Article> articles = arDAO.loadMore(" order by w_post_time desc limit 0,5", new Object[0]);
+        model.addAttribute("articles", articles);
         initBg(model);
+        listTag(model);
         return "blog/blogDetails";
     }
 }

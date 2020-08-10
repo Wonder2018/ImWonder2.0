@@ -16,3 +16,9 @@
 .markdown-body .highlight pre, .markdown-body pre {
     background-color: #d6fbd087 !important;
 }
+
+@media screen and (max-width: 500px) {
+    .blog-content{
+        font-size: 1.3rem;
+    }
+}
