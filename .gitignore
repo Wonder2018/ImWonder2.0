@@ -4,8 +4,6 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-photo
-target
 
 ### STS ###
 .apt_generated
@@ -35,3 +33,8 @@ out/
 bin
 src/test/java/top/imwonder/myblog/experiment/
 src/test/java/top/imwonder/myblog/record/
+
+## Imwonder ##
+photo
+target
+reqofphp.log

@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-08-06 10:44:56
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-08-10 10:12:50
+ * @Last Modified time: 2020-08-11 14:43:41
  */
 
 let markedOpt = {
@@ -32,7 +32,7 @@ function renderMd(progressId) {
 		blogDetails.markdownId,
 		function (data) {
 			for (let item of blogDetails.resourceList) {
-				data = data.replace(`http://wonderblog.img${item.order}`, item.imageId);
+				data = data.replace(`REwonderResourceID${item.order}RE`, item.resourceId);
 			}
 			$(".blog-content").html(marked(data, markedOpt));
 			window[progressId].count++;

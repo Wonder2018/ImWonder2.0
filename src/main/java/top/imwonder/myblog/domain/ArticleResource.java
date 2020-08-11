@@ -9,6 +9,6 @@ public class ArticleResource {
 
     private Integer order;
 
-    private String imageId;
+    private String resourceId;
 
 }

@@ -12,7 +12,7 @@ public class ArticleResourceDAO extends DAOTemplate<ArticleResource> {
         domainType = ArticleResource.class;
         tableName = "w_article_resource";
         pkColumns = new String[] { "w_article_id", "w_order" };
-        ckColumns = new String[] { "w_image_id" };
+        ckColumns = new String[] { "w_resource_id" };
         init();
     }
     

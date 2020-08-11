@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 import top.imwonder.myblog.SystemProperties;
 import top.imwonder.myblog.dao.ArticleDAO;
@@ -60,9 +61,6 @@ public class BlogDetailsController extends AbstractController {
             List<Tag> tags = tagDAO.loadMoreBySQL(sql, new Object[] { art.getId() });
             art.setTags(tags);
             List<ArticleResource> resourceList = arrDAO.loadMore(" where w_article_id = ? order by w_order asc", new Object[] { blogId });
-            for (ArticleResource item : resourceList) {
-                item.setImageId(calcOne(item.getImageId()));
-            }
             art.setResourceList(resourceList);
             String blogTag = String.format("-%s-", blogId);
             if (readList.indexOf(blogTag) == -1) {
@@ -80,5 +78,14 @@ public class BlogDetailsController extends AbstractController {
         initBg(model);
         listTag(model);
         return "blog/blogDetails";
+    }
+
+    @RequestMapping(value = { "/blogResource" })
+    public RedirectView blogDetails(String resourceId, Model model) {
+        String url = calcOne(resourceId);
+        if ("".equals(url)) {
+            throw new WonderResourceNotFoundException("404", "资源不存在或已被删除！");
+        }
+        return new RedirectView(url, false, true, false);
     }
 }
