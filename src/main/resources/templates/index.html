@@ -1,20 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
-	<head>
-		<meta charset="UTF-8" />
-		<meta content='width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0' name='viewport'/>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<head th:replace="fragments :: common_header(~{::.primate},~{::title},~{::.comcss},~{::.pricss},~{::.initjson},~{::.comjs},~{::.prijs})">
+		<meta name="baidu-site-verification" content="I6vGxjKLYi" class="primate" />
+		<meta name="description" content="wonder的个人博客网站，主要展示java、java web、spring、JVM、web前端（HTML - CSS - JavaScript）、逆向Linux和云服务器操作及项目部署等多方面内容，均为个人学习经验和相关研究的记录。喜欢的话不妨收藏一下呀。" class="primate" />
 		<title>I'm Wonder</title>
-		<link rel="stylesheet" href="/assets/css/reset.css" />
-		<link rel="stylesheet" href="/assets/css/imwonder.css" />
-		<link rel="stylesheet" href="/assets/css/public/hover-min.css" />
-		<link rel="stylesheet" href="/assets/css/public/jqcloud-1.0.4.css" />
-		<link th:href="${iconfontUrl}" rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
-		<link rel="stylesheet" href="/assets/css/cover-imwonder.css" />
-		<link rel="stylesheet" href="/assets/css/loading.css" />
-		<link rel="stylesheet" href="/assets/css/common.css" />
-		<link rel="stylesheet" href="/assets/css/index.css" />
-		<script th:inline="JavaScript">
+		<link th:if="false" class="comcss" />
+		<link rel="stylesheet" href="/assets/css/index.css" class="pricss" />
+		<script th:inline="JavaScript" class="initjson">
 			window.bgList = /*[[${bgList}]]*/ [];
 			/*[[${tagList}]]*/
 
@@ -30,122 +22,20 @@
 				{ text: "CSS", weight: 6, link: "#" },
 			];
 		</script>
-		<script src="/assets/js/public/jquery-3.4.1.min.js"></script>
-		<script src="/assets/js/public/L2Dwidget.min.js"></script>
-		<script src="/assets/js/public/jqcloud-1.0.4.js"></script>
-		<script src="/assets/js/common/PreloadImg.js"></script>
-		<script src="/assets/js/common/PreProgress.js"></script>
-		<script src="/assets/js/common/SetBackgroundImage.js"></script>
-		<script src="/assets/js/common/background.js"></script>
-		<script src="/assets/js/index.js"></script>
-		<script src="/assets/js/common/common.js"></script>
+		<script th:if="false" class="comjs"></script>
+		<script src="/assets/js/index.js" class="prijs"></script>
 	</head>
 	<body class="loading">
-		<div class="loading-cover">
-			<img src="" alt="" class="loading-icon" />
-			<div class="loading-prog">
-				<span class="loading-line" style="width: 0%;"><span>0%</span></span>
-			</div>
-		</div>
-		<nav class="nav">
-			<a href="/" class="nav-btn hvr-underline-from-center">I'm Wonder</a>
-			<a href="#home" class="nav-btn hvr-underline-from-center">
-				<span class="iconfont icon-home"></span>
-				主页
-			</a>
-			<a class="nav-btn hvr-underline-from-center">
-				<span class="iconfont icon-blog"></span>
-				笔记
-			</a>
-			<a class="nav-btn hvr-underline-from-center">
-				<span class="iconfont icon-timeline"></span>
-				时光轴
-			</a>
-			<a class="nav-btn hvr-underline-from-center">
-				<span class="iconfont icon-case-library"></span>
-				案例库
-			</a>
-			<a class="nav-btn hvr-underline-from-center">
-				<span class="iconfont icon-chat-area"></span>
-				讨论区
-			</a>
-			<a class="nav-btn hvr-underline-from-center">
-				<span class="iconfont icon-danni"></span>
-				Danni
-			</a>
-			<a class="nav-btn hvr-underline-from-center">
-				<span class="iconfont icon-connect"></span>
-				联系我
-			</a>
-		</nav>
+		<th:block th:replace="fragments :: loading" />
+		<th:block th:replace="fragments :: nav('#home')" />
 		<header class="titlepage" style="outline: 1px solid #54c;">
 			<div class="title hvr-buzz-out">I'm Wonder</div>
 			<div class="tag">拼命去争取成功，但不要期望一定会成功。</div>
 		</header>
 		<div class="content">
-			<div class="cover-box">
-				<div class="cover-paint"></div>
-			</div>
+			<th:block th:replace="fragments :: coverbox" />
 			<section id="home" class="container clearfix">
-				<ul class="news fr">
-					<li class="news-card clearfix">
-						<div class="blog-search">
-							<input type="text" class="blog-search-inp" placeholder="输入关键词搜索" />
-							<button class="blog-search-btn hvr-radial-out">
-								<span class="iconfont icon-search"></span>
-							</button>
-						</div>
-					</li>
-					<li class="news-card news-imwonder">
-						<img src="/assets/img/index/face.webp" alt="" class="wonder-face" />
-						<img src="/assets/img/index/Wonder2019-Black.png" alt="" class="wonder-sign" />
-						<label class="wonder-motto">拼命去争取成功，但不要期望一定会成功。</label>
-						<ul class="wonder-stat-list">
-							<li class="wonder-stat-item">
-								<span class="stat-key">博客</span>
-								<br />
-								<span class="stat-value">123</span>
-							</li>
-							<li class="wonder-stat-item">
-								<span class="stat-key">动态</span>
-								<br />
-								<span class="stat-value">456</span>
-							</li>
-							<li class="wonder-stat-item">
-								<span class="stat-key">评论</span>
-								<br />
-								<span class="stat-value">1334</span>
-							</li>
-						</ul>
-						<ul class="wonder-snsl-list">
-							<li class="wonder-snsl-item hvr-radial-out"><span class="iconfont icon-mail"></span></li>
-							<li class="wonder-snsl-item hvr-radial-out"><span class="iconfont icon-github"></span></li>
-						</ul>
-					</li>
-					<li class="news-card latest-article">
-						<label class="news-card-title">最近文章</label>
-						<ul class="latest-article-list">
-							<li th:each="article : ${articles}" class="latest-article-item">
-								<a th:href="|/blog/blogDetails?blogId=${article.id}|" th:title="${article.title}"  href="#" title="Title 标题 Title 标题">
-									<label class="latest-article-title">
-										<span th:text="${article.title}" class="latest-article-title-text">Title 标题 Title 标题</span>
-										<span th:text="${article.read}" class="latest-article-readnum">12232</span>
-									</label>
-								</a>
-								<label th:text="${#dates.format(article.postTime,'M.dd')}" class="latest-article-posttime fr">6.28</label>
-							</li>
-						</ul>
-					</li>
-					<li class="news-card tag-cloud">
-						<label class="news-card-title">标签云</label>
-						<div class="tag-cloud-board"></div>
-					</li>
-					<li class="news-card msg-board">
-						<label class="news-card-title">留言板</label>
-						<div class="msg-board-bulletchat"></div>
-						<button class="msg-board-lam hvr-radial-out">给我留言</button>
-					</li>
-				</ul>
+				<th:block th:replace="fragments :: news" />
 				<ul class="blog-list fl">
 					<li th:each="article : ${articles}" class="blog-card clearfix">
 						<div class="blog-date">
@@ -173,7 +63,7 @@
 						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
 							<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
 							<div th:text="${article.summary}" class="blog-abstract">
-								Body 正文 Review 预览 
+								Body 正文 Review 预览
 							</div>
 							<div class="blog-readmore hvr-sweep-to-right">
 								继续阅读
@@ -194,21 +84,7 @@
 					</li>
 				</ul>
 			</section>
-			<footer class="verso">
-				<ul class="web-map">
-					<li class="map-card fl"></li>
-					<li class="map-card fl"></li>
-					<li class="map-card fl"></li>
-					<li class="map-card fl"></li>
-				</ul>
-				<div class="copyright">
-					CopyRight Wonder&copy;2020
-					<br />
-					AllRight Reserved
-					<br />
-					<a href="http://beian.miit.gov.cn" style="color: #fff;" target="view_window">鄂ICP备18015012号</a>
-				</div>
-			</footer>
+			<th:block th:replace="fragments :: footer" />
 		</div>
 	</body>
 </html>

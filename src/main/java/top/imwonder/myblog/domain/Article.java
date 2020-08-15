@@ -30,6 +30,8 @@ public class Article {
 
     private List<Tag> tags;
 
+    private String keywords;
+
     private List<ArticleResource> resourceList;
     
 }

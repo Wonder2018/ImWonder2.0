@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+	<head th:fragment="common_header(primate,title,comcss,pricss,initjson,comjs,prijs)">
+		<meta charset="UTF-8" />
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta th:if="${blogDetails == null || blogDetails.keywords == null}" name="keywords" content="imwonder,博客,Danni,javaweb,web前端">
+		<meta th:if="${blogDetails != null && blogDetails.keywords != null}" name="keywords" th:content="${blogDetails.keywords}">
+		<th:block th:replace="${primate}" />
+		<title th:replace="${title}">I'm Wonder</title>
+		<link rel="stylesheet" href="/assets/css/reset.css" />
+		<link rel="stylesheet" href="/assets/css/imwonder.css" />
+		<link rel="stylesheet" href="/assets/css/public/hover-min.css" />
+		<link rel="stylesheet" href="/assets/css/public/jqcloud-1.0.4.css" />
+		<link th:href="${iconfontUrl}" rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
+		<link rel="stylesheet" href="/assets/css/cover-imwonder.css" />
+		<link rel="stylesheet" href="/assets/css/loading.css" />
+		<link rel="stylesheet" href="/assets/css/common.css" />
+		<th:block th:replace="${comcss}" />
+		<th:block th:replace="${pricss}" />
+		<th:block th:replace="${initjson}" />
+		<script src="/assets/js/public/jquery-3.4.1.min.js"></script>
+		<script src="/assets/js/public/L2Dwidget.min.js"></script>
+		<script src="/assets/js/public/jqcloud-1.0.4.js"></script>
+		<script src="/assets/js/common/PreloadImg.js"></script>
+		<script src="/assets/js/common/PreProgress.js"></script>
+		<script src="/assets/js/common/SetBackgroundImage.js"></script>
+		<script src="/assets/js/common/background.js"></script>
+		<th:block th:replace="${comjs}" />
+		<th:block th:replace="${prijs}" />
+		<script src="/assets/js/common/common.js"></script>
+	</head>
+	<body>
+		<div th:fragment="loading" class="loading-cover">
+			<img src="" alt="" class="loading-icon" />
+			<div class="loading-prog">
+				<span class="loading-line" style="width: 0%;"><span>0%</span></span>
+			</div>
+		</div>
+		<nav th:fragment="nav(home)" class="nav">
+			<a href="/" class="nav-btn hvr-underline-from-center">I'm Wonder</a>
+			<a th:href="${home}" href="#home" class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-home"></span>
+				主页
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-blog"></span>
+				笔记
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-timeline"></span>
+				时光轴
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-case-library"></span>
+				案例库
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-chat-area"></span>
+				讨论区
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-danni"></span>
+				Danni
+			</a>
+			<a class="nav-btn hvr-underline-from-center">
+				<span class="iconfont icon-connect"></span>
+				联系我
+			</a>
+		</nav>
+		
+		<div class="content">
+			<div th:fragment="coverbox" class="cover-box">
+				<div class="cover-paint"></div>
+			</div>
+			<section id="home" class="container clearfix">
+				<ul th:fragment="news" class="news fr">
+					<li class="news-card clearfix">
+						<div class="blog-search">
+							<input type="text" class="blog-search-inp" placeholder="输入关键词搜索" />
+							<button class="blog-search-btn hvr-radial-out">
+								<span class="iconfont icon-search"></span>
+							</button>
+						</div>
+					</li>
+					<li class="news-card news-imwonder">
+						<img src="/assets/img/index/face.webp" alt="" class="wonder-face" />
+						<img src="/assets/img/index/Wonder2019-Black.png" alt="" class="wonder-sign" />
+						<label class="wonder-motto">拼命去争取成功，但不要期望一定会成功。</label>
+						<ul class="wonder-stat-list">
+							<li class="wonder-stat-item">
+								<span class="stat-key">博客</span>
+								<br />
+								<span class="stat-value">123</span>
+							</li>
+							<li class="wonder-stat-item">
+								<span class="stat-key">动态</span>
+								<br />
+								<span class="stat-value">456</span>
+							</li>
+							<li class="wonder-stat-item">
+								<span class="stat-key">评论</span>
+								<br />
+								<span class="stat-value">1334</span>
+							</li>
+						</ul>
+						<ul class="wonder-snsl-list">
+							<li class="wonder-snsl-item hvr-radial-out"><span class="iconfont icon-mail"></span></li>
+							<li class="wonder-snsl-item hvr-radial-out"><span class="iconfont icon-github"></span></li>
+						</ul>
+					</li>
+					<li class="news-card latest-article">
+						<label class="news-card-title">最近文章</label>
+						<ul class="latest-article-list">
+							<li th:each="article : ${articles}" class="latest-article-item">
+								<a th:href="|/blog/blogDetails?blogId=${article.id}|" th:title="${article.title}" href="#" title="Title 标题 Title 标题">
+									<label class="latest-article-title">
+										<span th:text="${article.title}" class="latest-article-title-text">Title 标题 Title 标题</span>
+										<span th:text="${article.read}" class="latest-article-readnum">12232</span>
+									</label>
+								</a>
+								<label th:text="${#dates.format(article.postTime,'M.dd')}" class="latest-article-posttime fr">6.28</label>
+							</li>
+						</ul>
+					</li>
+					<li class="news-card tag-cloud">
+						<label class="news-card-title">标签云</label>
+						<div class="tag-cloud-board"></div>
+					</li>
+					<li class="news-card msg-board">
+						<label class="news-card-title">留言板</label>
+						<div class="msg-board-bulletchat"></div>
+						<button class="msg-board-lam hvr-radial-out">给我留言</button>
+					</li>
+				</ul>
+				<ul class="blog-list fl">
+					<li th:each="article : ${articles}" class="blog-card clearfix">
+						<div class="blog-date">
+							<span th:text="${#dates.format(article.postTime,'MMMMM')}" class="blog-date-month">6月</span>
+							<br />
+							<span th:text="${#dates.format(article.postTime,'dd')}" class="blog-date-day">28</span>
+						</div>
+						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
+							<label th:text="${article.title}" class="blog-title">Title 标题 Title 标题</label>
+						</a>
+						<ul class="blog-tag-list">
+							<li class="blog-tag hvr-grow-rotate">
+								<span class="iconfont icon-date"></span>
+								<span th:text="${#dates.format(article.postTime,'yyyyMMdd')}">20190628</span>
+							</li>
+							<li th:each="tag : ${article.tags}" class="blog-tag hvr-grow-rotate">
+								<span th:class="|iconfont icon-${tag.icon}|" class="iconfont icon-tag"></span>
+								<span th:text="${tag.name}">SpringMVC</span>
+							</li>
+							<li class="blog-tag hvr-grow-rotate">
+								<span class="iconfont icon-read-num"></span>
+								<span th:text="${article.read}">2342323</span>
+							</li>
+						</ul>
+						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
+							<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
+							<div th:text="${article.summary}" class="blog-abstract">
+								Body 正文 Review 预览
+							</div>
+							<div class="blog-readmore hvr-sweep-to-right">
+								继续阅读
+								<span th:text="${article.read}" class="blog-readnum">23238</span>
+							</div>
+						</a>
+					</li>
+					<li class="pagelist">
+						<label class="setpage pageUp">&lt;</label>
+						<label class="setpage">1</label>
+						<label class="setpage">2</label>
+						<label class="setpage">3</label>
+						<label class="setpage">...</label>
+						<label class="setpage">10</label>
+						<label class="setpage">11</label>
+						<label class="setpage">12</label>
+						<label class="setpage pageDown">&gt;</label>
+					</li>
+				</ul>
+			</section>
+			<footer th:fragment="footer" class="verso">
+				<ul class="web-map">
+					<li class="map-card fl"></li>
+					<li class="map-card fl"></li>
+					<li class="map-card fl"></li>
+					<li class="map-card fl"></li>
+				</ul>
+				<div class="copyright">
+					CopyRight Wonder&copy;2020
+					<br />
+					AllRight Reserved
+					<br />
+					<a href="http://beian.miit.gov.cn" style="color: #fff;" target="view_window">鄂ICP备18015012号</a>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>
