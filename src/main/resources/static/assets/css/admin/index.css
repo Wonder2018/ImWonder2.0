@@ -8,15 +8,9 @@
 body {
 	overflow: hidden;
 }
-.logo,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: Ubuntu, "Segoe UI", "Microsoft Yahei", "Microsoft Jhenghei", sans-serif !important;
+
+a{
+	text-decoration: none !important;
 }
 
 .main-header {
@@ -29,6 +23,7 @@ h6 {
 	display: block;
 	float: left;
 	width: 12em;
+	height: 5rem;
 	background-color: #357ca5;
 	text-align: center;
 	color: #fff;
@@ -53,13 +48,26 @@ h6 {
 	background-color: #222d32;
 }
 
-.sidebar {
-}
+/* .sidebar {
+} */
 
 .user-panel {
 }
 
 .sidebar-menu {
+	margin-top: 2rem;
+}
+
+.sidebar-menu-item{
+	position: relative;
+	box-sizing: border-box;
+	height: 4rem;
+	padding-left: 2rem;
+	border-top: 1px solid #ccc;
+	line-height: 4rem;
+	color: #fff;
+	word-spacing: 1rem;
+	font-size: 1.8rem;
 }
 
 .main-content {
@@ -83,4 +91,28 @@ h6 {
     height: 2.5em;
     width: 100%;
     background-color: #fff;
+}
+
+
+.hvr-leftline-reveal:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: #2098D1;
+    width: 4px;
+    -webkit-transform: translateY(4px);
+    transform: translateX(-4px);
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.hvr-leftline-reveal:hover:before, .hvr-leftline-reveal.focus:before, .hvr-leftline-reveal:active:before {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
 }

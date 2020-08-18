@@ -73,7 +73,7 @@ public class BlogDetailsController extends AbstractController {
             throw new WonderResourceNotFoundException("404", "你要查看的博客不存在或已被删除！");
         }
         model.addAttribute("blogDetails", art);
-        List<Article> articles = arDAO.loadMore(" order by w_post_time desc limit 0,5", new Object[0]);
+        List<Article> articles = arDAO.loadMore(" order by w_post_time desc limit 0,5", emptyObj);
         model.addAttribute("articles", articles);
         initBg(model);
         listTag(model);
@@ -86,6 +86,7 @@ public class BlogDetailsController extends AbstractController {
         if ("".equals(url)) {
             throw new WonderResourceNotFoundException("404", "资源不存在或已被删除！");
         }
+        model.asMap().clear();
         return new RedirectView(url, false, true, false);
     }
 }

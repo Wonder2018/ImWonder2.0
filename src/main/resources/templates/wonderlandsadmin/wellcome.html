@@ -91,6 +91,10 @@
 			Sorry, you are not allowed to delete user accounts.
 		</p>
 
+		<ul>
+			<li th:each="item : ${testArray}" th:shiro:hasPermission="|admin:sysinfo|" th:text="${item}"></li>
+		</ul>
+
 		<!-- 验证当前用户是否拥有以下所有角色。 -->
 
 		<p shiro:hasAllPermissions="userInfo:view, userInfo:add">

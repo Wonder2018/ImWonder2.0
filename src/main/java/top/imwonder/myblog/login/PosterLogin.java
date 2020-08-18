@@ -9,6 +9,7 @@ package top.imwonder.myblog.login;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import top.imwonder.myblog.login.util.LoginUtil;
@@ -17,11 +18,12 @@ import top.imwonder.myblog.util.AbstractController;
 @Controller
 public class PosterLogin extends AbstractController {
     @RequestMapping(value = { "/wonderpost/login", "/wonderpost/login.html" })
-    public String posterLogin(HttpServletRequest req) {
+    public String posterLogin(HttpServletRequest req, Model model) {
         switch (LoginUtil.checkLonginState(req, "wonderpost")) {
             case PASS:
                 return "wonderpost/login";
             default:
+                model.asMap().clear();
                 return "redirect:/wonderpost/index.html";
         }
     }

@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I'm Wonder 管理控制台</title>
-    <link rel="stylesheet" href="/assets/css/reset.css" />
-    <link rel="stylesheet" href="/assets/css/imwonder.css" />
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
-    <link rel="stylesheet" href="/assets/css/admin/index.css">
-</head>
-<body>
-    <header class="main-header">
-        <a href="/" class="logo">
-            <span class="logo-mini"></span>
-            <span class="logo-lg">I'm Wonder</span>
-        </a>
-        <nav class="nav">
-            <span class="iconfont icon-menu"></span>
-        </nav>
-    </header>
-    <aside class="main-sidebar">
-        <section class="sidebar">
+<html lang="zh_CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>I'm Wonder 管理控制台</title>
+		<link rel="stylesheet" href="/assets/css/reset.css" />
+		<link rel="stylesheet" href="/assets/css/imwonder.css" />
+		<link th:href="${iconfontUrl}" rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
+		<link rel="stylesheet" href="/assets/css/admin/index.css" />
+	</head>
+	<body>
+		<header class="main-header">
+			<a href="/" class="logo">
+				<span class="logo-mini"></span>
+				<span class="logo-lg">I'm Wonder</span>
+			</a>
+			<nav class="nav">
+				<span class="iconfont icon-menu"></span>
+			</nav>
+		</header>
+		<aside class="main-sidebar">
+			<!-- <section class="sidebar"> -->
             <div class="user-panel"></div>
-            <ul class="sidebar-menu"></ul>
-        </section>
-    </aside>
-    <section class="main-content">
-        <iframe class="main-content-iframe" src="wellcome.html" frameborder="0"></iframe>
-        <footer class="main-footer">sfsfsfs </footer>
-    </section>
-</body>
+            <ul class="sidebar-menu">
+                <a th:each="item : ${lmenu}" th:shiro:hasPermission="${item.perm}" th:href="${item.href}" target="wonderif">
+                    <li class="sidebar-menu-item hvr-leftline-reveal">
+                        <span th:class="|iconfont icon-${item.icon}|"></span>
+                        <span th:text="${item.name}" class="sidebar-menu-item-title"></span>
+                    </li>
+                </a>
+            </ul>
+			<!-- </section> -->
+		</aside>
+		<section class="main-content">
+			<iframe class="main-content-iframe" src="wellcome.html" frameborder="0" name="wonderif"></iframe>
+			<footer class="main-footer">Powered with ❤ by imwonder.top danni.love</footer>
+		</section>
+	</body>
 </html>

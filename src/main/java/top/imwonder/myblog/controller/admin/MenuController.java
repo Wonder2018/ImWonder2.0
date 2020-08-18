@@ -11,23 +11,17 @@ import top.imwonder.myblog.dao.MenuDAO;
 import top.imwonder.myblog.domain.Menu;
 import top.imwonder.myblog.util.AbstractController;
 
-@Controller("adminIndexControler")
+@Controller("menuControler")
 @RequestMapping(value = "/wonderlandsadmin")
-public class IndexController extends AbstractController{
+public class MenuController extends AbstractController{
 
     @Autowired
     private MenuDAO mDAO;
 
-    @RequestMapping(value = { "/", "/index", "/index.html" })
-    public String index(Model model) {
+    @RequestMapping(value = { "/listMenu.html" })
+    public String listMenu(Model model) {
         List<Menu> lmenu = mDAO.loadMore(" order by w_order", emptyObj);
         model.addAttribute("lmenu", lmenu);
-        return "wonderlandsadmin/index";
-    }
-
-    @RequestMapping(value = { "/", "/wellcome", "/wellcome.html" })
-    public String wellcome(Model model) {
-        model.addAttribute("testArray", new String[]{"1","2","3","4"});
-        return "wonderlandsadmin/wellcome";
+        return "wonderlandsadmin/listMenu";
     }
 }

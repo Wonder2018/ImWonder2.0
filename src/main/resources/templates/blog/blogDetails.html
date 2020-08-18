@@ -37,7 +37,7 @@
 				<th:block th:replace="fragments :: news" />
 				<ul class="blog-list fl">
 					<li th:object="${blogDetails}" class="blog-card clearfix">
-						<div class="blog-content markdown-body">
+						<div th:text="*{summary}" class="blog-content markdown-body">
 							Body 正文 Review 预览
 						</div>
 

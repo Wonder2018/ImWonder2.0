@@ -112,7 +112,7 @@
 					<li class="news-card latest-article">
 						<label class="news-card-title">最近文章</label>
 						<ul class="latest-article-list">
-							<li th:each="article : ${articles}" class="latest-article-item">
+							<li th:each="article,ite : ${articles}" th:if="${ite.index < 5}" class="latest-article-item">
 								<a th:href="|/blog/blogDetails?blogId=${article.id}|" th:title="${article.title}" href="#" title="Title 标题 Title 标题">
 									<label class="latest-article-title">
 										<span th:text="${article.title}" class="latest-article-title-text">Title 标题 Title 标题</span>

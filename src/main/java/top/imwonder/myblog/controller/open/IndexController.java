@@ -32,7 +32,7 @@ public class IndexController extends AbstractController {
 
     @RequestMapping(value = { "/", "index", "index.html" })
     public String index(Model model) throws UnsupportedEncodingException {
-        List<Article> articles = articleDAO.loadMore(" order by w_post_time desc", new Object[]{});
+        List<Article> articles = articleDAO.loadMore(" order by w_post_time desc", emptyObj);
         String sql = "select b.w_id, b.w_name, b.w_icon from w_articl_tag a left join w_tag b on a.w_tag_id = b.w_id where a.w_article_id = ?";
         for (Article item : articles) {
             if(item.getFaceId() != null){

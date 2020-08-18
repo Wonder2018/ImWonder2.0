@@ -102,10 +102,11 @@
 	float: right;
 	right: 0;
 	bottom: 5rem;
-	padding: 0.3rem 1rem;
+	padding: 0.4rem 1rem;
 	border-radius: 1rem;
 	background-color: #d84a4a;
 	font-size: 1.6rem;
+	word-spacing: 0.5rem;
 	color: #ffffff;
 }
 

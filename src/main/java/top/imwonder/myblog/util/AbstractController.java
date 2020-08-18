@@ -40,6 +40,8 @@ public abstract class AbstractController {
     @Autowired
     private SystemProperties sp;
 
+    protected static Object[] emptyObj = new Object[0];
+
     private static List<OssResource> orList;
 
     private static long lastUpdateBg = 0;

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑菜单</title>
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/imwonder.css">
+    <link th:href="${iconfontUrl}" rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
+    <link rel="stylesheet" href="/assets/css/admin/listMenu.css">
+    <script src="/assets/js/public/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>名称</th>
+                <th>图标</th>
+                <th>权限</th>
+                <th>排序</th>
+                <th>地址</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="menu,ite : ${lmenu}">
+                <td th:text="${ite.count}"></td>
+                <td th:text="${menu.name}"></td>
+                <td><span th:class="|iconfont icon-${menu.icon}|"></span></td>
+                <td th:text="${menu.perm}"></td>
+                <td th:text="${menu.order}"></td>
+                <td th:text="${menu.href}"></td>
+                <td>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

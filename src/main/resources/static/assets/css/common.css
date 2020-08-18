@@ -33,7 +33,7 @@
 	width: 5.6em;
 	font-size: 1.8rem;
 	color: #444;
-	word-spacing: inherit;
+	word-spacing: -0.5rem;
 	text-decoration: none !important;
 }
 
@@ -230,24 +230,26 @@ body,
 
 .latest-article-title {
 	display: inline-block;
-	width: 80%;
+	width: 87.5%;
 	height: 100%;
 }
 
 .latest-article-title-text {
     display: inline-block;
-    max-width: 72%;
+    max-width: 76%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .latest-article-readnum {
-	padding: 0.2em 0.5em;
+	padding: 0.2em 1em;
 	border-radius: 1em;
 	background-color: #d84a4a;
 	color: #fff;
 	vertical-align: top;
+	line-height: 5.6rem;
+	font-size: 0.9rem;
 }
 
 .latest-article-posttime {

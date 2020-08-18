@@ -87,9 +87,9 @@ public class WonderJdbcRealm extends JdbcRealm {
 			params[i++] = ur.getRoleId();
 		}
 		List<RolePermission> rps = rpDao.loadMore("where w_role_id in " + buildQuestionMarks(urs.size()), params);
-		boolean isLoginFromPoster = "authcUsr".equals(principals.asList().get(1));
+		boolean isLoginFromPoster = "poster".equals(principals.asList().get(1));
 		for (RolePermission rp : rps) {
-			if(isLoginFromPoster && rp.getPermId().startsWith("poster:")){
+			if(!isLoginFromPoster || (isLoginFromPoster && rp.getPermId().startsWith("poster:"))){
 				saoi.addStringPermission(rp.getPermId());
 			}
 		}
