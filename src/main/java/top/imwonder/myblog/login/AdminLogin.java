@@ -30,7 +30,7 @@ public class AdminLogin extends AbstractController {
                 Subject sub = SecurityUtils.getSubject();
                 sub.logout();
             default:
-                return "wonderlandsadmin/login";
+                return "admin/login";
         }
 
     }

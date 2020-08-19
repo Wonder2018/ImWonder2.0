@@ -177,7 +177,6 @@ public abstract class DAOTemplate<T> {
         loadMoreSQL = sqlBuffer.toString();
     }
 
-    // TODO Test 'foreach deleteCharAt' and 'if case' performance
     protected void buildWhereClause(StringBuffer buffer) {
         buffer.append(" where ");
         for (int i = 0; i < pkColumns.length; i++) {

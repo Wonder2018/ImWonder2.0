@@ -21,7 +21,7 @@ public class PosterLogin extends AbstractController {
     public String posterLogin(HttpServletRequest req, Model model) {
         switch (LoginUtil.checkLonginState(req, "wonderpost")) {
             case PASS:
-                return "wonderpost/login";
+                return "admin/login";
             default:
                 model.asMap().clear();
                 return "redirect:/wonderpost/index.html";

@@ -22,12 +22,12 @@ public class IndexController extends AbstractController{
     public String index(Model model) {
         List<Menu> lmenu = mDAO.loadMore(" order by w_order", emptyObj);
         model.addAttribute("lmenu", lmenu);
-        return "wonderlandsadmin/index";
+        return "admin/index";
     }
 
     @RequestMapping(value = { "/", "/wellcome", "/wellcome.html" })
     public String wellcome(Model model) {
         model.addAttribute("testArray", new String[]{"1","2","3","4"});
-        return "wonderlandsadmin/wellcome";
+        return "admin/wellcome";
     }
 }
