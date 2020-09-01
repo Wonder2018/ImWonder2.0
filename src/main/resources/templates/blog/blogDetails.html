@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
 	<head th:replace="fragments :: common_header(~{::.primate},~{::title},~{::.comcss},~{::.pricss},~{::.initjson},~{::.comjs},~{::.prijs})">
-		<mate name="description" th:content="${blogDetails.summary}" class="primate" />
+		<meta name="description" th:content="${blogDetails.summary}" class="primate" />
 		<title th:text="|${blogDetails.title} - I'm Wonder|">Title - I'm Wonder</title>
 		<link rel="stylesheet" href="/assets/css/public/github-markdown.css" class="comcss" />
 		<link rel="stylesheet" href="/assets/css/public/highlight/googlecode.css" class="comcss" />
@@ -37,8 +37,9 @@
 				<th:block th:replace="fragments :: news" />
 				<ul class="blog-list fl">
 					<li th:object="${blogDetails}" class="blog-card clearfix">
-						<div th:text="*{summary}" class="blog-content markdown-body">
-							Body 正文 Review 预览
+						<div class="blog-content markdown-body">
+							<h1 th:text="*{title}"></h1>
+							<div th:text="*{summary}"></div>
 						</div>
 
 						<ul class="blog-tag-list">

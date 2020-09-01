@@ -2,8 +2,9 @@
 <html lang="zh_CN">
 	<head th:replace="fragments :: common_header(~{::.primate},~{::title},~{::.comcss},~{::.pricss},~{::.initjson},~{::.comjs},~{::.prijs})">
 		<meta name="baidu-site-verification" content="I6vGxjKLYi" class="primate" />
+		<meta name="google-site-verification" content="-i92lRen0qiwsyWX8ty1Bz0JJhXirEH4_f7_3c_OfIA" class="primate" />
 		<meta name="description" content="wonder的个人博客网站，主要展示java、java web、spring、JVM、web前端（HTML - CSS - JavaScript）、逆向Linux和云服务器操作及项目部署等多方面内容，均为个人学习经验和相关研究的记录。喜欢的话不妨收藏一下呀。" class="primate" />
-		<title>I'm Wonder</title>
+		<title>I'm Wonder - 一只立志成为最强全栈的小猿！</title>
 		<link th:if="false" class="comcss" />
 		<link rel="stylesheet" href="/assets/css/index.css" class="pricss" />
 		<script th:inline="JavaScript" class="initjson">
@@ -29,7 +30,7 @@
 		<th:block th:replace="fragments :: loading" />
 		<th:block th:replace="fragments :: nav('#home')" />
 		<header class="titlepage" style="outline: 1px solid #54c;">
-			<div class="title hvr-buzz-out">I'm Wonder</div>
+			<div class="title hvr-buzz-out"><h1>I'm Wonder</h1></div>
 			<div class="tag">拼命去争取成功，但不要期望一定会成功。</div>
 		</header>
 		<div class="content">
@@ -44,7 +45,7 @@
 							<span th:text="${#dates.format(article.postTime,'dd')}" class="blog-date-day">28</span>
 						</div>
 						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
-							<label th:text="${article.title}" class="blog-title">Title 标题 Title 标题</label>
+							<h2 th:text="${article.title}" class="blog-title">Title 标题 Title 标题</h2>
 						</a>
 						<ul class="blog-tag-list">
 							<li class="blog-tag hvr-grow-rotate">

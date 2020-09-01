@@ -2,7 +2,7 @@
  * @Author: qh 
  * @Date: 2020-05-02 16:27:18 
  * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-05-02 19:40:13
+ * @Last Modified time: 2020-08-24 09:58:24
  */
 package top.imwonder.util;
 
@@ -113,7 +113,7 @@ public abstract class DAOTemplate<T> {
         }
         for (String ck : ckColumns) {
             sqlBuffer.append(ck);
-            sqlBuffer.append(" ,");
+            sqlBuffer.append(", ");
         }
         sqlBuffer.deleteCharAt(sqlBuffer.length() - 2);
         sqlBuffer.append(") values(");

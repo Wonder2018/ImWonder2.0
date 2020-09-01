@@ -4,8 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta th:if="${blogDetails == null || blogDetails.keywords == null}" name="keywords" content="imwonder,博客,Danni,javaweb,web前端">
-		<meta th:if="${blogDetails != null && blogDetails.keywords != null}" name="keywords" th:content="${blogDetails.keywords}">
+		<meta th:if="${blogDetails == null || blogDetails.keywords == null}" name="keywords" content="imwonder,博客,Danni,javaweb,web前端" />
+		<meta th:if="${blogDetails != null && blogDetails.keywords != null}" name="keywords" th:content="${blogDetails.keywords}" />
 		<th:block th:replace="${primate}" />
 		<title th:replace="${title}">I'm Wonder</title>
 		<link rel="stylesheet" href="/assets/css/reset.css" />
@@ -32,7 +32,7 @@
 	</head>
 	<body>
 		<div th:fragment="loading" class="loading-cover">
-			<img src="" alt="" class="loading-icon" />
+			<img src="" alt="loading" class="loading-icon" />
 			<div class="loading-prog">
 				<span class="loading-line" style="width: 0%;"><span>0%</span></span>
 			</div>
@@ -68,7 +68,7 @@
 				联系我
 			</a>
 		</nav>
-		
+
 		<div class="content">
 			<div th:fragment="coverbox" class="cover-box">
 				<div class="cover-paint"></div>
@@ -84,8 +84,8 @@
 						</div>
 					</li>
 					<li class="news-card news-imwonder">
-						<img src="/assets/img/index/face.webp" alt="" class="wonder-face" />
-						<img src="/assets/img/index/Wonder2019-Black.png" alt="" class="wonder-sign" />
+						<img src="/assets/img/index/face.webp" alt="face" class="wonder-face" />
+						<img src="/assets/img/index/Wonder2019-Black.png" alt="wonder2019" class="wonder-sign" />
 						<label class="wonder-motto">拼命去争取成功，但不要期望一定会成功。</label>
 						<ul class="wonder-stat-list">
 							<li class="wonder-stat-item">

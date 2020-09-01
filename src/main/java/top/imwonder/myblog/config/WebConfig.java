@@ -6,6 +6,8 @@
  */
 package top.imwonder.myblog.config;
 
+import java.io.File;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
@@ -29,6 +31,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
         registry.addResourceHandler("/robots.txt").addResourceLocations("classpath:/static/assets/robots.txt");
         registry.addResourceHandler("/favicon.ico").addResourceLocations("classpath:/static/assets/img/favicon.ico");
+        registry.addResourceHandler("/sitemap.xml").addResourceLocations("file:./sitemap.xml");
     }
 
     @Bean

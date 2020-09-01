@@ -40,6 +40,7 @@ dependencies {
 		'org.springframework.boot:spring-boot-starter-jdbc'
 	)
     implementation('com.google.code.gson:gson:2.8.6')
+    implementation('dom4j:dom4j:1.6.1')
     implementation('com.github.theborakompanioni:thymeleaf-extras-shiro:2.0.0')
     implementation('org.apache.commons:commons-lang3:3.10')
 	implementation('org.jsoup:jsoup:1.13.1')

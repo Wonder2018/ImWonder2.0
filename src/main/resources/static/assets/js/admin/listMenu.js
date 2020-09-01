@@ -1,4 +1,6 @@
 let updateAPI = "updateAjax";
+let insertAPI = "insertAjax";
+let deleteAPI = "deleteAjax";
 let tbjson = [
 	{
 		tagName: "td",

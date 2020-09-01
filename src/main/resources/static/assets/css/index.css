@@ -34,6 +34,10 @@
 	text-shadow: 0.3rem 0.3rem 0.3rem #000;
 }
 
+.title>h1{
+	font-weight: normal;
+}
+
 .tag {
 	bottom: 6.83em;
 	left: 16.5em;
@@ -72,6 +76,7 @@
 	line-height: 5.4rem;
 	text-indent: 0;
 	font-size: 3rem;
+	font-weight: normal;
 	color: #000;
 }
 

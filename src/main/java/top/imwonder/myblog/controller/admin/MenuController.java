@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import top.imwonder.myblog.dao.MenuDAO;
 import top.imwonder.myblog.domain.Menu;
 import top.imwonder.myblog.util.AbstractController;
+import top.imwonder.util.IdUtil;
 
 @Controller("menuControler")
 @RequestMapping(value = "/wonderlandsadmin/menu")
@@ -27,6 +28,17 @@ public class MenuController extends AbstractController{
         List<Menu> lmenu = mDAO.loadMore(" order by w_order", emptyObj);
         model.addAttribute("lmenu", lmenu);
         return "admin/listMenu";
+    }
+
+    @Transactional
+    @RequestMapping(value = {"/insertAjax"})
+    public String insert(Menu menu, Model model) {
+        menu.setId(IdUtil.uuid());
+        mDAO.insert(menu);
+        model.addAttribute("result", menu);
+        model.addAttribute("code", 200);
+        model.addAttribute("msg", "添加成功！");
+        return "json";
     }
 
     @Transactional
