@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="/assets/css/public/highlight/googlecode.css" class="comcss" />
 		<link rel="stylesheet" href="/assets/css/blog/blogDetails.css" class="pricss" />
 		<script th:inline="JavaScript" class="initjson">
+			window.isRobot = /*[[${isRobot}]]*/ false;
 			window.bgList = /*[[${bgList}]]*/ [];
 			/*[[${tagList}]]*/
 
@@ -27,7 +28,7 @@
 		<script src="/assets/js/public/marked-1.1.0.js" class="comjs"></script>
 		<script src="/assets/js/blog/blogDetails.js" class="prijs"></script>
 	</head>
-	<body class="loading">
+	<body th:class="${isRobot}?'':'loading'">
 		<th:block th:replace="fragments :: loading" />
 
 		<th:block th:replace="fragments :: nav('/')" />

@@ -1,4 +1,5 @@
 function preLoading(percent) {
+	if (window.isRobot) return;
 	$(".loading-prog>.loading-line").animate({ width: percent }, 300, function () {
 		$(this).children().html(percent);
 		if (percent == "100%") {
@@ -21,7 +22,7 @@ $(document).ready(function () {
 	let ppg = new PreProgress(true, function () {
 		preLoading("100%");
 	});
-	ppg.addAllTask(window.wonderTask)
+	ppg.addAllTask(window.wonderTask);
 	ppg.start();
 
 	// if (navigator.userAgent.match(/(Trident\/7\.)|(Edge)/)) {

@@ -31,7 +31,7 @@
 		<script src="/assets/js/common/common.js"></script>
 	</head>
 	<body>
-		<div th:fragment="loading" class="loading-cover">
+		<div th:fragment="loading" th:if="${!isRobot}" class="loading-cover">
 			<img src="" alt="loading" class="loading-icon" />
 			<div class="loading-prog">
 				<span class="loading-line" style="width: 0%;"><span>0%</span></span>
@@ -68,7 +68,6 @@
 				联系我
 			</a>
 		</nav>
-
 		<div class="content">
 			<div th:fragment="coverbox" class="cover-box">
 				<div class="cover-paint"></div>

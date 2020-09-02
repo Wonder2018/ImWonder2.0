@@ -8,6 +8,7 @@
 		<link th:if="false" class="comcss" />
 		<link rel="stylesheet" href="/assets/css/index.css" class="pricss" />
 		<script th:inline="JavaScript" class="initjson">
+			window.isRobot = /*[[${isRobot}]]*/ false;
 			window.bgList = /*[[${bgList}]]*/ [];
 			/*[[${tagList}]]*/
 
@@ -26,7 +27,7 @@
 		<script th:if="false" class="comjs"></script>
 		<script src="/assets/js/index.js" class="prijs"></script>
 	</head>
-	<body class="loading">
+	<body th:class="${isRobot}?'':'loading'">
 		<th:block th:replace="fragments :: loading" />
 		<th:block th:replace="fragments :: nav('#home')" />
 		<header class="titlepage" style="outline: 1px solid #54c;">

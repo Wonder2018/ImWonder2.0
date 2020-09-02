@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.qiniu.util.Auth;
 
 import org.slf4j.Logger;
@@ -48,7 +50,9 @@ public abstract class AbstractController {
     private static Map<String, Map<String, Object>> resource;
 
     @ModelAttribute
-    public void initModel(Model model) {
+    public void initModel(HttpServletRequest req, Model model) {
+        String ua = req.getHeader("User-Agent");
+        model.addAttribute("isRobot", SpiderUtil.isSpider(ua));
         model.addAttribute("iconfontUrl", sp.getIconfontUrl());
     }
 
@@ -67,7 +71,7 @@ public abstract class AbstractController {
 
     protected void listTag(Model model) {
         String sql = "select b.w_id as tagId, b.w_name as text, a.count as weight, concat('/blog/search?tag=', b.w_id) as link from (select c.w_tag_id, count(c.w_article_id) as count from w_articl_tag c group by c.w_tag_id) a left join w_tag b on a.w_tag_id = b.w_id order by a.count desc;";
-        List<Map<String,Object>> tagList = jt.queryForList(sql);
+        List<Map<String, Object>> tagList = jt.queryForList(sql);
         model.addAttribute("tagList", tagList);
     }
 
@@ -82,9 +86,9 @@ public abstract class AbstractController {
     // model.addAttribute("page", p);
     // }
 
-    protected String calcOne(String orId){
-        List<OssResource> ors = orDAO.loadMore("where w_id =?", new Object[]{orId});
-        if(!ors.isEmpty()){
+    protected String calcOne(String orId) {
+        List<OssResource> ors = orDAO.loadMore("where w_id =?", new Object[] { orId });
+        if (!ors.isEmpty()) {
             calcOne(ors.get(0));
             return ors.get(0).getPath();
         }
@@ -109,7 +113,7 @@ public abstract class AbstractController {
             String secretKey = env.getOssSecretKey();
             Auth auth = Auth.create(accessKey, secretKey);
             long expireInSeconds = 3600;
-            String finalUrl = auth.privateDownloadUrl( String.format("%s://%s.%s/%s", ossProtocol, prefix, ossHostSuffix, fileName), expireInSeconds);
+            String finalUrl = auth.privateDownloadUrl(String.format("%s://%s.%s/%s", ossProtocol, prefix, ossHostSuffix, fileName), expireInSeconds);
             res.put("path", finalUrl);
             res.put("lu", new Long(System.currentTimeMillis()));
             res.put("timeout", new Long(3300000));
