@@ -45,11 +45,11 @@ dependencies {
     implementation('org.apache.commons:commons-lang3:3.10')
 	implementation('org.jsoup:jsoup:1.13.1')
 	implementation(
-        'org.apache.shiro:shiro-core:1.5.1',
-		'org.apache.shiro:shiro-ehcache:1.5.1',
-		'org.apache.shiro:shiro-web:1.5.1',
-		'org.apache.shiro:shiro-quartz:1.5.1',
-		'org.apache.shiro:shiro-spring:1.5.1'
+        'org.apache.shiro:shiro-core:1.6.0',
+		'org.apache.shiro:shiro-ehcache:1.6.0',
+		'org.apache.shiro:shiro-web:1.6.0',
+		'org.apache.shiro:shiro-quartz:1.6.0',
+		'org.apache.shiro:shiro-spring:1.6.0'
     )
     implementation('com.qiniu:qiniu-java-sdk:7.2.29')
 	compile fileTree(dir:'lib',include:['*.jar'])

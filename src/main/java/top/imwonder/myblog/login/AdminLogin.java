@@ -32,6 +32,5 @@ public class AdminLogin extends AbstractController {
             default:
                 return "admin/login";
         }
-
     }
 }
