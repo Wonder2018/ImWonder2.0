@@ -15,7 +15,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -62,8 +61,8 @@ public class GloubleExceptionHandler {
         return checkRequestType(req.getRequestURI(), req);
     }
 
-    @ExceptionHandler(AuthorizationException.class)
-    public String authorizationExceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model, AuthorizationException ex) {
+    // @ExceptionHandler(AuthorizationException.class)
+    public String authorizationExceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model, Exception ex) {
         res.setStatus(403);
         model.addAttribute("code", 403);
         model.addAttribute("msg", "非法访问，您无权限执行此操作");

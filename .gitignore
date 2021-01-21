@@ -1,9 +1,7 @@
 HELP.md
-.gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**
-!**/src/test/**
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -19,7 +17,6 @@ build/
 *.iws
 *.iml
 *.ipr
-out/
 
 ### NetBeans ###
 /nbproject/private/
@@ -27,12 +24,12 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
-bin
-src/test/java/top/imwonder/myblog/experiment/
-src/test/java/top/imwonder/myblog/record/
 
 ## Imwonder ##
 photo
@@ -41,3 +38,5 @@ reqofphp.log
 sitemap.xml
 **/application-dev.yml
 **/application-product.yml
+src/test/java/top/imwonder/myblog/experiment/
+src/test/java/top/imwonder/myblog/record/

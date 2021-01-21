@@ -2,14 +2,10 @@ package top.imwonder.myblog.config;
 
 import java.util.HashMap;
 
-import javax.servlet.Filter;
-
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.DelegatingFilterProxy;
-
-import top.imwonder.myblog.login.WonderFormAuthenticationFilter;
 
 /**
  * Created by qh on 2017/4/9.
@@ -40,21 +36,4 @@ public class FilterConfig {
         return fb;
     }
 
-    @Bean
-    public Filter authcWonder(){
-        WonderFormAuthenticationFilter filter = new WonderFormAuthenticationFilter();
-        filter.setRoleBase("admin");
-        filter.setLoginUrl("/wonderlandsadmin/login");
-        filter.setSuccessUrl("/wonderlandsadmin/index.html");
-        return filter;
-    }
-
-    @Bean
-    public Filter authcUsr(){
-        WonderFormAuthenticationFilter filter = new WonderFormAuthenticationFilter();
-        filter.setRoleBase("poster");
-        filter.setLoginUrl("/wonderpost/login");
-        filter.setSuccessUrl("/wonderpost/index.html");
-        return filter;
-    }
 }
