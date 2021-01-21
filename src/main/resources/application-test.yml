@@ -1,0 +1,45 @@
+env:
+    oss-protocol: 
+    oss-host-suffix: 
+    oss-access-key: 
+    oss-secret-key: 
+
+logging:
+    level:
+        web: DEBUG
+        top.imwonder: DEBUG
+        org.springframework: WARN
+
+server:
+    max-http-header-size: 16KB
+    servlet.session.tracking-modes: cookie
+
+
+spring:
+    datasource: 
+        url: 
+        username: 
+        password: 
+        driver-class-name: 
+        hikari:
+            max-lifetime: 1700000     
+    main: 
+        allow-bean-definition-overriding: true
+    messages:
+        basename: i18n.messages
+    mvc: 
+        throw-exception-if-no-handler-found: true
+    resources:
+        add-mappings: false
+    thymeleaf:
+        cache: false
+        check-template: true
+        check-template-location: true
+        enabled: true
+        encoding: UTF-8
+        excluded-view-names: json
+        mode: HTML
+        prefix: classpath:/templates/
+        suffix: .html
+        servlet:
+            content-type: text/html

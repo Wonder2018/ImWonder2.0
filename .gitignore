@@ -39,3 +39,5 @@ photo
 target
 reqofphp.log
 sitemap.xml
+**/application-dev.yml
+**/application-product.yml

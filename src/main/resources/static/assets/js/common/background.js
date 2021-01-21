@@ -1,12 +1,12 @@
 /*
  * @Author: Wonder2019
  * @Date: 2020-07-30 16:31:44
- * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-09-02 09:57:10
+ * @Last Modified by: Wonder2020
+ * @Last Modified time: 2021-01-21 13:04:17
  */
 
 // Reset
-let changeTime = 5 * 1000;
+let changeTime = 10 * 1000;
 
 // Function
 function loadBackground(progressId, back, front) {

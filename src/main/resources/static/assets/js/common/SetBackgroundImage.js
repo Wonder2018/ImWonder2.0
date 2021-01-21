@@ -1,8 +1,8 @@
 /*
  * @Author: Wonder2019
  * @Date: 2020-04-16 16:45:38
- * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-08-05 21:01:49
+ * @Last Modified by: Wonder2020
+ * @Last Modified time: 2020-12-23 10:57:58
  */
 class SetBackgroundImage {
 	/**
@@ -40,7 +40,7 @@ class SetBackgroundImage {
 		if (this.front) {
 			this.front.style.backgroundImage = `url(${this.imgs[this.index].blur})`;
 		}
-		this.index = this.index++ % this.imgs.length;
+		this.index = ++this.index % this.imgs.length;
 		if (resetTimer) {
 			clearInterval(this.timerID);
 			this.timerID = setInterval(this.nextBgi.bind(this), this.time);

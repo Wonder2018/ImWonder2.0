@@ -71,6 +71,8 @@ body,
 	background-position: 0 center;
 	background-size: cover;
 	background-attachment: fixed;
+    transition-property: background-image;
+    transition-duration: .5s;
 }
 
 .container {
