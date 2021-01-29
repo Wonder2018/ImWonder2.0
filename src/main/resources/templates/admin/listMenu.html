@@ -11,10 +11,16 @@
 		<link rel="stylesheet" href="/assets/css/admin/listMenu.css" />
 		<script src="/assets/js/public/jquery-3.4.1.min.js"></script>
 		<script src="/assets/js/common/datatable.js"></script>
+		<script src="/assets/js/admin/common.js"></script>
 		<script src="/assets/js/admin/listMenu.js"></script>
+		<script th:inline="JavaScript" class="initjson">
+			window._chn = /*[[${_csrf.headerName}]]*/ "cpn";
+			window._ctv = /*[[${_csrf.token}]]*/ "cpv";
+			window._csrf = /*[[${_csrf}]]*/ {};
+		</script>
 	</head>
 	<body>
-		<button dt-type="adro" onclick="add(tbjson,'.table')">添加菜单</button>
+		<button dt-type="adro" onclick="datatable.add(tbjson,'.table')">添加菜单</button>
 		<table class="table">
 			<thead>
 				<tr>
@@ -36,8 +42,8 @@
 					<td th:text="${menu.order}" edit-type="comtext" edit-key="order"></td>
 					<td th:text="${menu.href}" edit-type="comtext" edit-key="href"></td>
 					<td>
-						<button dt-type="edit" th:onclick="edit([[${menu.id}]])">编辑</button>
-						<button dt-type="dlet" th:onclick="dlet([[${menu.id}]])">删除</button>
+						<button dt-type="edit" th:onclick="datatable.edit([[${menu.id}]])">编辑</button>
+						<button dt-type="dlet" th:onclick="datatable.dlet([[${menu.id}]],[[${menu.name}]])">删除</button>
 					</td>
 				</tr>
 			</tbody>

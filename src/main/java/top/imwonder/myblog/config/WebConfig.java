@@ -6,7 +6,10 @@
  */
 package top.imwonder.myblog.config;
 
+import com.google.gson.Gson;
+import com.qiniu.util.Auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.View;
@@ -17,9 +20,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import top.imwonder.myblog.Env;
+
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
+
+    @Autowired
+    private Env env;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
@@ -37,6 +46,16 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public View json() {
         return new MappingJackson2JsonView();
+    }
+
+    @Bean
+    public Gson gson() {
+        return new Gson();
+    }
+
+    @Bean
+    public Auth auth() {
+        return Auth.create(env.getOssAccessKey(), env.getOssSecretKey());
     }
 
     // @Bean

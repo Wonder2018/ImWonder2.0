@@ -4,6 +4,13 @@
  * @Last Modified by: Wonder2019
  * @Last Modified time: 2020-08-05 21:08:46
  */
+
+
+/**
+ * 预加载处理器
+ *
+ * @class PreProgress
+ */
 class PreProgress {
 	/**
 	 * Creates an instance of PreProgress
@@ -51,7 +58,7 @@ class PreProgress {
 		}, 300);
 	}
 	/**
-	 *
+	 * 添加预加载任务
 	 *
 	 * @param {Object} task
 	 * @returns

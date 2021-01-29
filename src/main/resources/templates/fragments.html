@@ -112,7 +112,7 @@
 						<label class="news-card-title">最近文章</label>
 						<ul class="latest-article-list">
 							<li th:each="article,ite : ${articles}" th:if="${ite.index < 5}" class="latest-article-item">
-								<a th:href="|/blog/blogDetails?blogId=${article.id}|" th:title="${article.title}" href="#" title="Title 标题 Title 标题">
+								<a th:href="|/blog/details/${article.id}|" th:title="${article.title}" href="#" title="Title 标题 Title 标题">
 									<label class="latest-article-title">
 										<span th:text="${article.title}" class="latest-article-title-text">Title 标题 Title 标题</span>
 										<span th:text="${article.read}" class="latest-article-readnum">12232</span>
@@ -139,7 +139,7 @@
 							<br />
 							<span th:text="${#dates.format(article.postTime,'dd')}" class="blog-date-day">28</span>
 						</div>
-						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
+						<a th:href="|/blog/details/${article.id}|" href="#">
 							<label th:text="${article.title}" class="blog-title">Title 标题 Title 标题</label>
 						</a>
 						<ul class="blog-tag-list">
@@ -156,7 +156,7 @@
 								<span th:text="${article.read}">2342323</span>
 							</li>
 						</ul>
-						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
+						<a th:href="|/blog/details/=${article.id}|" href="#">
 							<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
 							<div th:text="${article.summary}" class="blog-abstract">
 								Body 正文 Review 预览

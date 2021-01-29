@@ -1,15 +1,67 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>管理员登陆</title>
-</head>
-<body>
-    <form action="" method="post">
-        sn: <input type="text" name="username"><br>
-        pwd: <input type="text" name="password"><br>
-        <input type="submit" value="登陆">
-    </form>
-</body>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<title>管理员登陆</title>
+		<style>
+			body {
+				padding-top: 40px;
+				padding-bottom: 40px;
+				background-color: #eee;
+			}
+
+			.form-signin {
+				max-width: 330px;
+				padding: 15px;
+				margin: 0 auto;
+			}
+			.form-signin .form-signin-heading,
+			.form-signin .checkbox {
+				margin-bottom: 10px;
+			}
+			.form-signin .checkbox {
+				font-weight: 400;
+			}
+			.form-signin .form-control {
+				position: relative;
+				box-sizing: border-box;
+				height: auto;
+				padding: 10px;
+				font-size: 16px;
+			}
+			.form-signin .form-control:focus {
+				z-index: 2;
+			}
+			.form-signin input[type="email"] {
+				margin-bottom: -1px;
+				border-bottom-right-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+			.form-signin input[type="password"] {
+				margin-bottom: 10px;
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<form class="form-signin" method="post" action="/wonderadmin/login">
+				<h2 class="form-signin-heading">管理员登陆</h2>
+				<p>
+					<label for="username" class="sr-only">用户名</label>
+					<input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus />
+				</p>
+				<p>
+					<label for="password" class="sr-only">密码</label>
+					<input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
+				</p>
+				<input th:name="${_csrf.parameterName}" name="_csrf" type="hidden" th:value="${_csrf.token}" value="1ce0e0d2-29b9-4ddc-9b29-28d3b912a2c8" />
+				<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+			</form>
+		</div>
+	</body>
 </html>

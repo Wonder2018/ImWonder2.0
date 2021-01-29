@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="/assets/css/admin/index.css" />
 	</head>
 	<body>
-		<header class="main-header">
-			<a href="/" class="logo">
+		<header  class="main-header">
+			<a  href="/" class="logo">
 				<span class="logo-mini"></span>
 				<span class="logo-lg">I'm Wonder</span>
 			</a>
@@ -21,20 +21,25 @@
 		</header>
 		<aside class="main-sidebar">
 			<!-- <section class="sidebar"> -->
-            <div class="user-panel"></div>
-            <ul class="sidebar-menu">
-                <a th:each="item : ${lmenu}" th:shiro:hasPermission="${item.perm}" th:href="${item.href}" target="wonderif">
-                    <li class="sidebar-menu-item hvr-leftline-reveal">
-                        <span th:class="|iconfont icon-${item.icon}|"></span>
-                        <span th:text="${item.name}" class="sidebar-menu-item-title"></span>
-                    </li>
-                </a>
-            </ul>
+			<div class="user-panel"></div>
+			<ul class="sidebar-menu">
+				<a th:each="item : ${lmenu}"  th:if="${#authorization.expression('hasAuthority(''__${item.perm}__'')')}" th:href="${item.href}" target="wonderif">
+					<li class="sidebar-menu-item hvr-leftline-reveal">
+						<span th:class="|iconfont icon-${item.icon}|"></span>
+						<span th:text="${item.name}" class="sidebar-menu-item-title"></span>
+					</li>
+				</a>
+			</ul>
 			<!-- </section> -->
 		</aside>
 		<section class="main-content">
 			<iframe class="main-content-iframe" src="wellcome.html" frameborder="0" name="wonderif"></iframe>
-			<footer class="main-footer">Powered with ❤ by <a href="http://www.imwonder.top">imwonder.top</a> & <a href="http://www.danni.love">danni.love</a></footer>
+			<footer class="main-footer">
+				Powered with ❤ by
+				<a href="http://www.imwonder.top">imwonder.top</a>
+				&
+				<a href="http://www.danni.love">danni.love</a>
+			</footer>
 		</section>
 	</body>
 </html>

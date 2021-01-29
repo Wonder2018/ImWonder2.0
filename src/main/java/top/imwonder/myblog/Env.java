@@ -10,13 +10,15 @@ import lombok.Data;
 @ConfigurationProperties("env")
 public class Env {
     
-    public String ossProtocol;
+    private String ossProtocol;
     
-    public String ossHostSuffix;
+    private String ossHostSuffix;
 
-    public String ossAccessKey;
+    private String ossAccessKey;
 
-    public String ossSecretKey;
+    private String ossSecretKey;
+    
+    private Long ossExpireInSeconds;
     
     // public File resource;
 

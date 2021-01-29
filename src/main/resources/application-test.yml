@@ -3,6 +3,7 @@ env:
     oss-host-suffix: 
     oss-access-key: 
     oss-secret-key: 
+    oss-expire-in-seconds:
 
 logging:
     level:

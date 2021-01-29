@@ -3,14 +3,15 @@ package top.imwonder.myblog.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import top.imwonder.myblog.dao.RolePermissionDAO;
 import top.imwonder.myblog.dao.UserRoleDAO;
 import top.imwonder.myblog.dao.userdao.UserPwdDAO;
 import top.imwonder.myblog.domain.RolePermission;
+import top.imwonder.myblog.domain.User;
 import top.imwonder.myblog.domain.UserRole;
+import top.imwonder.myblog.domain.UserTicket;
 import top.imwonder.myblog.services.LoginOAService;
 
 @Service
@@ -26,11 +27,10 @@ public class LoginOAServiceImpl implements LoginOAService {
     private RolePermissionDAO rpDAO;
 
     @Override
-    public User loadBaseInfo(String id) {
+    public UserTicket loadBaseInfoByLoginName(String loginName) {
         try {
-            top.imwonder.myblog.domain.User userInfo = upDAO.loadOne("where w_username=? and w_disable=0",
-                    new Object[] { id });
-            return new User(userInfo.getId(), userInfo.getPassword(), null);
+            User userInfo = upDAO.loadOne("where w_username=? and w_disable=0", new Object[] { loginName });
+            return new UserTicket(userInfo.getId(), loginName, userInfo.getPassword());
         } catch (Exception e) {
             return null;
         }
@@ -42,7 +42,7 @@ public class LoginOAServiceImpl implements LoginOAService {
     }
 
     @Override
-    public List<RolePermission> loadPerms(String[] params) {
+    public List<RolePermission> loadPerms(Object... params) {
         return rpDAO.loadMore("where w_role_id in " + buildQuestionMarks(params.length), params);
     }
 

@@ -45,7 +45,7 @@
 							<br />
 							<span th:text="${#dates.format(article.postTime,'dd')}" class="blog-date-day">28</span>
 						</div>
-						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
+						<a th:href="|/blog/details/${article.id}|" href="#">
 							<h2 th:text="${article.title}" class="blog-title">Title 标题 Title 标题</h2>
 						</a>
 						<ul class="blog-tag-list">
@@ -62,7 +62,7 @@
 								<span th:text="${article.read}">2342323</span>
 							</li>
 						</ul>
-						<a th:href="|blog/blogDetails?blogId=${article.id}|" href="#">
+						<a th:href="|/blog/details/${article.id}|" href="#">
 							<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
 							<div th:text="${article.summary}" class="blog-abstract">
 								Body 正文 Review 预览

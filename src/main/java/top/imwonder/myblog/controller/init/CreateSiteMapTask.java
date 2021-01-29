@@ -13,14 +13,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import top.imwonder.myblog.controller.AbstractController;
 import top.imwonder.myblog.dao.ArticleDAO;
 import top.imwonder.myblog.domain.Article;
-import top.imwonder.myblog.util.AbstractController;
 import top.imwonder.myblog.util.SiteMapUtil;
 import top.imwonder.myblog.util.enumeration.ChangeFreqEnum;
 
-@Order(value = 1)
 @Component
+@Order(value = 1)
 public class CreateSiteMapTask extends AbstractController implements CommandLineRunner {
 
     @Autowired
@@ -29,12 +29,12 @@ public class CreateSiteMapTask extends AbstractController implements CommandLine
     @Override
     public void run(String... args) throws Exception {
         File sitemap = new File("sitemap.xml");
-        if (!sitemap.exists() || System.currentTimeMillis() - sitemap.lastModified() > 604800000) {
+        if (!sitemap.exists() || System.currentTimeMillis() - sitemap.lastModified() > 100) {
             Document doc = SiteMapUtil.createSiteMap();
-            List<Article> articles = arDAO.loadMore(" Order by w_post_time desc", emptyObj);
+            List<Article> articles = arDAO.loadMore(" Order by w_post_time desc");
             SiteMapUtil.addUrl(doc, "http://www.imwonder.top", new Date(), ChangeFreqEnum.WEEKLY, "1");
             for (Article article : articles) {
-                String loc = String.format("http://www.imwonder.top/blog/blogDetails?blogId=%s", article.getId());
+                String loc = String.format("http://www.imwonder.top/blog/details/%s", article.getId());
                 SiteMapUtil.addUrl(doc, loc, article.getPostTime(), ChangeFreqEnum.WEEKLY, "0.9");
             }
             try (OutputStream os = new FileOutputStream(sitemap)) {

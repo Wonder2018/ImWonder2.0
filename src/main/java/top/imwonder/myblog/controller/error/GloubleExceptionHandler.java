@@ -1,20 +1,24 @@
 /*
  * @Author: Wonder2019 
  * @Date: 2020-04-30 23:16:38 
- * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-08-10 18:22:58
+ * @Last Modified by: Wonder2020
+ * @Last Modified time: 2021-01-29 15:24:31
  */
-package top.imwonder.myblog;
+package top.imwonder.myblog.controller.error;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,7 +30,7 @@ import top.imwonder.myblog.exception.WonderResourceNotFoundException;
 
 @Slf4j
 @ControllerAdvice
-public class GloubleExceptionHandler {
+public class GloubleExceptionHandler implements AccessDeniedHandler {
 
     @ExceptionHandler(Exception.class)
     public String exceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model, Exception ex) {
@@ -39,7 +43,8 @@ public class GloubleExceptionHandler {
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
-    public String noHandlerFoundExceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model, NoHandlerFoundException ex) {
+    public String noHandlerFoundExceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model,
+            NoHandlerFoundException ex) {
         res.setStatus(404);
         model.addAttribute("code", 404);
         model.addAttribute("msg", "您请求的资源未找到！");
@@ -47,7 +52,8 @@ public class GloubleExceptionHandler {
     }
 
     @ExceptionHandler(WonderResourceNotFoundException.class)
-    public String wonderResourceNotFoundExceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model, WonderException ex) {
+    public String wonderResourceNotFoundExceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model,
+            WonderException ex) {
         res.setStatus(404);
         model.addAttribute("code", ex.getCode());
         model.addAttribute("msg", ex.getMessage());
@@ -55,18 +61,32 @@ public class GloubleExceptionHandler {
     }
 
     @ExceptionHandler(WonderException.class)
-    public String wonderExceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model, WonderException ex) {
+    public String wonderExceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model,
+            WonderException ex) {
         model.addAttribute("code", ex.getCode());
         model.addAttribute("msg", ex.getMessage());
         return checkRequestType(req.getRequestURI(), req);
     }
 
-    // @ExceptionHandler(AuthorizationException.class)
-    public String authorizationExceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model, Exception ex) {
+    @ExceptionHandler(AccessDeniedException.class)
+    public String authorizationExceptionHandler(HttpServletRequest req, HttpServletResponse res, Model model,
+            Exception ex) {
         res.setStatus(403);
+        log.info("in 403!");
         model.addAttribute("code", 403);
         model.addAttribute("msg", "非法访问，您无权限执行此操作");
         return checkRequestType(req.getRequestURI(), req);
+    }
+
+    @Override
+    public void handle(HttpServletRequest req, HttpServletResponse res, AccessDeniedException ex)
+            throws IOException, ServletException {
+
+        log.info("in hand!");
+        req.setAttribute("msg", "非法访问，您无权限执行此操作");
+        req.setAttribute("code", 403);
+        req.getRequestDispatcher("/error/403/非法访问，您无权限执行此操作").forward(req, res);
+
     }
 
     private String checkRequestType(String uri, HttpServletRequest req) {
@@ -89,7 +109,7 @@ public class GloubleExceptionHandler {
             }
         }
         log.debug("uri:{}", uri);
-        return uri.endsWith("Ajax") ? "json" : "error";
+        return uri.contains("api") ? "json" : "error";
     }
 
 }

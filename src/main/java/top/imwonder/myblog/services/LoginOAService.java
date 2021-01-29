@@ -2,16 +2,15 @@ package top.imwonder.myblog.services;
 
 import java.util.List;
 
-import org.springframework.security.core.userdetails.User;
-
 import top.imwonder.myblog.domain.RolePermission;
 import top.imwonder.myblog.domain.UserRole;
+import top.imwonder.myblog.domain.UserTicket;
 
 public interface LoginOAService {
     
-    User loadBaseInfo(String id);
+    UserTicket loadBaseInfoByLoginName(String id);
 
 	List<UserRole> loadUserRole(String uid);
 
-	List<RolePermission> loadPerms(String[] params);
+	List<RolePermission> loadPerms(Object... params);
 }

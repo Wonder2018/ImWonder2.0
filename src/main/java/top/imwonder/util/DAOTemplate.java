@@ -207,12 +207,12 @@ public abstract class DAOTemplate<T> {
         return jt.update(insertSQL, getInsertParamValues(t));
     }
 
-    public int delete(Object i) {
-        return delete(new Object[] { i });
+    public int delete(Object id) {
+        return delete(new Object[] { id });
     }
 
-    public int delete(Object[] i) {
-        return jt.update(deleteSQL, i);
+    public int delete(Object... params) {
+        return jt.update(deleteSQL, params);
     }
 
     public int update(T t) {
@@ -223,45 +223,45 @@ public abstract class DAOTemplate<T> {
         return jt.update(updateSqlWithPk, getUpdateParamValues(t, oldPks));
     }
 
-    public ArrayList<T> loadMore(String clause, Object[] i) {
-        return loadMoreBySQL(appendClause(loadMoreSQL, clause), i);
+    public ArrayList<T> loadMore(String clause, Object... params) {
+        return loadMoreBySQL(appendClause(loadMoreSQL, clause), params);
     }
 
-    public ArrayList<T> loadMoreBySQL(String sql, Object[] i){
-        return jt.query(sql, i, new ResultSetExtractor<ArrayList<T>>() {
+    public ArrayList<T> loadMoreBySQL(String sql, Object... params) {
+        return jt.query(sql, new ResultSetExtractor<ArrayList<T>>() {
             public ArrayList<T> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 ArrayList<T> result = new ArrayList<T>();
                 while (rs.next())
                     result.add(wrapResult(rs));
                 return result;
             }
-        });
+        }, params);
     }
 
-    public T loadOne(Object i) {
-        return loadOne(new Object[] { i });
+    public T loadOne(Object id) {
+        return loadOne(new Object[] { id });
     }
 
-    public T loadOne(Object[] i) {
-        return jt.query(loadOneSQL, i, new ResultSetExtractor<T>() {
+    public T loadOne(Object... params) {
+        return jt.query(loadOneSQL, new ResultSetExtractor<T>() {
             public T extractData(ResultSet rs) throws SQLException, DataAccessException {
                 if (rs.next())
                     return wrapResult(rs);
                 return null;
             }
 
-        });
+        }, params);
     }
 
-    public T loadOne(String clause, Object[] i) {
-        return jt.query(appendClause(loadMoreSQL, clause), i, new ResultSetExtractor<T>() {
+    public T loadOne(String clause, Object... params) {
+        return jt.query(appendClause(loadMoreSQL, clause), new ResultSetExtractor<T>() {
             public T extractData(ResultSet rs) throws SQLException, DataAccessException {
                 if (rs.next())
                     return wrapResult(rs);
                 return null;
             }
 
-        });
+        }, params);
     }
 
     protected Object[] getInsertParamValues(T t) {

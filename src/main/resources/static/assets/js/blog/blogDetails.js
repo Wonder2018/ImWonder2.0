@@ -26,7 +26,11 @@ let markedOpt = {
 	walkTokens: null,
 	xhtml: false,
 };
-
+/**
+ * 预加载博文回调
+ *
+ * @param {String} progressId 预加载器 ID
+ */
 function renderMd(progressId) {
 	$.post(
 		blogDetails.markdownId,
@@ -41,6 +45,11 @@ function renderMd(progressId) {
 	);
 }
 
+/**
+ * 通过预加载初始化标签云的回调
+ *
+ * @param {String} progressId 预加载器 ID
+ */
 function initTagList(progressId) {
 	$(".tag-cloud-board").jQCloud(window.tagList, {
 		removeOverflowing: true,

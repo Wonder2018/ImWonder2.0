@@ -5,7 +5,6 @@ import java.util.HashMap;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.filter.DelegatingFilterProxy;
 
 /**
  * Created by qh on 2017/4/9.
@@ -25,15 +24,4 @@ public class FilterConfig {
         fb.setInitParameters(initParameters);
         return fb;
     }
-
-    @Bean
-    public FilterRegistrationBean<DelegatingFilterProxy> shiroFilter(){
-        DelegatingFilterProxy filter = new DelegatingFilterProxy();
-        FilterRegistrationBean<DelegatingFilterProxy> fb = new FilterRegistrationBean<DelegatingFilterProxy>();
-        fb.addInitParameter("targetFilterLifecycle", "true");
-        fb.addUrlPatterns("/*");
-        fb.setFilter(filter);
-        return fb;
-    }
-
 }
