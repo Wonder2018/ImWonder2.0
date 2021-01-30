@@ -34,7 +34,7 @@
 		<div th:fragment="loading" th:if="${!isRobot}" class="loading-cover">
 			<img src="" alt="loading" class="loading-icon" />
 			<div class="loading-prog">
-				<span class="loading-line" style="width: 0%;"><span>0%</span></span>
+				<span class="loading-line" style="width: 0%"><span>0%</span></span>
 			</div>
 		</div>
 		<nav th:fragment="nav(home)" class="nav">
@@ -158,9 +158,7 @@
 						</ul>
 						<a th:href="|/blog/details/=${article.id}|" href="#">
 							<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
-							<div th:text="${article.summary}" class="blog-abstract">
-								Body 正文 Review 预览
-							</div>
+							<div th:text="${article.summary}" class="blog-abstract">Body 正文 Review 预览</div>
 							<div class="blog-readmore hvr-sweep-to-right">
 								继续阅读
 								<span th:text="${article.read}" class="blog-readnum">23238</span>
@@ -181,18 +179,34 @@
 				</ul>
 			</section>
 			<footer th:fragment="footer" class="verso">
-				<ul class="web-map">
-					<li class="map-card fl"></li>
-					<li class="map-card fl"></li>
-					<li class="map-card fl"></li>
-					<li class="map-card fl"></li>
+				<div class="verso-cover"></div>
+				<span class="friendly-link-card">友情链接</span>
+				<ul class="friendly-link-list">
+					<li th:each="fl : ${friendlyLinkList}" class="friendly-link-item hvr-radial-out" th:title="${fl.siteName}">
+						<a th:href="${fl.url}" href="#">
+							<img th:src="${fl.icon}? ${fl.icon}:'/favicon.ico'" src="/favicon.ico" class="friendly-link-icon" />
+							<span class="friendly-link-sitename" th:text="${fl.siteName}">I'm Wonder</span>
+						</a>
+					</li>
+					<li class="friendly-link-item hvr-radial-out" title="互加友链">
+						<a href="/addFriendlyLink">
+							<img src="/favicon.ico" class="friendly-link-icon" />
+							<span class="friendly-link-sitename">互加友链</span>
+						</a>
+					</li>
 				</ul>
+				<!-- <ul class="web-map">
+					<li class="map-card"></li>
+					<li class="map-card"></li>
+					<li class="map-card"></li>
+					<li class="map-card"></li>
+				</ul> -->
 				<div class="copyright">
-					CopyRight Wonder&copy;2020
+					CopyRight Wonder &copy; 2020
 					<br />
 					AllRight Reserved
 					<br />
-					<a href="http://beian.miit.gov.cn" style="color: #fff;" target="view_window">鄂ICP备18015012号</a>
+					<a href="http://beian.miit.gov.cn" target="view_window">鄂ICP备18015012号</a>
 				</div>
 			</footer>
 		</div>

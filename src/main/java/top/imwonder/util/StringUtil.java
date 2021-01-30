@@ -12,6 +12,8 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 
@@ -21,6 +23,8 @@ import org.apache.tomcat.util.codec.binary.Base64;
  * @description: 字符串工具类
  **/
 public class StringUtil {
+
+    private static Pattern humPattern = Pattern.compile("[A-Z]");
 
     /**
      * 判断是否为空字符串最优代码
@@ -72,8 +76,8 @@ public class StringUtil {
         return true;
     }
 
-    public static String toCamelCase(String str, String regex, boolean isFirstAlphaUpperCase, boolean hasPerfix) {
-        StringBuffer bf = new StringBuffer();
+    public static String toHumpCase(String str, String regex, boolean isFirstAlphaUpperCase, boolean hasPerfix) {
+        StringBuffer sb = new StringBuffer();
         Queue<String> qu = new LinkedList<>(Arrays.asList(str.toLowerCase().split(regex)));
         if (hasPerfix) {
             qu.poll();
@@ -83,16 +87,31 @@ public class StringUtil {
         }
         String head = qu.poll();
         if (isFirstAlphaUpperCase) {
-            bf.append(head.substring(0, 1).toUpperCase());
-            bf.append(head.substring(1));
+            sb.append(head.substring(0, 1).toUpperCase());
+            sb.append(head.substring(1));
         } else {
-            bf.append(head);
+            sb.append(head);
         }
         for (String s : qu) {
-            bf.append(s.substring(0, 1).toUpperCase());
-            bf.append(s.substring(1));
+            sb.append(s.substring(0, 1).toUpperCase());
+            sb.append(s.substring(1));
         }
-        return bf.toString();
+        return sb.toString();
+    }
+
+    public static String toSeparator(String str, String separator, boolean isToUpperCase, String... perfix) {
+        Matcher matcher;
+        if (isToUpperCase) {
+            matcher = humPattern.matcher(str.toUpperCase());
+        } else {
+            matcher = humPattern.matcher(str);
+        }
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, separator + matcher.group(0));
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 
     /**

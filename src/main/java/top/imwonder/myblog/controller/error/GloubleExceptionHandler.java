@@ -2,14 +2,13 @@
  * @Author: Wonder2019 
  * @Date: 2020-04-30 23:16:38 
  * @Last Modified by: Wonder2020
- * @Last Modified time: 2021-01-29 15:24:31
+ * @Last Modified time: 2021-01-29 17:01:52
  */
 package top.imwonder.myblog.controller.error;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

@@ -3,10 +3,10 @@ package top.imwonder.myblog.dao;
 import org.springframework.stereotype.Component;
 
 import top.imwonder.myblog.domain.ArticleResource;
-import top.imwonder.util.DAOTemplate;
+import top.imwonder.util.AbstractDAO;
 
 @Component
-public class ArticleResourceDAO extends DAOTemplate<ArticleResource> {
+public class ArticleResourceDAO extends AbstractDAO<ArticleResource> {
 
     public ArticleResourceDAO() {
         domainType = ArticleResource.class;

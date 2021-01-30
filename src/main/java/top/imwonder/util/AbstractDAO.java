@@ -20,7 +20,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-public abstract class DAOTemplate<T> {
+public abstract class AbstractDAO<T> {
 
     protected Logger log = LoggerFactory.getLogger(getClass());
 
@@ -75,7 +75,7 @@ public abstract class DAOTemplate<T> {
             Method[] getters) {
         try {
             for (int i = 0; i < columns.length; i++) {
-                String cccn = StringUtil.toCamelCase(columns[i], "_", true, true);
+                String cccn = StringUtil.toHumpCase(columns[i], "_", true, true);
                 String methodName = "get" + cccn;
                 try {
                     getters[i] = domainType.getMethod(methodName);

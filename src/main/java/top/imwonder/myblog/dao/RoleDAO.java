@@ -9,10 +9,10 @@ package top.imwonder.myblog.dao;
 import org.springframework.stereotype.Component;
 
 import top.imwonder.myblog.domain.Role;
-import top.imwonder.util.DAOTemplate;
+import top.imwonder.util.AbstractDAO;
 
 @Component
-public class RoleDAO extends DAOTemplate<Role> {
+public class RoleDAO extends AbstractDAO<Role> {
     
     public RoleDAO() {
         domainType = Role.class;

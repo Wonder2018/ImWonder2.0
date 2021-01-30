@@ -43,7 +43,7 @@
 .content {
 	position: relative;
 	min-height: 100%;
-	padding: 0 14% 40rem;
+	padding: 0 14% 20rem;
 }
 
 .cover-box {
@@ -71,8 +71,8 @@ body,
 	background-position: 0 center;
 	background-size: cover;
 	background-attachment: fixed;
-    transition-property: background-image;
-    transition-duration: .5s;
+	transition-property: background-image;
+	transition-duration: 0.5s;
 }
 
 .container {
@@ -226,8 +226,8 @@ body,
 	font-size: 1.6rem;
 }
 
-.latest-article-list li.latest-article-item:last-of-type{
-	border-bottom:0;
+.latest-article-list li.latest-article-item:last-of-type {
+	border-bottom: 0;
 }
 
 .latest-article-title {
@@ -237,11 +237,11 @@ body,
 }
 
 .latest-article-title-text {
-    display: inline-block;
-    max-width: 76%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	display: inline-block;
+	max-width: 76%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .latest-article-readnum {
@@ -344,18 +344,95 @@ body,
 */
 
 .verso {
-	position: absolute;
 	width: 100%;
 	left: 0;
 	bottom: 0;
+	margin-top: 5em;
+	padding-top: 3em;
 	box-sizing: border-box;
-	padding: 0 20% 8em;
+	text-align: center;
+	/* color: #fff; */
+	color: #1f1f1f;
+}
+.verso-cover {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	border-top: 1px solid #ddd;
+	z-index: -1;
+	background-color: rgba(255, 255, 255, 0.4);
+}
+
+.web-map {
+	text-align: center;
+	margin-bottom: 4em;
+}
+
+.map-card {
+	display: inline-block;
+	width: 24%;
+}
+
+.friendly-link-card {
+	font-size: 1.7rem;
+}
+
+.friendly-link-list {
+	margin: 2em auto 4em;
+	font-size: 1.7rem;
+}
+
+.friendly-link-item {
+	display: inline-block;
+	overflow: hidden;
+	width: 8em;
+	padding: 0.2em;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	background-color: unset;
+	border-radius: 5px;
+}
+
+.friendly-link-item a:hover {
+	text-decoration: none;
+}
+
+.friendly-link-item.hvr-radial-out:before {
+	background-color: #41bcf7;
+	width: 0.5em;
+	height: 0.5em;
+	margin: auto;
+}
+
+.friendly-link-item.hvr-radial-out:hover:before {
+	background-color: #41bcf7;
+	-webkit-transform: scale(20);
+	transform: scale(20);
+}
+
+.friendly-link-icon {
+	width: 1em;
+}
+
+.friendly-link-sitename {
+	color: #1f1f1f;
+}
+
+.friendly-link-item:hover .friendly-link-sitename {
 	color: #fff;
 }
 
 .copyright {
 	text-align: center;
 	font-size: 1.7rem;
+	font-weight: bold;
+	color: #1f1f1f;
+}
+
+.copyright a {
+	font-size: 1.7rem;
+	color: #1f1f1f;
 }
 
 @media screen and (max-width: 500px) {

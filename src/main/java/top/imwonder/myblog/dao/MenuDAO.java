@@ -3,10 +3,10 @@ package top.imwonder.myblog.dao;
 import org.springframework.stereotype.Component;
 
 import top.imwonder.myblog.domain.Menu;
-import top.imwonder.util.DAOTemplate;
+import top.imwonder.util.AbstractDAO;
 
 @Component
-public class MenuDAO extends DAOTemplate<Menu>{
+public class MenuDAO extends AbstractDAO<Menu>{
     
     public MenuDAO(){
         domainType = Menu.class;

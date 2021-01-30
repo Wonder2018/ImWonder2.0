@@ -48,8 +48,10 @@ $(document).ready(function () {
 	preLoading("70%");
 	let ppg = new PreProgress(true, function () {
 		preLoading("100%");
+		console.log(document.body.scrollHeight - $(".verso").offset().top)
+		$(".verso-cover").height(document.body.scrollHeight - $(".verso").offset().top);
 	});
-	ppg.addAllTask(window.wonderTask);
+	ppg.addAllTask(window.wonderTask || {});
 	ppg.start();
 
 	// if (navigator.userAgent.match(/(Trident\/7\.)|(Edge)/)) {

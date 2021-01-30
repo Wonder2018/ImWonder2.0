@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 
 import top.imwonder.myblog.domain.User;
 import top.imwonder.myblog.exception.WonderException;
-import top.imwonder.util.DAOTemplate;
+import top.imwonder.util.AbstractDAO;
 
 @Component
-public class UserInfoDAO extends DAOTemplate<User> {
+public class UserInfoDAO extends AbstractDAO<User> {
     public UserInfoDAO() {
         domainType = User.class;
         tableName = "w_user";

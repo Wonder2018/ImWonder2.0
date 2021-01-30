@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+	<head th:replace="fragments :: common_header(~{::.primate},~{::title},~{::.comcss},~{::.pricss},~{::.initjson},~{::.comjs},~{::.prijs})">
+		<meta name="description" content="将你的网站添加到我的友情链接列表中" class="primate" />
+		<title>互加友链 - I'm Wonder</title>
+		<link rel="stylesheet" href="/assets/css/public/github-markdown.css" class="comcss" />
+		<link rel="stylesheet" href="/assets/css/public/highlight/googlecode.css" class="comcss" />
+		<link rel="stylesheet" href="/assets/css/blog/blogDetails.css" class="pricss" />
+		<script th:inline="JavaScript" class="initjson">
+			window.isRobot = /*[[${isRobot}]]*/ false;
+			window.bgList = /*[[${bgList}]]*/ [];
+			/*[[${tagList}]]*/
+
+			window.tagList = [
+				{ text: "SpringMVC", weight: 10, link: "#" },
+				{ text: "Tomcat", weight: 11, link: "#" },
+				{ text: "LinkedList", weight: 34, link: "#" },
+				{ text: "BankOS", weight: 5, link: "#" },
+				{ text: "Web", weight: 15, link: "#" },
+				{ text: "Java", weight: 7, link: "#" },
+				{ text: "JavaScript", weight: 20, link: "#" },
+				{ text: "Html", weight: 8, link: "#" },
+				{ text: "CSS", weight: 6, link: "#" },
+			];
+		</script>
+		<script src="/assets/js/public/highlight-10.1.2.min.js" class="comjs"></script>
+		<script src="/assets/js/public/marked-1.1.0.js" class="comjs"></script>
+		<script src="/assets/js/addFriendlyLink.js" class="prijs"></script>
+	</head>
+	<body th:class="${isRobot}?'':'loading'">
+		<th:block th:replace="fragments :: loading" />
+
+		<th:block th:replace="fragments :: nav('/')" />
+		<div class="content">
+			<th:block th:replace="fragments :: coverbox" />
+			<section id="home" class="container clearfix">
+				<th:block th:replace="fragments :: news" />
+				<ul class="blog-list fl">
+					<li class="blog-card clearfix">
+						<div class="blog-content markdown-body">
+                            <h1>互加友链</h1>
+                            <p>
+                                <ol>
+                                    <li>
+                                        注意事项
+                                        <p>
+                                            你可以通过此页面自助填写信息将你的网站添加到本站友情链接列表，本站友情链接列表排序规则为：<br>
+                                            a: 使用<code>https</code>协议的网站排在使用<code>http</code>协议的网站之前，更早申请的网站排在较后申请的网站之前。你也可以通过<a href="mailto:wonder6613@126.com"><code>联系站长</code></a>来调整你的网站排序。<br>
+                                            b：在收到申请后，你的网站链接将立即添加到本站友情链接一栏，本站也将在 15天 内，每间隔 5天 检查你提交的网站页面是否包含 Url “https://www.imwonder.top”，超过 15天 未验证成功将降低你网站的排序。<br>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        填写表单
+                                        <form action="" method="post" style="text-align: center;">
+                                            <label for="url">站点地址</label>
+                                            <input type="text" name="url" id="url"><br>
+                                            <label for="siteName">网站标题</label>
+                                            <input type="text" name="siteName" id="siteName">
+                                        </form>
+                                    </li>
+                                </ol>
+                            </p>
+						</div>
+					</li>
+				</ul>
+			</section>
+			<th:block th:replace="fragments :: footer" />
+		</div>
+	</body>
+</html>

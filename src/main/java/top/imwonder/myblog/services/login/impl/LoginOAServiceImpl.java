@@ -1,4 +1,4 @@
-package top.imwonder.myblog.services.impl;
+package top.imwonder.myblog.services.login.impl;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import top.imwonder.myblog.domain.RolePermission;
 import top.imwonder.myblog.domain.User;
 import top.imwonder.myblog.domain.UserRole;
 import top.imwonder.myblog.domain.UserTicket;
-import top.imwonder.myblog.services.LoginOAService;
+import top.imwonder.myblog.services.login.LoginOAService;
 
 @Service
 public class LoginOAServiceImpl implements LoginOAService {
