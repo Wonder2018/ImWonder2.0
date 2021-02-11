@@ -73,97 +73,101 @@
 				<div class="cover-paint"></div>
 			</div>
 			<section id="home" class="container clearfix">
-				<ul th:fragment="news" class="news fr">
-					<li class="news-card clearfix">
-						<div class="blog-search">
-							<input type="text" class="blog-search-inp" placeholder="输入关键词搜索" />
-							<button class="blog-search-btn hvr-radial-out">
-								<span class="iconfont icon-search"></span>
-							</button>
-						</div>
-					</li>
-					<li class="news-card news-imwonder">
-						<img src="/assets/img/index/face.webp" alt="face" class="wonder-face" />
-						<img src="/assets/img/index/Wonder2019-Black.png" alt="wonder2019" class="wonder-sign" />
-						<label class="wonder-motto">拼命去争取成功，但不要期望一定会成功。</label>
-						<ul class="wonder-stat-list">
-							<li class="wonder-stat-item">
-								<span class="stat-key">博客</span>
-								<br />
-								<span class="stat-value">123</span>
-							</li>
-							<li class="wonder-stat-item">
-								<span class="stat-key">动态</span>
-								<br />
-								<span class="stat-value">456</span>
-							</li>
-							<li class="wonder-stat-item">
-								<span class="stat-key">评论</span>
-								<br />
-								<span class="stat-value">1334</span>
-							</li>
-						</ul>
-						<ul class="wonder-snsl-list">
-							<li class="wonder-snsl-item hvr-radial-out"><span class="iconfont icon-mail"></span></li>
-							<li class="wonder-snsl-item hvr-radial-out"><span class="iconfont icon-github"></span></li>
-						</ul>
-					</li>
-					<li class="news-card latest-article">
-						<label class="news-card-title">最近文章</label>
-						<ul class="latest-article-list">
-							<li th:each="article,ite : ${articles}" th:if="${ite.index < 5}" class="latest-article-item">
-								<a th:href="|/blog/details/${article.id}|" th:title="${article.title}" href="#" title="Title 标题 Title 标题">
-									<label class="latest-article-title">
-										<span th:text="${article.title}" class="latest-article-title-text">Title 标题 Title 标题</span>
-										<span th:text="${article.read}" class="latest-article-readnum">12232</span>
-									</label>
-								</a>
-								<label th:text="${#dates.format(article.postTime,'M.dd')}" class="latest-article-posttime fr">6.28</label>
-							</li>
-						</ul>
-					</li>
-					<li class="news-card tag-cloud">
-						<label class="news-card-title">标签云</label>
-						<div class="tag-cloud-board"></div>
-					</li>
-					<li class="news-card msg-board">
-						<label class="news-card-title">留言板</label>
-						<div class="msg-board-bulletchat"></div>
-						<button class="msg-board-lam hvr-radial-out">给我留言</button>
-					</li>
-				</ul>
+				<aside th:fragment="news" class="news-container">
+					<ul class="news fr">
+						<li class="news-card clearfix">
+							<div class="blog-search">
+								<input type="text" class="blog-search-inp" placeholder="输入关键词搜索" />
+								<button class="blog-search-btn hvr-radial-out">
+									<span class="iconfont icon-search"></span>
+								</button>
+							</div>
+						</li>
+						<li class="news-card news-imwonder">
+							<img src="/assets/img/index/face.webp" alt="face" class="wonder-face" />
+							<img src="/assets/img/index/Wonder2019-Black.png" alt="wonder2019" class="wonder-sign" />
+							<label class="wonder-motto">拼命去争取成功，但不要期望一定会成功。</label>
+							<ul class="wonder-stat-list">
+								<li class="wonder-stat-item">
+									<span class="stat-key">博客</span>
+									<br />
+									<span class="stat-value">123</span>
+								</li>
+								<li class="wonder-stat-item">
+									<span class="stat-key">动态</span>
+									<br />
+									<span class="stat-value">456</span>
+								</li>
+								<li class="wonder-stat-item">
+									<span class="stat-key">评论</span>
+									<br />
+									<span class="stat-value">1334</span>
+								</li>
+							</ul>
+							<ul class="wonder-snsl-list">
+								<li class="wonder-snsl-item hvr-radial-out"><a href="mailto:wonder6613@mail.imwonder.top" style="color: #fff; text-decoration: none;"><span class="iconfont icon-mail"></span></a></li>
+								<li class="wonder-snsl-item hvr-radial-out"><a href="https://github.com/wonder2018" style="color: #fff; text-decoration: none;"><span class="iconfont icon-github"></span></a></li>
+							</ul>
+						</li>
+						<li class="news-card latest-article">
+							<label class="news-card-title">最近文章</label>
+							<ul class="latest-article-list">
+								<li th:each="article,ite : ${articles}" th:if="${ite.index < 5}" class="latest-article-item">
+									<a th:href="|/blog/details/${article.id}|" th:title="${article.title}" href="#" title="Title 标题 Title 标题">
+										<label class="latest-article-title">
+											<span th:text="${article.title}" class="latest-article-title-text">Title 标题 Title 标题</span>
+											<span th:text="${article.read}" class="latest-article-readnum">12232</span>
+										</label>
+									</a>
+									<label th:text="${#dates.format(article.postTime,'M.dd')}" class="latest-article-posttime fr">6.28</label>
+								</li>
+							</ul>
+						</li>
+						<li class="news-card tag-cloud">
+							<label class="news-card-title">标签云</label>
+							<div class="tag-cloud-board"></div>
+						</li>
+						<li class="news-card msg-board">
+							<label class="news-card-title">留言板</label>
+							<div class="msg-board-bulletchat"></div>
+							<button class="msg-board-lam hvr-radial-out">给我留言</button>
+						</li>
+					</ul>
+				</aside>
 				<ul class="blog-list fl">
 					<li th:each="article : ${articles}" class="blog-card clearfix">
-						<div class="blog-date">
-							<span th:text="${#dates.format(article.postTime,'MMMMM')}" class="blog-date-month">6月</span>
-							<br />
-							<span th:text="${#dates.format(article.postTime,'dd')}" class="blog-date-day">28</span>
-						</div>
-						<a th:href="|/blog/details/${article.id}|" href="#">
-							<label th:text="${article.title}" class="blog-title">Title 标题 Title 标题</label>
-						</a>
-						<ul class="blog-tag-list">
-							<li class="blog-tag hvr-grow-rotate">
-								<span class="iconfont icon-date"></span>
-								<span th:text="${#dates.format(article.postTime,'yyyyMMdd')}">20190628</span>
-							</li>
-							<li th:each="tag : ${article.tags}" class="blog-tag hvr-grow-rotate">
-								<span th:class="|iconfont icon-${tag.icon}|" class="iconfont icon-tag"></span>
-								<span th:text="${tag.name}">SpringMVC</span>
-							</li>
-							<li class="blog-tag hvr-grow-rotate">
-								<span class="iconfont icon-read-num"></span>
-								<span th:text="${article.read}">2342323</span>
-							</li>
-						</ul>
-						<a th:href="|/blog/details/=${article.id}|" href="#">
-							<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
-							<div th:text="${article.summary}" class="blog-abstract">Body 正文 Review 预览</div>
-							<div class="blog-readmore hvr-sweep-to-right">
-								继续阅读
-								<span th:text="${article.read}" class="blog-readnum">23238</span>
+						<section class="blog-card-section">
+							<div class="blog-date">
+								<span th:text="${#dates.format(article.postTime,'MMMMM')}" class="blog-date-month">6月</span>
+								<br />
+								<span th:text="${#dates.format(article.postTime,'dd')}" class="blog-date-day">28</span>
 							</div>
-						</a>
+							<a th:href="|/blog/details/${article.id}|" href="#">
+								<label th:text="${article.title}" class="blog-title">Title 标题 Title 标题</label>
+							</a>
+							<ul class="blog-tag-list">
+								<li class="blog-tag hvr-grow-rotate">
+									<span class="iconfont icon-date"></span>
+									<span th:text="${#dates.format(article.postTime,'yyyyMMdd')}">20190628</span>
+								</li>
+								<li th:each="tag : ${article.tags}" class="blog-tag hvr-grow-rotate">
+									<span th:class="|iconfont icon-${tag.icon}|" class="iconfont icon-tag"></span>
+									<span th:text="${tag.name}">SpringMVC</span>
+								</li>
+								<li class="blog-tag hvr-grow-rotate">
+									<span class="iconfont icon-read-num"></span>
+									<span th:text="${article.read}">2342323</span>
+								</li>
+							</ul>
+							<a th:href="|/blog/details/=${article.id}|" href="#">
+								<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
+								<div th:text="${article.summary}" class="blog-abstract">Body 正文 Review 预览</div>
+								<div class="blog-readmore hvr-sweep-to-right">
+									继续阅读
+									<span th:text="${article.read}" class="blog-readnum">23238</span>
+								</div>
+							</a>
+						</section>
 					</li>
 					<li class="pagelist">
 						<label class="setpage pageUp">&lt;</label>

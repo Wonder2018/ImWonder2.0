@@ -6,6 +6,76 @@
   "description": "My Blog 2.0",
   "glyphs": [
     {
+      "icon_id": "5183631",
+      "name": "错误",
+      "font_class": "error",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "5183661",
+      "name": "正确",
+      "font_class": "right",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "7588096",
+      "name": "警告",
+      "font_class": "warn",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "14318614",
+      "name": "离线下载",
+      "font_class": "download",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "13469997",
+      "name": "spring",
+      "font_class": "spring",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "13530457",
+      "name": "服务器",
+      "font_class": "server",
+      "unicode": "e6c2",
+      "unicode_decimal": 59074
+    },
+    {
+      "icon_id": "5555178",
+      "name": "linux",
+      "font_class": "linux",
+      "unicode": "e731",
+      "unicode_decimal": 59185
+    },
+    {
+      "icon_id": "2328687",
+      "name": "公告",
+      "font_class": "notice",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
+      "icon_id": "13895901",
+      "name": "bookmark",
+      "font_class": "bookmark",
+      "unicode": "e761",
+      "unicode_decimal": 59233
+    },
+    {
+      "icon_id": "10333707",
+      "name": "菜单",
+      "font_class": "menu",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
       "icon_id": "11308907",
       "name": "案例库",
       "font_class": "case-library",

@@ -36,8 +36,8 @@
 			<th:block th:replace="fragments :: coverbox" />
 			<section id="home" class="container clearfix">
 				<th:block th:replace="fragments :: news" />
-				<ul class="blog-list fl">
-					<li th:object="${blogDetails}" class="blog-card clearfix">
+				<section th:object="${blogDetails}" class="blog-list fl">
+					<article class="blog-card clearfix">
 						<div class="blog-content markdown-body">
 							<h1 th:text="*{title}"></h1>
 							<div th:text="*{summary}"></div>
@@ -57,8 +57,8 @@
 								<span th:text="*{read}">2342323</span>
 							</li>
 						</ul>
-					</li>
-				</ul>
+					</article>
+				</section>
 			</section>
 			<th:block th:replace="fragments :: footer" />
 		</div>

@@ -22,7 +22,7 @@ public class GaussianBlur {
      * @param img    原始图片
      * @param radius 模糊半径
      * @return BufferedImage 处理后的图片
-     * @author <a href="mailto:wonder6613@126.com">Wonder2020</a>
+     * @author <a href="mailto:wonder6613@mail.imwonder.top">Wonder2020</a>
      * @date 2020年7月12日
      */
     public static BufferedImage blur(BufferedImage img, int radius) throws IOException {

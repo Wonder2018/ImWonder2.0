@@ -2,15 +2,11 @@
  * @Author: Wonder2019 
  * @Date: 2020-04-30 23:16:38 
  * @Last Modified by: Wonder2020
- * @Last Modified time: 2021-01-29 17:01:52
+ * @Last Modified time: 2021-02-08 14:34:47
  */
 package top.imwonder.myblog.controller.error;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -89,24 +85,6 @@ public class GloubleExceptionHandler implements AccessDeniedHandler {
     }
 
     private String checkRequestType(String uri, HttpServletRequest req) {
-        if (uri.indexOf("cgi-bin") != -1 || uri.indexOf("php") != -1 || uri.indexOf("adm") != -1) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            try (PrintWriter pw = new PrintWriter(new FileOutputStream("reqofphp.log", true))) {
-                pw.print(sdf.format(new Date()));
-                pw.print("-[ imwonder ]-");
-                pw.print(req.getRemoteHost());
-                pw.print("--");
-                pw.print(req.getRemoteAddr());
-                pw.print(":");
-                pw.print(req.getRemotePort());
-                pw.print("-[ imwonder ]-");
-                pw.print(uri);
-                pw.print("-[ imwonder ]-");
-                pw.println(req.getHeader("User-Agent"));
-            } catch (IOException e) {
-                log.info(e.getMessage());
-            }
-        }
         log.debug("uri:{}", uri);
         return uri.contains("api") ? "json" : "error";
     }

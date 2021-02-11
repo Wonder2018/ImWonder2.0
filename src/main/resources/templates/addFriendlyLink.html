@@ -5,7 +5,7 @@
 		<title>互加友链 - I'm Wonder</title>
 		<link rel="stylesheet" href="/assets/css/public/github-markdown.css" class="comcss" />
 		<link rel="stylesheet" href="/assets/css/public/highlight/googlecode.css" class="comcss" />
-		<link rel="stylesheet" href="/assets/css/blog/blogDetails.css" class="pricss" />
+		<link rel="stylesheet" href="/assets/css/addFriendlyLink.css" class="pricss" />
 		<script th:inline="JavaScript" class="initjson">
 			window.isRobot = /*[[${isRobot}]]*/ false;
 			window.bgList = /*[[${bgList}]]*/ [];
@@ -23,6 +23,7 @@
 				{ text: "CSS", weight: 6, link: "#" },
 			];
 		</script>
+		<script src="/assets/js/public/jquery.form.min.js" class="comjs"></script>
 		<script src="/assets/js/public/highlight-10.1.2.min.js" class="comjs"></script>
 		<script src="/assets/js/public/marked-1.1.0.js" class="comjs"></script>
 		<script src="/assets/js/addFriendlyLink.js" class="prijs"></script>
@@ -35,34 +36,97 @@
 			<th:block th:replace="fragments :: coverbox" />
 			<section id="home" class="container clearfix">
 				<th:block th:replace="fragments :: news" />
-				<ul class="blog-list fl">
-					<li class="blog-card clearfix">
+				<div class="blog-list fl">
+					<article class="blog-card clearfix">
 						<div class="blog-content markdown-body">
-                            <h1>互加友链</h1>
-                            <p>
-                                <ol>
-                                    <li>
-                                        注意事项
-                                        <p>
-                                            你可以通过此页面自助填写信息将你的网站添加到本站友情链接列表，本站友情链接列表排序规则为：<br>
-                                            a: 使用<code>https</code>协议的网站排在使用<code>http</code>协议的网站之前，更早申请的网站排在较后申请的网站之前。你也可以通过<a href="mailto:wonder6613@126.com"><code>联系站长</code></a>来调整你的网站排序。<br>
-                                            b：在收到申请后，你的网站链接将立即添加到本站友情链接一栏，本站也将在 15天 内，每间隔 5天 检查你提交的网站页面是否包含 Url “https://www.imwonder.top”，超过 15天 未验证成功将降低你网站的排序。<br>
-                                        </p>
-                                    </li>
-                                    <li>
-                                        填写表单
-                                        <form action="" method="post" style="text-align: center;">
-                                            <label for="url">站点地址</label>
-                                            <input type="text" name="url" id="url"><br>
-                                            <label for="siteName">网站标题</label>
-                                            <input type="text" name="siteName" id="siteName">
-                                        </form>
-                                    </li>
-                                </ol>
-                            </p>
+							<h1>互加友链</h1>
+							<div>
+								<ol>
+									<li>
+										注意事项
+										<p>
+											你可以通过此页面自助填写信息将你的网站添加到本站友情链接列表，本站友情链接列表排序规则为：
+											<br />
+											a: 使用
+											<code>https</code>
+											协议的网站排在使用
+											<code>http</code>
+											协议的网站之前，更早申请的网站排在较后申请的网站之前。你也可以通过
+											<a href="mailto:wonder6613@mail.imwonder.top"><code>联系站长</code></a>
+											来调整你的网站排序。
+											<br />
+											b：在收到申请后，你的网站链接将立即添加到本站友情链接一栏，本站也将在 15天 内，每间隔 5天 检查你提交的网站页面是否包含 Url “https://www.imwonder.top”，超过
+											15天 未验证成功将降低你网站的排序。
+											<br />
+										</p>
+									</li>
+									<li>
+										填写表单（未正式启用！）
+										<form action="" method="" class="friendly-link-form">
+											<div class="form-group">
+												<label for="url">站点地址：</label>
+												<span class="control-group">
+													<input type="text" name="url" id="url" class="form-control" placeholder="站点完整地址 (包含协议)，确保地址可以访问！" required/>
+													<div class="tips-box iconfont"></div>
+												</span>
+											</div>
+											<div class="form-group">
+												<label for="siteName">网站标题：</label>
+												<span class="control-group">
+													<input type="text" name="siteName" id="siteName" class="form-control" placeholder="简短的网站标题" required/>
+													<div class="tips-box iconfont"></div>
+												</span>
+											</div>
+											<div class="form-group" id="iconTypeGroup">
+												<label for="iconType">图标来源：</label>
+												<select name="iconType" class="form-control" id="iconType">
+													<option value="default">请选择网站图标来源 (可以没有图标)</option>
+													<option value="bili">Bilibili 头像</option>
+													<option value="qq">QQ 头像</option>
+													<option value="github">Github 头像</option>
+													<option value="iconUrl">链接</option>
+													<option value="file">上传文件</option>
+												</select>
+											</div>
+											<div class="form-group hide" id="iconGroup">
+												<label for="icon" id="iconLabel">图标详情：</label>
+												<span class="control-group">
+													<span class="file-placeholder hide" id="filePlaceholder"></span>
+													<input type="text" name="icon" id="icon" class="form-control" placeholder="id (可选项)" />
+													<div class="tips-box iconfont"></div>
+												</span>
+											</div>
+											<div class="form-group">
+												<label for="master">站长称呼：</label>
+												<span class="control-group">
+													<input type="text" name="master" id="master" class="form-control" placeholder="你的昵称 (可选项)，供管理员识别" />
+													<div class="tips-box iconfont"></div>
+												</span>
+											</div>
+											<div class="form-group">
+												<label for="email">站长邮箱：</label>
+												<span class="control-group">
+													<input type="email" name="email" id="email" class="form-control" placeholder="你的邮箱 (可选项)，自助修改信息时验证" />
+													<div class="tips-box iconfont"></div>
+												</span>
+											</div>
+											<div class="form-group" id="pwd-group">
+												<label for="pwd">附加密码：</label>
+												<span class="control-group">
+													<input type="password" name="pwd" id="pwd" class="form-control" placeholder="设置自助修改信息时使用的密码(可选项)" />
+													<div class="tips-box iconfont"></div>
+												</span>
+											</div>
+											<div class="form-group">
+												<button class="btn btn-common" type="button" id="submitBtn">提交</button>
+											</div>
+										</form>
+									</li>
+								</ol>
+							</div>
 						</div>
-					</li>
-				</ul>
+					</article>
+				</div>
 			</section>
 			<th:block th:replace="fragments :: footer" />
 		</div>

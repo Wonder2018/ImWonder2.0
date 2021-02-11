@@ -3,7 +3,11 @@
 	<head th:replace="fragments :: common_header(~{::.primate},~{::title},~{::.comcss},~{::.pricss},~{::.initjson},~{::.comjs},~{::.prijs})">
 		<meta name="baidu-site-verification" content="I6vGxjKLYi" class="primate" />
 		<meta name="google-site-verification" content="-i92lRen0qiwsyWX8ty1Bz0JJhXirEH4_f7_3c_OfIA" class="primate" />
-		<meta name="description" content="wonder的个人博客网站，主要展示java、java web、spring、JVM、web前端（HTML - CSS - JavaScript）、逆向Linux和云服务器操作及项目部署等多方面内容，均为个人学习经验和相关研究的记录。喜欢的话不妨收藏一下呀。" class="primate" />
+		<meta
+			name="description"
+			content="wonder的个人博客网站，主要展示java、java web、spring、JVM、web前端（HTML - CSS - JavaScript）、逆向Linux和云服务器操作及项目部署等多方面内容，均为个人学习经验和相关研究的记录。喜欢的话不妨收藏一下呀。"
+			class="primate"
+		/>
 		<title>I'm Wonder - 一只立志成为最强全栈的小猿！</title>
 		<link th:if="false" class="comcss" />
 		<link rel="stylesheet" href="/assets/css/index.css" class="pricss" />
@@ -30,7 +34,7 @@
 	<body th:class="${isRobot}?'':'loading'">
 		<th:block th:replace="fragments :: loading" />
 		<th:block th:replace="fragments :: nav('#home')" />
-		<header class="titlepage" style="outline: 1px solid #54c;">
+		<header class="titlepage" style="outline: 1px solid #54c">
 			<div class="title hvr-buzz-out"><h1>I'm Wonder</h1></div>
 			<div class="tag">拼命去争取成功，但不要期望一定会成功。</div>
 		</header>
@@ -40,38 +44,38 @@
 				<th:block th:replace="fragments :: news" />
 				<ul class="blog-list fl">
 					<li th:each="article : ${articles}" class="blog-card clearfix">
-						<div class="blog-date">
-							<span th:text="${#dates.format(article.postTime,'MMMMM')}" class="blog-date-month">6月</span>
-							<br />
-							<span th:text="${#dates.format(article.postTime,'dd')}" class="blog-date-day">28</span>
-						</div>
-						<a th:href="|/blog/details/${article.id}|" href="#">
-							<h2 th:text="${article.title}" class="blog-title">Title 标题 Title 标题</h2>
-						</a>
-						<ul class="blog-tag-list">
-							<li class="blog-tag hvr-grow-rotate">
-								<span class="iconfont icon-date"></span>
-								<span th:text="${#dates.format(article.postTime,'yyyyMMdd')}">20190628</span>
-							</li>
-							<li th:each="tag : ${article.tags}" class="blog-tag hvr-grow-rotate">
-								<span th:class="|iconfont icon-${tag.icon}|" class="iconfont icon-tag"></span>
-								<span th:text="${tag.name}">SpringMVC</span>
-							</li>
-							<li class="blog-tag hvr-grow-rotate">
-								<span class="iconfont icon-read-num"></span>
-								<span th:text="${article.read}">2342323</span>
-							</li>
-						</ul>
-						<a th:href="|/blog/details/${article.id}|" href="#">
-							<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
-							<div th:text="${article.summary}" class="blog-abstract">
-								Body 正文 Review 预览
+						<section class="blog-card-section">
+							<div class="blog-date">
+								<span th:text="${#dates.format(article.postTime,'MMMMM')}" class="blog-date-month">6月</span>
+								<br />
+								<span th:text="${#dates.format(article.postTime,'dd')}" class="blog-date-day">28</span>
 							</div>
-							<div class="blog-readmore hvr-sweep-to-right">
-								继续阅读
-								<span th:text="${article.read}" class="blog-readnum">23238</span>
-							</div>
-						</a>
+							<a th:href="|/blog/details/${article.id}|" href="#">
+								<h2 th:text="${article.title}" class="blog-title">Title 标题 Title 标题</h2>
+							</a>
+							<ul class="blog-tag-list">
+								<li class="blog-tag hvr-grow-rotate">
+									<span class="iconfont icon-date"></span>
+									<span th:text="${#dates.format(article.postTime,'yyyyMMdd')}">20190628</span>
+								</li>
+								<li th:each="tag : ${article.tags}" class="blog-tag hvr-grow-rotate">
+									<span th:class="|iconfont icon-${tag.icon}|" class="iconfont icon-tag"></span>
+									<span th:text="${tag.name}">SpringMVC</span>
+								</li>
+								<li class="blog-tag hvr-grow-rotate">
+									<span class="iconfont icon-read-num"></span>
+									<span th:text="${article.read}">2342323</span>
+								</li>
+							</ul>
+							<a th:href="|/blog/details/${article.id}|" href="#">
+								<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
+								<div th:text="${article.summary}" class="blog-abstract">Body 正文 Review 预览</div>
+								<div class="blog-readmore hvr-sweep-to-right">
+									继续阅读
+									<span th:text="${article.read}" class="blog-readnum">23238</span>
+								</div>
+							</a>
+						</section>
 					</li>
 					<li class="pagelist">
 						<label class="setpage pageUp">&lt;</label>
