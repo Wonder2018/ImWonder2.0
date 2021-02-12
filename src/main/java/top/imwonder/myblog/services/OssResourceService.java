@@ -1,8 +1,10 @@
 package top.imwonder.myblog.services;
 
+import java.io.File;
+
 import top.imwonder.myblog.domain.OssResource;
 
-public interface OssService {
+public interface OssResourceService {
 
     /**
      * 通过数据库中的资源 ID ，获取资源对应的 URL
@@ -16,4 +18,14 @@ public interface OssService {
      * @param or
      */
     void calcPath(OssResource or);
+
+    void uploadResource(File file,OssResource or);
+
+    void uploadResource(byte[] file,OssResource or);
+
+    void fetchResourceByUrl(String url,OssResource or);
+
+    int countType(String category);
+
+    
 }

@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-08-06 10:44:56
  * @Last Modified by: Wonder2020
- * @Last Modified time: 2021-02-11 19:15:04
+ * @Last Modified time: 2021-02-12 19:57:27
  */
 
 /**
@@ -51,9 +51,10 @@ function initListener(progressId) {
 function initAjaxSubmit(progressId) {
 	submitBtn.addEventListener("click", () => {
 		$(".friendly-link-form").ajaxSubmit({
-			url: "addFriendlyLink",
+			url: "/api/addFriendlyLink",
 			type: "post",
 			dataType: "json",
+			headers: hds,
 			beforeSubmit(values) {
 				let result = true;
 				console.log(values);
@@ -69,7 +70,9 @@ function initAjaxSubmit(progressId) {
 					console.log(retBody);
 					if (retBody && retBody.code != "ok") {
 						tipsSetter(controlGroups[value.name], retBody.msg);
-						result = false;
+						if (retBody.code == "err") {
+							result = false;
+						}
 						continue;
 					}
 					if (value.type == "file" && value.value.size >= 3145728) {
@@ -175,6 +178,10 @@ let regUrl = /^http(s)?:\/\/(?![\-\.])([\w\-]*\.)+\w[\w\-]*(?<![\-\.])(\/(?![\-\
 let regIconUrl = /^http(s)?:\/\/(?![\-\.])([\w\-]*\.)+\w[\w\-]*(?<![\-\.])(\/(?![\-\.])[\w\-\.]*(?<![\-\.]))*(\?([0-9A-Za-z]+=[0-9A-Za-z]+&?)+)*/;
 let regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})$/;
 
+// csrf
+let hds = {};
+hds[window._chn] = window._ctv;
+
 // 提示容器
 let controlGroups = {};
 
@@ -275,34 +282,26 @@ let iconInfo = {
 		label: "关键信息：",
 		placeholder: "B站 UID(本站不会保存，获取头像后清除)",
 		type: "text",
-		name: "icon",
 	},
 	qq: {
 		label: "关键信息：",
 		placeholder: "QQ 号(本站不会保存，获取头像后清除)",
 		type: "text",
-		name: "icon",
 	},
 	github: {
 		label: "关键信息：",
 		placeholder: "Github用户名(本站不会保存，获取头像后清除)",
 		type: "text",
-		name: "icon",
 	},
 	iconUrl: {
 		label: "关键信息：",
 		placeholder: "图片地址",
 		type: "text",
-		name: "icon",
 	},
 	file: {
 		label: "上传图标：",
 		type: "file",
-		name: "iconFile",
 		accept: "image/*",
-		init() {
-			controlGroups.iconFile = controlGroups.icon;
-		},
 	},
 };
 
@@ -337,7 +336,6 @@ let listener = {
 			let controlGroup = controlGroups.icon;
 			cleanTips(controlGroup);
 			if (format) {
-				format.init && format.init();
 				if (iconType.value == "file") {
 					iconGroup.querySelector(".control-group").classList.add("file-group");
 					filePlaceholder.classList.remove("hide");
@@ -348,7 +346,6 @@ let listener = {
 				}
 				iconLabel.innerText = format.label;
 				icon.type = format.type;
-				icon.name = format.name;
 				icon.value = "";
 				format.placeholder && icon.setAttribute("placeholder", format.placeholder);
 				format.accept && icon.setAttribute("accept", format.accept);

@@ -69,7 +69,7 @@
 		<dependency>
 			<groupId>com.qiniu</groupId>
 			<artifactId>qiniu-java-sdk</artifactId>
-			<version>7.2.29</version>
+			<version>LATEST</version>
 		</dependency>
 
 		<dependency>

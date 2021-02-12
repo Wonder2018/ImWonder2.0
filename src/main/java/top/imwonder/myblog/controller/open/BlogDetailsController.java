@@ -20,7 +20,7 @@ import top.imwonder.myblog.domain.Article;
 import top.imwonder.myblog.domain.ArticleResource;
 import top.imwonder.myblog.domain.Tag;
 import top.imwonder.myblog.exception.WonderResourceNotFoundException;
-import top.imwonder.myblog.services.OssService;
+import top.imwonder.myblog.services.OssResourceService;
 
 @RequestMapping(value = "/blog")
 @Controller("blogDetailsController")
@@ -36,7 +36,7 @@ public class BlogDetailsController extends AbstractController {
     private ArticleResourceDAO arrDAO;
 
     @Autowired
-    private OssService os;
+    private OssResourceService ors;
 
     @Autowired
     private SystemProperties sp;
@@ -58,7 +58,7 @@ public class BlogDetailsController extends AbstractController {
         String sql = "select b.w_id, b.w_name, b.w_icon from w_articl_tag a left join w_tag b on a.w_tag_id = b.w_id where a.w_article_id = ?";
         try {
             art = arDAO.loadOne(blogId);
-            art.setMarkdownId(os.getUrlById(art.getMarkdownId()));
+            art.setMarkdownId(ors.getUrlById(art.getMarkdownId()));
             List<Tag> tags = tagDAO.loadMoreBySQL(sql, new Object[] { art.getId() });
             art.setTags(tags);
             List<ArticleResource> resourceList = arrDAO.loadMore(" where w_article_id = ? order by w_order asc",
@@ -85,7 +85,7 @@ public class BlogDetailsController extends AbstractController {
 
     @RequestMapping(value = { "/resource/{resourceId}" })
     public RedirectView blogResource(@PathVariable("resourceId") String resourceId, Model model) {
-        String url = os.getUrlById(resourceId);
+        String url = ors.getUrlById(resourceId);
         if ("".equals(url)) {
             throw new WonderResourceNotFoundException("404", "资源不存在或已被删除！");
         }

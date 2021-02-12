@@ -23,7 +23,7 @@ import top.imwonder.myblog.SystemProperties;
 import top.imwonder.myblog.dao.OssResourceDAO;
 import top.imwonder.myblog.domain.OssResource;
 import top.imwonder.myblog.services.FriendlyLinkService;
-import top.imwonder.myblog.services.OssService;
+import top.imwonder.myblog.services.OssResourceService;
 import top.imwonder.myblog.util.SpiderUtil;
 
 public abstract class AbstractController {
@@ -34,7 +34,7 @@ public abstract class AbstractController {
     private OssResourceDAO orDAO;
 
     @Autowired
-    private OssService ossService;
+    private OssResourceService ors;
 
     @Autowired
     private FriendlyLinkService flService;
@@ -66,7 +66,7 @@ public abstract class AbstractController {
             AbstractController.orList = orDAO.loadMore(" where w_category = ? order by w_order asc",
                     new Object[] { "bg" });
             for (OssResource item : AbstractController.orList) {
-                ossService.calcPath(item);
+                ors.calcPath(item);
                 item.setPath("/assets/img/bg/img2.jpg");
                 item.setBz("/assets/img/bg/img2blur.webp");
             }

@@ -40,3 +40,4 @@ sitemap.xml
 **/application-product.yml
 src/test/java/top/imwonder/myblog/experiment/
 src/test/java/top/imwonder/myblog/record/
+testBiliHeader.json

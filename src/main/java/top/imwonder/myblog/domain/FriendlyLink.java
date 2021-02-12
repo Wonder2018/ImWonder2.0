@@ -36,4 +36,6 @@ public class FriendlyLink {
     private Date lastVarified;
 
     private Boolean disabled;
+
+    private Integer order;
 }
