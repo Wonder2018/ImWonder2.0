@@ -31,9 +31,9 @@ public class CreateSiteMapTask implements CommandLineRunner {
         if (!sitemap.exists() || System.currentTimeMillis() - sitemap.lastModified() > 100) {
             Document doc = SiteMapUtil.createSiteMap();
             List<Article> articles = arDAO.loadMore(" Order by w_post_time desc");
-            SiteMapUtil.addUrl(doc, "http://www.imwonder.top", new Date(), ChangeFreqEnum.WEEKLY, "1");
+            SiteMapUtil.addUrl(doc, "https://www.imwonder.top", new Date(), ChangeFreqEnum.WEEKLY, "1");
             for (Article article : articles) {
-                String loc = String.format("http://www.imwonder.top/blog/details/%s", article.getId());
+                String loc = String.format("https://www.imwonder.top/blog/details/%s", article.getId());
                 SiteMapUtil.addUrl(doc, loc, article.getPostTime(), ChangeFreqEnum.WEEKLY, "0.9");
             }
             try (OutputStream os = new FileOutputStream(sitemap)) {

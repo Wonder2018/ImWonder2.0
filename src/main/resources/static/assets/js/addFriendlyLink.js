@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-08-06 10:44:56
  * @Last Modified by: Wonder2020
- * @Last Modified time: 2021-02-16 12:19:45
+ * @Last Modified time: 2021-02-16 16:07:25
  */
 
 /**
@@ -50,6 +50,8 @@ function initListener(progressId) {
  */
 function initAjaxSubmit(progressId) {
 	submitBtn.addEventListener("click", () => {
+		$(submitBtn).attr("disabled",true)
+		submitBtn.innerText = "努力提交ing。。。";
 		$(".friendly-link-form").ajaxSubmit({
 			url: "/api/addFriendlyLink",
 			type: "post",
@@ -61,15 +63,19 @@ function initAjaxSubmit(progressId) {
 				for (let value of values) {
 					console.log(value);
 					console.log;
-					if (value.required && !value.value) {
-						setError(controlGroups[value.name], "此项为必填项！");
-						result = false;
-						continue;
+					if(!value.value){
+						if(value.required){
+							setError(controlGroups[value.name], "此项为必填项！");
+							result = false;
+							continue;
+						}else{
+							continue;
+						}
 					}
 					let retBody = validator[value.name] && validator[value.name](value.value);
 					console.log(retBody);
 					if (retBody && retBody.code != "ok") {
-						tipsSetter(controlGroups[value.name], retBody.msg);
+						tipsSetter(controlGroups[value.name], retBody);
 						if (retBody.code == "err") {
 							result = false;
 						}
@@ -81,13 +87,27 @@ function initAjaxSubmit(progressId) {
 						continue;
 					}
 				}
+				if (!result) {
+					$(submitBtn).attr("disabled",false)
+					submitBtn.innerText = "提交";
+				}
 				return result;
 			},
 			error(a, b, c, d) {
 				console.log("error", a, b, c, d);
+				alert("出错了！(ノへ￣、)\n请联系管理员解决。。。");
+				$(submitBtn).attr("disabled",false)
+				submitBtn.innerText = "提交";
 			},
 			success(data) {
-				console.log(data);
+				if (data.code && data.code != "200") {
+					alert("出错了！(ノへ￣、)\n请联系管理员解决。。。\n错误详情：" + data.msg);
+					$(submitBtn).attr("disabled",false)
+					submitBtn.innerText = "提交";
+					return "error";
+				}
+				alert("你的网站已经成功加入！\n肥肠感谢您的参与！(～￣▽￣)～");
+				window.location.href = "/";
 			},
 		});
 	});

@@ -417,10 +417,12 @@ body,
 
 .friendly-link-icon {
 	width: 1em;
+	vertical-align: middle;
 }
 
 .friendly-link-sitename {
 	color: #1f1f1f;
+	vertical-align: middle;
 }
 
 .friendly-link-item:hover .friendly-link-sitename {

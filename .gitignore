@@ -41,3 +41,4 @@ sitemap.xml
 src/test/java/top/imwonder/myblog/experiment/
 src/test/java/top/imwonder/myblog/record/
 testBiliHeader.json
+nginx.config

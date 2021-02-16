@@ -1,8 +1,8 @@
 /*
  * @Author: Wonder2019 
  * @Date: 2020-05-02 17:59:25 
- * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-08-10 10:13:15
+ * @Last Modified by: Wonder2020
+ * @Last Modified time: 2021-02-16 16:28:47
  */
 package top.imwonder.myblog.controller;
 
@@ -67,8 +67,8 @@ public abstract class AbstractUiController {
                     new Object[] { "bg" });
             for (OssResource item : AbstractUiController.orList) {
                 ors.calcPath(item);
-                item.setPath("/assets/img/bg/img2.jpg");
-                item.setBz("/assets/img/bg/img2blur.webp");
+                // item.setPath("/assets/img/bg/img2.jpg");
+                // item.setBz("/assets/img/bg/img2blur.webp");
             }
         }
         model.addAttribute("bgList", AbstractUiController.orList);

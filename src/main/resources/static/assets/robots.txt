@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://www.imwonder.top/sitemap.xml
+Sitemap: https://www.imwonder.top/sitemap.xml
