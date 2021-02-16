@@ -26,7 +26,7 @@ import top.imwonder.myblog.services.FriendlyLinkService;
 import top.imwonder.myblog.services.OssResourceService;
 import top.imwonder.myblog.util.SpiderUtil;
 
-public abstract class AbstractController {
+public abstract class AbstractUiController {
 
     protected Logger log = LoggerFactory.getLogger(getClass());
 
@@ -60,18 +60,18 @@ public abstract class AbstractController {
     }
 
     protected void initBg(Model model) {
-        long lub = AbstractController.lastUpdateBg;
+        long lub = AbstractUiController.lastUpdateBg;
         if (lub == 0 || System.currentTimeMillis() - lub > 3300000) {
-            AbstractController.lastUpdateBg = System.currentTimeMillis();
-            AbstractController.orList = orDAO.loadMore(" where w_category = ? order by w_order asc",
+            AbstractUiController.lastUpdateBg = System.currentTimeMillis();
+            AbstractUiController.orList = orDAO.loadMore(" where w_category = ? order by w_order asc",
                     new Object[] { "bg" });
-            for (OssResource item : AbstractController.orList) {
+            for (OssResource item : AbstractUiController.orList) {
                 ors.calcPath(item);
                 item.setPath("/assets/img/bg/img2.jpg");
                 item.setBz("/assets/img/bg/img2blur.webp");
             }
         }
-        model.addAttribute("bgList", AbstractController.orList);
+        model.addAttribute("bgList", AbstractUiController.orList);
     }
 
     protected void listTag(Model model) {

@@ -6,14 +6,13 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
-import org.dom4j.Document;
-import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import top.imwonder.myblog.controller.AbstractController;
+import nu.xom.Document;
+import nu.xom.Serializer;
 import top.imwonder.myblog.dao.ArticleDAO;
 import top.imwonder.myblog.domain.Article;
 import top.imwonder.myblog.util.SiteMapUtil;
@@ -21,7 +20,7 @@ import top.imwonder.myblog.util.enumeration.ChangeFreqEnum;
 
 @Component
 @Order(value = 1)
-public class CreateSiteMapTask extends AbstractController implements CommandLineRunner {
+public class CreateSiteMapTask implements CommandLineRunner {
 
     @Autowired
     private ArticleDAO arDAO;
@@ -38,8 +37,9 @@ public class CreateSiteMapTask extends AbstractController implements CommandLine
                 SiteMapUtil.addUrl(doc, loc, article.getPostTime(), ChangeFreqEnum.WEEKLY, "0.9");
             }
             try (OutputStream os = new FileOutputStream(sitemap)) {
-                XMLWriter writer = new XMLWriter(os);
-                writer.write(doc);
+                Serializer serializer = new Serializer(os);
+                serializer.write(doc);
+                serializer.flush();
             }
         }
 

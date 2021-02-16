@@ -1,4 +1,4 @@
-package top.imwonder.myblog.controller.open;
+package top.imwonder.myblog.controller.open.ui;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import top.imwonder.myblog.SystemProperties;
-import top.imwonder.myblog.controller.AbstractController;
+import top.imwonder.myblog.controller.AbstractUiController;
 import top.imwonder.myblog.dao.ArticleDAO;
 import top.imwonder.myblog.dao.ArticleResourceDAO;
 import top.imwonder.myblog.dao.TagDAO;
@@ -24,7 +24,7 @@ import top.imwonder.myblog.services.OssResourceService;
 
 @RequestMapping(value = "/blog")
 @Controller("blogDetailsController")
-public class BlogDetailsController extends AbstractController {
+public class BlogDetailsController extends AbstractUiController {
 
     @Autowired
     private ArticleDAO arDAO;
@@ -43,7 +43,7 @@ public class BlogDetailsController extends AbstractController {
 
     @RequestMapping(value = { "/api/updateIcon" })
     public String upicon(Model model) {
-        sp.reload();
+        sp.getIconfontUrl(true);
         model.addAttribute("ok", "fun!");
         return "json";
     }

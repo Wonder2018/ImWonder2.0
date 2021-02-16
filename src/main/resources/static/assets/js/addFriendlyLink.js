@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-08-06 10:44:56
  * @Last Modified by: Wonder2020
- * @Last Modified time: 2021-02-12 19:57:27
+ * @Last Modified time: 2021-02-16 12:19:45
  */
 
 /**
@@ -295,7 +295,7 @@ let iconInfo = {
 	},
 	iconUrl: {
 		label: "关键信息：",
-		placeholder: "图片地址",
+		placeholder: "图片地址（可使用网站 favicon 文件）",
 		type: "text",
 	},
 	file: {

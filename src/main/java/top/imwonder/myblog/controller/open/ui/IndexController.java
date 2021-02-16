@@ -4,7 +4,7 @@
  * @Last Modified by: Wonder2020
  * @Last Modified time: 2021-01-30 20:20:30
  */
-package top.imwonder.myblog.controller.open;
+package top.imwonder.myblog.controller.open.ui;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import top.imwonder.myblog.controller.AbstractController;
+import top.imwonder.myblog.controller.AbstractUiController;
 import top.imwonder.myblog.dao.ArticleDAO;
 import top.imwonder.myblog.dao.TagDAO;
 import top.imwonder.myblog.domain.Article;
@@ -22,7 +22,7 @@ import top.imwonder.myblog.domain.Tag;
 import top.imwonder.myblog.services.OssResourceService;
 
 @Controller("openSourceIndexController")
-public class IndexController extends AbstractController {
+public class IndexController extends AbstractUiController {
 
     @Autowired
     private ArticleDAO articleDAO;

@@ -21,6 +21,7 @@ import top.imwonder.myblog.domain.OssResource;
 import top.imwonder.myblog.exception.WonderException;
 import top.imwonder.myblog.pojo.FriendlyLinkForm;
 import top.imwonder.myblog.services.FriendlyLinkService;
+import top.imwonder.myblog.services.OssApiService.FileInfo;
 import top.imwonder.myblog.services.OssResourceService;
 import top.imwonder.util.IdUtil;
 
@@ -40,7 +41,7 @@ public class FriendlyLinkServiceImpl implements FriendlyLinkService {
     @Autowired
     private OssResourceService ors;
 
-    private Pattern biliHeaderUrl = Pattern.compile(
+    private static final Pattern BILI_HEAD_PTN = Pattern.compile(
             "[\\s\\S]*\"face\":\"(http(s)?://([\\w\\d-]+)(.[\\w\\d-]+)+/?([\\w\\d-]+/)*([\\w\\d.]+))\"[\\S\\s]*");
 
     private static final String PAGE_CAUSE_FORMAT = " where w_disabled = 0 order by w_order asc, w_protocol asc, w_add_time asc limit %d, %d";
@@ -64,7 +65,7 @@ public class FriendlyLinkServiceImpl implements FriendlyLinkService {
     @Transactional
     public FriendlyLink addFriendlyLinkOpen(FriendlyLinkForm flf) {
         FriendlyLink fl = parseFromOpenForm(flf);
-        if(flf.getIconType()==null){
+        if (flf.getIconType() == null) {
             flfDAO.insert(fl);
             return fl;
         }
@@ -86,17 +87,28 @@ public class FriendlyLinkServiceImpl implements FriendlyLinkService {
                 break;
         }
         OssResource or = creatOssResource(fl);
+        FileInfo fi = null;
         fl.setIcon(or.getId());
         if (url == null) {
             MultipartFile icon = (MultipartFile) flf.getIcon();
             try {
                 byte[] ib = icon.getBytes();
-                ors.uploadResource(ib, or);
+                fi = ors.uploadResource(ib, or);
             } catch (IOException e) {
                 throw new WonderException("500", "保存文件时发生错误！");
             }
+        } else {
+            ors.fetchResourceByUrl(url, or);
+        }
+        if (fi.getMimeType() == null) {
+            fi = ors.getFileInfo(or);
+        }
+        if (!fi.getMimeType().startsWith("image")) {
+            ors.deleteFile(or);
+            throw new WonderException("412", "获取到的文件不是可用图片！");
         }
         flfDAO.insert(fl);
+        flf.setIcon(String.format("/blog/resource/%s", or.getId()));
         return fl;
 
     }
@@ -147,7 +159,7 @@ public class FriendlyLinkServiceImpl implements FriendlyLinkService {
         }
         String userInfoApi = String.format("http://api.bilibili.com/x/space/acc/info?mid=%s", uid);
         String userInfo = restTemplate.getForObject(userInfoApi, String.class);
-        Matcher matcher = biliHeaderUrl.matcher(userInfo);
+        Matcher matcher = BILI_HEAD_PTN.matcher(userInfo);
         if (matcher.find()) {
             return matcher.group(1);
         }

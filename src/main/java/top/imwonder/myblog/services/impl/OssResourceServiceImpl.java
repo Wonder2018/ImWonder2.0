@@ -6,16 +6,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.Data;
 import top.imwonder.myblog.Env;
+import top.imwonder.myblog.SystemProperties;
 import top.imwonder.myblog.dao.OssResourceDAO;
 import top.imwonder.myblog.domain.OssResource;
 import top.imwonder.myblog.services.OssApiService;
 import top.imwonder.myblog.services.OssResourceService;
+import top.imwonder.myblog.services.OssApiService.FileInfo;
 
 @Service
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class OssResourceServiceImpl implements OssResourceService {
 
     @Autowired
@@ -26,6 +32,9 @@ public class OssResourceServiceImpl implements OssResourceService {
 
     @Autowired
     private OssApiService oas;
+
+    @Autowired
+    private SystemProperties sp;
 
     private static Map<String, OssResourceInfo> resource;
 
@@ -80,23 +89,47 @@ public class OssResourceServiceImpl implements OssResourceService {
     }
 
     @Override
-    public void uploadResource(File file, OssResource or) {
-        oas.uploadFile(file, or.getPrefix(), or.getPath());
+    @Transactional
+    public FileInfo uploadResource(File file, OssResource or) {
+        FileInfo fi = oas.uploadFile(file, getBucketName(or), or.getPath());
+        orDAO.insert(or);
+        return fi;
     }
 
     @Override
-    public void uploadResource(byte[] file, OssResource or) {
-        oas.uploadFile(file, or.getPrefix(), or.getPath());
+    @Transactional
+    public FileInfo uploadResource(byte[] file, OssResource or) {
+        FileInfo fi = oas.uploadFile(file, getBucketName(or), or.getPath());
+        orDAO.insert(or);
+        return fi;
     }
 
     @Override
-    public void fetchResourceByUrl(String url, OssResource or) {
-        oas.fetchByUrl(url, or.getPrefix(), or.getPath());
+    @Transactional
+    public FileInfo fetchResourceByUrl(String url, OssResource or) {
+        FileInfo fi = oas.fetchByUrl(url, getBucketName(or), or.getPath());
+        orDAO.insert(or);
+        return fi;
+    }
+
+    @Override
+    public FileInfo getFileInfo(OssResource or) {
+        return oas.getFileInfo(getBucketName(or), or.getPath());
+    }
+
+    @Override
+    public void deleteFile(OssResource or) {
+        oas.deleteFile(getBucketName(or), or.getPath());
+        orDAO.delete(or.getId());
     }
 
     @Override
     public int countType(String category) {
         return orDAO.countBy(" where w_category=?", "w_id", category);
+    }
+
+    private String getBucketName(OssResource or) {
+        return sp.getBucket(or.getPrefix());
     }
 
     @Data
