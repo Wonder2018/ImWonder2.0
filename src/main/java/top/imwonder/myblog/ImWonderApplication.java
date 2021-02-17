@@ -14,8 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableAutoConfiguration
 @ComponentScan
+@EnableAutoConfiguration
 @SpringBootApplication(exclude = QuartzAutoConfiguration.class)
 public class ImWonderApplication {
 

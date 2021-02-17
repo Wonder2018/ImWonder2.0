@@ -7,6 +7,8 @@
 		<link rel="stylesheet" href="/assets/css/public/highlight/googlecode.css" class="comcss" />
 		<link rel="stylesheet" href="/assets/css/addFriendlyLink.css" class="pricss" />
 		<script th:inline="JavaScript" class="initjson">
+			window._chn = /*[[${_csrf.headerName}]]*/ "cpn";
+			window._ctv = /*[[${_csrf.token}]]*/ "cpv";
 			window.isRobot = /*[[${isRobot}]]*/ false;
 			window.bgList = /*[[${bgList}]]*/ [];
 			/*[[${tagList}]]*/
@@ -45,23 +47,26 @@
 									<li>
 										注意事项
 										<p>
-											你可以通过此页面自助填写信息将你的网站添加到本站友情链接列表，本站友情链接列表排序规则为：
-											<br />
-											a: 使用
+											你可以通过此页面自助填写信息将你的网站添加到本站友情链接列表，详细规则如下：
+											<br /><br>
+											a. 关于排序: 使用
 											<code>https</code>
 											协议的网站排在使用
 											<code>http</code>
 											协议的网站之前，更早申请的网站排在较后申请的网站之前。你也可以通过
 											<a href="mailto:wonder6613@mail.imwonder.top"><code>联系站长</code></a>
 											来调整你的网站排序。
-											<br />
-											b：在收到申请后，你的网站链接将立即添加到本站友情链接一栏，本站也将在 15天 内，每间隔 5天 检查你提交的网站页面是否包含 Url “https://www.imwonder.top”，超过
-											15天 未验证成功将降低你网站的排序。
-											<br />
+											<br /><br>
+											b.<span style="color: blue;">（当前处于开放申请阶段，不设任何限制！申请成功后你的网站链接将立即出现在本站下方“友情链接区域！”）</span><span style="text-decoration:line-through;">在收到申请后，你的网站链接将立即添加到本站友情链接一栏，本站也将在 15天 内，每间隔 5天 检查你提交的网站页面是否包含 Url “https://www.imwonder.top”，超过
+											15天 未验证成功将降低你网站的排序。</span>
+											<br /><br>
+											c. 表格中只有站点地址和标题是必填项，如果没有设置网站图标，则默认使用本站图标。你也可以直接填写你网站的favicon文件链接作为图标。
+											<br><br>
+											d. 如果选择上传图标文件，其大小不能超过3m，上传后服务器可能对问件进行压制以适应移动端浏览（给你省流量）。<br>
 										</p>
 									</li>
 									<li>
-										填写表单（未正式启用！）
+										填写表单
 										<form action="" method="" class="friendly-link-form">
 											<div class="form-group">
 												<label for="url">站点地址：</label>
@@ -118,7 +123,7 @@
 												</span>
 											</div>
 											<div class="form-group">
-												<button class="btn btn-common" type="button" id="submitBtn">提交</button>
+												<button class="btn btn-common hvr-fade" type="button" id="submitBtn">提交</button>
 											</div>
 										</form>
 									</li>

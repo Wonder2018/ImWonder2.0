@@ -382,6 +382,7 @@ body,
 }
 
 .friendly-link-list {
+	width: 70%;
 	margin: 2em auto 4em;
 	font-size: 1.7rem;
 }
@@ -416,10 +417,12 @@ body,
 
 .friendly-link-icon {
 	width: 1em;
+	vertical-align: middle;
 }
 
 .friendly-link-sitename {
 	color: #1f1f1f;
+	vertical-align: middle;
 }
 
 .friendly-link-item:hover .friendly-link-sitename {

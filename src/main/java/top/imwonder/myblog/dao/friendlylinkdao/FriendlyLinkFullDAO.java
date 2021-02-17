@@ -12,7 +12,7 @@ public class FriendlyLinkFullDAO extends AbstractDAO<FriendlyLink> {
         domainType = FriendlyLink.class;
         tableName = "w_friendly_link";
         pkColumns = new String[] { "w_id" };
-        ckColumns = new String[] { "w_url", "w_protocol", "w_site_name", "w_icon", "w_add_time", "w_webmaster", "w_email", "w_password", "w_varified", "w_last_varified", "w_disabled" };
+        ckColumns = new String[] { "w_url", "w_protocol", "w_site_name", "w_icon", "w_add_time", "w_webmaster", "w_email", "w_password", "w_varified", "w_last_varified", "w_disabled", "w_order" };
         init();
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -48,5 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/wonderlandsadmin/**").authenticated();
         http.authorizeRequests().antMatchers("/assets/**/admin/**").authenticated();
         http.authorizeRequests().antMatchers("/**").permitAll();
+        http.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
     }
 }

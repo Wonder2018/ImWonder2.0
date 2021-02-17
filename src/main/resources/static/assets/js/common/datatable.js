@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-08-19 10:09:14
  * @Last Modified by: Wonder2020
- * @Last Modified time: 2021-01-29 16:41:22
+ * @Last Modified time: 2021-02-12 19:55:11
  */
 
 let datatable = {
@@ -398,7 +398,6 @@ class RESTBody {
 		if (this.enableCsrf) {
 			this.header[this.csrfKey] = this.csrfToken;
 		}
-		this.header["dsds"] = "dfdfdf";
 		return this.header;
 	}
 }

@@ -1,4 +1,4 @@
-package top.imwonder.myblog.controller.admin;
+package top.imwonder.myblog.controller.admin.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import top.imwonder.myblog.controller.AbstractController;
 import top.imwonder.myblog.domain.Menu;
 import top.imwonder.myblog.services.admin.MenuService;
 import top.imwonder.util.StringUtil;
@@ -19,7 +18,7 @@ import top.imwonder.util.StringUtil;
 @Controller("menuControler")
 @RequestMapping("/wonderlandsadmin/api/menus")
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class MenuController extends AbstractController {
+public class MenuController {
 
     @Autowired
     private MenuService ms;

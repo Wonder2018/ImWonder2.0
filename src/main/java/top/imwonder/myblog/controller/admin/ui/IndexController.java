@@ -1,16 +1,16 @@
-package top.imwonder.myblog.controller.admin;
+package top.imwonder.myblog.controller.admin.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import top.imwonder.myblog.controller.AbstractController;
+import top.imwonder.myblog.controller.AbstractUiController;
 import top.imwonder.myblog.services.admin.MenuService;
 
 @Controller("adminIndexControler")
 @RequestMapping(value = "/wonderlandsadmin")
-public class IndexController extends AbstractController {
+public class IndexController extends AbstractUiController {
 
     @Autowired
     private MenuService ms;

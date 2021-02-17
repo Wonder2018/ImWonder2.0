@@ -4,7 +4,7 @@
  * @Last Modified by: Wonder2020
  * @Last Modified time: 2021-01-30 20:20:30
  */
-package top.imwonder.myblog.controller.open;
+package top.imwonder.myblog.controller.open.ui;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -14,15 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import top.imwonder.myblog.controller.AbstractController;
+import top.imwonder.myblog.controller.AbstractUiController;
 import top.imwonder.myblog.dao.ArticleDAO;
 import top.imwonder.myblog.dao.TagDAO;
 import top.imwonder.myblog.domain.Article;
 import top.imwonder.myblog.domain.Tag;
-import top.imwonder.myblog.services.OssService;
+import top.imwonder.myblog.services.OssResourceService;
 
 @Controller("openSourceIndexController")
-public class IndexController extends AbstractController {
+public class IndexController extends AbstractUiController {
 
     @Autowired
     private ArticleDAO articleDAO;
@@ -31,7 +31,7 @@ public class IndexController extends AbstractController {
     private TagDAO tagDAO;
 
     @Autowired
-    private OssService os;
+    private OssResourceService ors;
 
     @RequestMapping(value = { "/", "index", "index.html" })
     public String index(Model model) throws UnsupportedEncodingException {
@@ -39,7 +39,7 @@ public class IndexController extends AbstractController {
         String sql = "select b.w_id, b.w_name, b.w_icon from w_articl_tag a left join w_tag b on a.w_tag_id = b.w_id where a.w_article_id = ?";
         for (Article item : articles) {
             if (item.getFaceId() != null) {
-                item.setFaceId(os.getUrlById(item.getFaceId()));
+                item.setFaceId(ors.getUrlById(item.getFaceId()));
             }
             List<Tag> tags = tagDAO.loadMoreBySQL(sql, new Object[] { item.getId() });
             item.setTags(tags);
@@ -57,7 +57,7 @@ public class IndexController extends AbstractController {
         String sql = "select b.w_id, b.w_name, b.w_icon from w_articl_tag a left join w_tag b on a.w_tag_id = b.w_id where a.w_article_id = ?";
         for (Article item : articles) {
             if (item.getFaceId() != null) {
-                item.setFaceId(os.getUrlById(item.getFaceId()));
+                item.setFaceId(ors.getUrlById(item.getFaceId()));
             }
             List<Tag> tags = tagDAO.loadMoreBySQL(sql, new Object[] { item.getId() });
             item.setTags(tags);

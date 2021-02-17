@@ -1,8 +1,8 @@
 /*
  * @Author: Wonder2019 
  * @Date: 2020-05-02 17:59:25 
- * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-08-10 10:13:15
+ * @Last Modified by: Wonder2020
+ * @Last Modified time: 2021-02-16 16:28:47
  */
 package top.imwonder.myblog.controller;
 
@@ -23,10 +23,10 @@ import top.imwonder.myblog.SystemProperties;
 import top.imwonder.myblog.dao.OssResourceDAO;
 import top.imwonder.myblog.domain.OssResource;
 import top.imwonder.myblog.services.FriendlyLinkService;
-import top.imwonder.myblog.services.OssService;
+import top.imwonder.myblog.services.OssResourceService;
 import top.imwonder.myblog.util.SpiderUtil;
 
-public abstract class AbstractController {
+public abstract class AbstractUiController {
 
     protected Logger log = LoggerFactory.getLogger(getClass());
 
@@ -34,7 +34,7 @@ public abstract class AbstractController {
     private OssResourceDAO orDAO;
 
     @Autowired
-    private OssService ossService;
+    private OssResourceService ors;
 
     @Autowired
     private FriendlyLinkService flService;
@@ -60,18 +60,18 @@ public abstract class AbstractController {
     }
 
     protected void initBg(Model model) {
-        long lub = AbstractController.lastUpdateBg;
+        long lub = AbstractUiController.lastUpdateBg;
         if (lub == 0 || System.currentTimeMillis() - lub > 3300000) {
-            AbstractController.lastUpdateBg = System.currentTimeMillis();
-            AbstractController.orList = orDAO.loadMore(" where w_category = ? order by w_order asc",
+            AbstractUiController.lastUpdateBg = System.currentTimeMillis();
+            AbstractUiController.orList = orDAO.loadMore(" where w_category = ? order by w_order asc",
                     new Object[] { "bg" });
-            for (OssResource item : AbstractController.orList) {
-                ossService.calcPath(item);
-                item.setPath("/assets/img/bg/img2.jpg");
-                item.setBz("/assets/img/bg/img2blur.webp");
+            for (OssResource item : AbstractUiController.orList) {
+                ors.calcPath(item);
+                // item.setPath("/assets/img/bg/img2.jpg");
+                // item.setBz("/assets/img/bg/img2blur.webp");
             }
         }
-        model.addAttribute("bgList", AbstractController.orList);
+        model.addAttribute("bgList", AbstractUiController.orList);
     }
 
     protected void listTag(Model model) {

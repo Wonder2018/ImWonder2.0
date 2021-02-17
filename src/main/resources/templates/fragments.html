@@ -188,7 +188,7 @@
 				<ul class="friendly-link-list">
 					<li th:each="fl : ${friendlyLinkList}" class="friendly-link-item hvr-radial-out" th:title="${fl.siteName}">
 						<a th:href="${fl.url}" href="#">
-							<img th:src="${fl.icon}? ${fl.icon}:'/favicon.ico'" src="/favicon.ico" class="friendly-link-icon" />
+							<img th:src="${fl.icon}?|/blog/resource/${fl.icon}|:'/favicon.ico'" src="/favicon.ico" class="friendly-link-icon" />
 							<span class="friendly-link-sitename" th:text="${fl.siteName}">I'm Wonder</span>
 						</a>
 					</li>
@@ -210,7 +210,7 @@
 					<br />
 					AllRight Reserved
 					<br />
-					<a href="http://beian.miit.gov.cn" target="view_window">鄂ICP备18015012号</a>
+					<a href="https://beian.miit.gov.cn" target="view_window">鄂ICP备18015012号</a>
 				</div>
 			</footer>
 		</div>

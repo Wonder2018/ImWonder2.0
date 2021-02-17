@@ -69,12 +69,6 @@ input[type="file"].form-control {
 	transition-property: none;
 }
 
-input#file-upload-button {
-	background-color: #66ccff;
-	border-radius: 5px;
-	color: #ccc;
-}
-
 .control-group.onerror > input.form-control,
 .control-group.file-group.onerror {
 	border-color: red;
@@ -153,8 +147,28 @@ select.form-control {
 	background-color: #66ccff;
 }
 
+.btn-common.hvr-fade:hover{
+	background-color: #50d634;
+}
+
 @media screen and (max-width: 500px) {
 	.blog-content {
 		font-size: 1.3rem;
+	}
+	.form-group > label {
+		display: none;
+	}
+	input.form-control,
+	select.form-control {
+		width: 100%;
+		margin-left: -1em;
+	}
+	.form-control + .tips-box::before {
+		right: 0.5em;
+		top: -0.3em;
+	}
+	.form-control + .tips-box::after {
+		top: 3em;
+		font-size: 1rem;
 	}
 }

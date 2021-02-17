@@ -33,6 +33,7 @@ public abstract class AbstractDAO<T> {
     protected String updateSqlWithPk;
     protected String loadOneSQL;
     protected String loadMoreSQL;
+    protected String countBySql;
 
     protected boolean insertPK = true;
 
@@ -98,6 +99,7 @@ public abstract class AbstractDAO<T> {
         buildUpdateSQL(true);
         buildLoadOneSQL();
         buildLoadMoreSQL();
+        buildCountBySQL();
     }
 
     protected void buildInsertSQL() {
@@ -175,6 +177,10 @@ public abstract class AbstractDAO<T> {
         sqlBuffer.append(" from ");
         sqlBuffer.append(tableName);
         loadMoreSQL = sqlBuffer.toString();
+    }
+
+    protected void buildCountBySQL() {
+        countBySql = String.format("select count(%s) from %s %s group by %s", "%s", tableName, "%s", "%s");
     }
 
     protected void buildWhereClause(StringBuffer buffer) {
@@ -262,6 +268,14 @@ public abstract class AbstractDAO<T> {
             }
 
         }, params);
+    }
+
+    public int countBy(String clause, String columns, Object... params) {
+        try {
+            return jt.queryForObject(String.format(countBySql, columns, clause, columns), Integer.class, params);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     protected Object[] getInsertParamValues(T t) {
