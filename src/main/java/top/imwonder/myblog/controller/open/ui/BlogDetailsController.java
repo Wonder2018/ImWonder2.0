@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import top.imwonder.myblog.domain.ArticleResource;
 import top.imwonder.myblog.domain.Tag;
 import top.imwonder.myblog.exception.WonderResourceNotFoundException;
 import top.imwonder.myblog.services.OssResourceService;
+import top.imwonder.myblog.util.SpiderUtil;
 
 @RequestMapping(value = "/blog")
 @Controller("blogDetailsController")
@@ -31,6 +33,9 @@ public class BlogDetailsController extends AbstractUiController {
 
     @Autowired
     private TagDAO tagDAO;
+
+    @Autowired
+    private JdbcTemplate jt;
 
     @Autowired
     private ArticleResourceDAO arrDAO;
@@ -59,15 +64,13 @@ public class BlogDetailsController extends AbstractUiController {
         try {
             art = arDAO.loadOne(blogId);
             art.setMarkdownId(ors.getUrlById(art.getMarkdownId()));
-            List<Tag> tags = tagDAO.loadMoreBySQL(sql, new Object[] { art.getId() });
+            List<Tag> tags = tagDAO.loadMoreBySQL(sql, art.getId());
             art.setTags(tags);
-            List<ArticleResource> resourceList = arrDAO.loadMore(" where w_article_id = ? order by w_order asc",
-                    new Object[] { blogId });
+            List<ArticleResource> resourceList = arrDAO.loadMore(" where w_article_id = ? order by w_order asc", blogId);
             art.setResourceList(resourceList);
             String blogTag = String.format("-%s-", blogId);
-            if (readList.indexOf(blogTag) == -1) {
-                // jt.update("update w_article set w_read = ? where w_id = ?", new Object[] {
-                // art.getRead() + 1, blogId });
+            if (readList.indexOf(blogTag) == -1 && !SpiderUtil.isSpider(req.getHeader("User-Agent"))) {
+                jt.update("update w_article set w_read = ? where w_id = ?", art.getRead() + 1, blogId);
                 readList += blogTag;
                 req.getSession().setAttribute("readList", readList);
             }

@@ -57,14 +57,14 @@ public abstract class AbstractUiController {
         String ua = req.getHeader("User-Agent");
         model.addAttribute("isRobot", SpiderUtil.isSpider(ua));
         model.addAttribute("iconfontUrl", sp.getIconfontUrl());
+        listFriendlyLink(model);
     }
 
     protected void initBg(Model model) {
         long lub = AbstractUiController.lastUpdateBg;
         if (lub == 0 || System.currentTimeMillis() - lub > 3300000) {
             AbstractUiController.lastUpdateBg = System.currentTimeMillis();
-            AbstractUiController.orList = orDAO.loadMore(" where w_category = ? order by w_order asc",
-                    new Object[] { "bg" });
+            AbstractUiController.orList = orDAO.loadMore(" where w_category = ? order by w_order asc", "bg" );
             for (OssResource item : AbstractUiController.orList) {
                 ors.calcPath(item);
                 // item.setPath("/assets/img/bg/img2.jpg");

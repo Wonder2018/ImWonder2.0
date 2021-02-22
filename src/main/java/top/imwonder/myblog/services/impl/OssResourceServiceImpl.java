@@ -43,10 +43,10 @@ public class OssResourceServiceImpl implements OssResourceService {
             resource = new HashMap<>();
         }
         OssResourceInfo res = resource.get(orId);
-        if (res != null) {
+        if (res != null && System.currentTimeMillis() - res.getLastUpdate() < res.getTimeout()) {
             return res.getPath();
         }
-        List<OssResource> ors = orDAO.loadMore("where w_id =?", new Object[] { orId });
+        List<OssResource> ors = orDAO.loadMore("where w_id =?", orId);
         if (!ors.isEmpty()) {
             calcPath(ors.get(0));
             return ors.get(0).getPath();

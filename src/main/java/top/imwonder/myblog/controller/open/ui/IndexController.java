@@ -41,16 +41,15 @@ public class IndexController extends AbstractUiController {
             if (item.getFaceId() != null) {
                 item.setFaceId(ors.getUrlById(item.getFaceId()));
             }
-            List<Tag> tags = tagDAO.loadMoreBySQL(sql, new Object[] { item.getId() });
+            List<Tag> tags = tagDAO.loadMoreBySQL(sql, item.getId());
             item.setTags(tags);
         }
         model.addAttribute("articles", articles);
         initBg(model);
         listTag(model);
-        listFriendlyLink(model);
         return "index";
     }
-    
+
     @RequestMapping(value = { "addFriendlyLink", "addFriendlyLink.html" })
     public String addFriendlyLink(Model model) throws UnsupportedEncodingException {
         List<Article> articles = articleDAO.loadMore(" order by w_post_time desc");
@@ -59,13 +58,12 @@ public class IndexController extends AbstractUiController {
             if (item.getFaceId() != null) {
                 item.setFaceId(ors.getUrlById(item.getFaceId()));
             }
-            List<Tag> tags = tagDAO.loadMoreBySQL(sql, new Object[] { item.getId() });
+            List<Tag> tags = tagDAO.loadMoreBySQL(sql, item.getId());
             item.setTags(tags);
         }
         model.addAttribute("articles", articles);
         initBg(model);
         listTag(model);
-        listFriendlyLink(model);
         return "addFriendlyLink";
     }
 

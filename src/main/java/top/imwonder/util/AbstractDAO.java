@@ -213,10 +213,6 @@ public abstract class AbstractDAO<T> {
         return jt.update(insertSQL, getInsertParamValues(t));
     }
 
-    public int delete(Object id) {
-        return delete(new Object[] { id });
-    }
-
     public int delete(Object... params) {
         return jt.update(deleteSQL, params);
     }
@@ -242,10 +238,6 @@ public abstract class AbstractDAO<T> {
                 return result;
             }
         }, params);
-    }
-
-    public T loadOne(Object id) {
-        return loadOne(new Object[] { id });
     }
 
     public T loadOne(Object... params) {
