@@ -2,7 +2,7 @@
  * @Author: Wonder2019
  * @Date: 2020-08-06 10:44:56
  * @Last Modified by: Wonder2020
- * @Last Modified time: 2021-02-16 16:07:25
+ * @Last Modified time: 2021-03-13 17:08:40
  */
 
 /**
@@ -50,25 +50,25 @@ function initListener(progressId) {
  */
 function initAjaxSubmit(progressId) {
 	submitBtn.addEventListener("click", () => {
-		$(submitBtn).attr("disabled",true)
+		$(submitBtn).attr("disabled", true);
 		submitBtn.innerText = "努力提交ing。。。";
 		$(".friendly-link-form").ajaxSubmit({
 			url: "/api/addFriendlyLink",
 			type: "post",
 			dataType: "json",
 			headers: hds,
-			beforeSubmit(values) {
+			beforeSubmit: function (values) {
 				let result = true;
 				console.log(values);
 				for (let value of values) {
 					console.log(value);
 					console.log;
-					if(!value.value){
-						if(value.required){
+					if (!value.value) {
+						if (value.required) {
 							setError(controlGroups[value.name], "此项为必填项！");
 							result = false;
 							continue;
-						}else{
+						} else {
 							continue;
 						}
 					}
@@ -88,21 +88,21 @@ function initAjaxSubmit(progressId) {
 					}
 				}
 				if (!result) {
-					$(submitBtn).attr("disabled",false)
+					$(submitBtn).attr("disabled", false);
 					submitBtn.innerText = "提交";
 				}
 				return result;
 			},
-			error(a, b, c, d) {
+			error: function (a, b, c, d) {
 				console.log("error", a, b, c, d);
 				alert("出错了！(ノへ￣、)\n请联系管理员解决。。。");
-				$(submitBtn).attr("disabled",false)
+				$(submitBtn).attr("disabled", false);
 				submitBtn.innerText = "提交";
 			},
-			success(data) {
+			success: function (data) {
 				if (data.code && data.code != "200") {
 					alert("出错了！(ノへ￣、)\n请联系管理员解决。。。\n错误详情：" + data.msg);
-					$(submitBtn).attr("disabled",false)
+					$(submitBtn).attr("disabled", false);
 					submitBtn.innerText = "提交";
 					return "error";
 				}
@@ -207,7 +207,7 @@ let controlGroups = {};
 
 // 表单验证器
 let validator = {
-	url(value) {
+	url: function (value) {
 		if (value.length > 32) {
 			// 超过字长，显示异常
 			return { code: "err", msg: "url 过长！" };
@@ -225,7 +225,7 @@ let validator = {
 			return { code: "err", msg: "请输入正确的Url" };
 		}
 	},
-	siteName(value) {
+	siteName: function (value) {
 		if (value.length < 3) {
 			return { code: "err", msg: "网站标题过短" };
 		}
@@ -237,13 +237,13 @@ let validator = {
 		}
 		return { code: "ok", msg: "" };
 	},
-	bili(value) {
+	bili: function (value) {
 		if (!isNaN(value) && value.indexOf("e") < 0) {
 			return { code: "ok", msg: "好像没什么问题。" };
 		}
 		return { code: "err", msg: "UID 可以在B站个人中心看到！" };
 	},
-	qq(value) {
+	qq: function (value) {
 		if (!isNaN(value) && value.indexOf("e") < 0) {
 			if (value.length < 4) {
 				return { code: "err", msg: "真的有这么靓的靓号吗？" };
@@ -255,31 +255,31 @@ let validator = {
 		}
 		return { code: "err", msg: "这不是QQ号吧。。。" };
 	},
-	github(value) {
+	github: function (value) {
 		if (/\w+/.test(value)) {
 			return { code: "ok", msg: "好像没什么问题。" };
 		}
 		return { code: "err", msg: "没有这么秀的用户名吧。。" };
 	},
-	iconUrl(value) {
+	iconUrl: function (value) {
 		if (regIconUrl.test(value)) {
 			return { code: "ok", msg: "好像没什么问题。" };
 		}
 		return { code: "err", msg: "请输入正确的，完整的url" };
 	},
-	file(value) {
+	file: function (value) {
 		if (value) {
 			filePlaceholder.innerText = value.split(/\\|\//).pop();
 			return { code: "ok", msg: "" };
 		}
 	},
-	master(value) {
+	master: function (value) {
 		if (value.length > 20) {
 			return { code: "err", msg: "名字太长了，太长了鸭！！！" };
 		}
 		return { code: "ok", msg: "这个名字真不啜！" };
 	},
-	email(value) {
+	email: function (value) {
 		if (value.length > 32) {
 			return { code: "err", msg: "邮箱太长了！！！" };
 		}
@@ -288,7 +288,7 @@ let validator = {
 		}
 		return { code: "err", msg: "这。。不是邮箱吧。" };
 	},
-	pwd(value) {
+	pwd: function (value) {
 		if (value.length > 0) {
 			return { code: "ok", msg: "你的密码将使用BCrypt加盐加密保存！" };
 		}
@@ -328,7 +328,7 @@ let iconInfo = {
 // 控件监听器
 let listener = {
 	url: {
-		keyup() {
+		keyup: function () {
 			let url = document.querySelector(`input[id="url"]`).value.trim();
 			let controlGroup = controlGroups.url;
 			if (!url) {
@@ -339,7 +339,7 @@ let listener = {
 		},
 	},
 	siteName: {
-		keyup() {
+		keyup: function () {
 			let siteName = document.querySelector(`input[id="siteName"]`).value.trimStart();
 			let controlGroup = controlGroups.siteName;
 			if (!siteName) {
@@ -350,7 +350,7 @@ let listener = {
 		},
 	},
 	iconType: {
-		change() {
+		change: function () {
 			let iconType = document.querySelector(`select[id="iconType"]`);
 			let format = iconInfo[iconType.value];
 			let controlGroup = controlGroups.icon;
@@ -376,7 +376,7 @@ let listener = {
 		},
 	},
 	icon: {
-		keyup() {
+		keyup: function () {
 			let iconType = document.querySelector(`select[id="iconType"]`).value;
 			if (iconType == "file") {
 				return;
@@ -386,7 +386,7 @@ let listener = {
 			let retBody = validator[iconType](iv);
 			tipsSetter(controlGroup, retBody);
 		},
-		change() {
+		change: function () {
 			let iconType = document.querySelector(`select[id="iconType"]`).value;
 			let controlGroup = controlGroups.icon;
 			let iv = icon.value;
@@ -399,7 +399,7 @@ let listener = {
 		},
 	},
 	master: {
-		keyup() {
+		keyup: function () {
 			let master = document.querySelector(`input[id="master"]`).value.trimStart();
 			let controlGroup = controlGroups.master;
 			if (!master) {
@@ -410,7 +410,7 @@ let listener = {
 		},
 	},
 	email: {
-		keyup() {
+		keyup: function () {
 			let email = document.querySelector(`input[id="email"]`).value.trimStart();
 			let controlGroup = controlGroups.email;
 			if (!email) {
@@ -421,7 +421,7 @@ let listener = {
 		},
 	},
 	pwd: {
-		keyup() {
+		keyup: function () {
 			let pwd = document.querySelector(`input[id="pwd"]`).value.trimStart();
 			let controlGroup = controlGroups.pwd;
 			if (!pwd) {

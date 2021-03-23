@@ -26,6 +26,8 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import top.imwonder.myblog.Env;
 import top.imwonder.myblog.enumeration.EnumConverterFactory;
+import top.touchface.md2x.Md2x;
+import top.touchface.md2x.entity.Options;
 
 @Configuration
 @EnableWebMvc
@@ -65,6 +67,12 @@ public class WebConfig implements WebMvcConfigurer {
         return new Gson();
     }
 
+    // md2x工具
+    @Bean
+    public Md2x md2x() {
+        return new Md2x(new Options());
+    }
+
     // 七牛云认证
     @Bean
     public Auth auth(Env env) {
@@ -92,7 +100,7 @@ public class WebConfig implements WebMvcConfigurer {
     // 通用http客户端
     @Bean
     public RestTemplate restTemplate() {
-    return new RestTemplate();
+        return new RestTemplate();
     }
 
     // @Bean
