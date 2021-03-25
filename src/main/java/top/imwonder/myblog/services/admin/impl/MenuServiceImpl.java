@@ -29,7 +29,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu updateMenu(Menu menu) {
-        Menu old = mDAO.loadOne(menu.getId());
+        Menu old = mDAO.loadOneByPrimaryKey(menu.getId());
         old.setHref(menu.getHref());
         old.setIcon(menu.getIcon());
         old.setName(menu.getName());

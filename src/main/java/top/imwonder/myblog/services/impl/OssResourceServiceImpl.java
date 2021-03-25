@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -17,8 +19,9 @@ import top.imwonder.myblog.SystemProperties;
 import top.imwonder.myblog.dao.OssResourceDAO;
 import top.imwonder.myblog.domain.OssResource;
 import top.imwonder.myblog.services.OssApiService;
-import top.imwonder.myblog.services.OssResourceService;
 import top.imwonder.myblog.services.OssApiService.FileInfo;
+import top.imwonder.myblog.services.OssResourceService;
+import top.imwonder.myblog.services.RedisService;
 
 @Service
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -36,56 +39,20 @@ public class OssResourceServiceImpl implements OssResourceService {
     @Autowired
     private SystemProperties sp;
 
-    private static Map<String, OssResourceInfo> resource;
+    @Resource
+    private RedisService<OssResourceInfo> redisService;
 
+    @Override
     public String getUrlById(String orId) {
-        if (resource == null) {
-            resource = new HashMap<>();
-        }
-        OssResourceInfo res = resource.get(orId);
-        if (res != null && System.currentTimeMillis() - res.getLastUpdate() < res.getTimeout()) {
-            return res.getPath();
-        }
-        List<OssResource> ors = orDAO.loadMore("where w_id =?", orId);
-        if (!ors.isEmpty()) {
-            calcPath(ors.get(0));
-            return ors.get(0).getPath();
-        }
-        return "";
+        return tryToFindOssResourceInfo(orId).getPath();
     }
 
-    public void calcPath(OssResource or) {
-        if (resource == null) {
-            resource = new HashMap<>();
-        }
-        OssResourceInfo res = resource.get(or.getId());
-        if (res == null || System.currentTimeMillis() - res.getLastUpdate() > res.getTimeout()) {
-            if (res == null) {
-                res = new OssResourceInfo();
-            }
-            String prefix = or.getPrefix();
-            String fileName = or.getPath();
-            String finalUrl = oas.authUrl(getBaseUrl(prefix, fileName), env.getOssExpireInSeconds());
-            res.setPath(finalUrl);
-            res.setLastUpdate(System.currentTimeMillis());
-            res.setTimeout(3300000);
-            switch (or.getCategory()) {
-                case "bg":
-                    fileName = fileName.replace(".webp", "blur.webp");
-                    String blurUrl = oas.authUrl(getBaseUrl(prefix, fileName), env.getOssExpireInSeconds());
-                    res.setBz(blurUrl);
-                    break;
-                default:
-                    break;
-            }
-            resource.put(or.getId(), res);
-        }
-        or.setPath(res.getPath());
-        or.setBz(res.getBz());
-    }
-
-    private String getBaseUrl(String prefix, String fileName) {
-        return String.format("%s://%s.%s/%s", env.getOssProtocol(), prefix, env.getOssHostSuffix(), fileName);
+    @Override
+    public OssResource calcPath(OssResource or) {
+        OssResourceInfo ori = tryToFindOssResourceInfo(or);
+        or.setPath(ori.getPath());
+        or.setBz(ori.getBz());
+        return or;
     }
 
     @Override
@@ -132,11 +99,46 @@ public class OssResourceServiceImpl implements OssResourceService {
         return sp.getBucket(or.getPrefix());
     }
 
+    private synchronized OssResourceInfo tryToFindOssResourceInfo(String orId) {
+        List<OssResource> ors = orDAO.loadMore("where w_id =?", orId);
+        if (!ors.isEmpty()) {
+            return tryToFindOssResourceInfo(ors.get(0));
+        }
+        return new OssResourceInfo();
+    }
+
+    private synchronized OssResourceInfo tryToFindOssResourceInfo(OssResource or) {
+        OssResourceInfo res = redisService.get(or.getId());
+        if (res != null) {
+            return res;
+        } else {
+            res = new OssResourceInfo();
+        }
+        String prefix = or.getPrefix();
+        String fileName = or.getPath();
+        long oeis = env.getOssExpireInSeconds();
+        String finalUrl = oas.authUrl(getBaseUrl(prefix, fileName), oeis);
+        switch (or.getCategory()) {
+        case "bg":
+            fileName = fileName.replace(".webp", "blur.webp");
+            String blurUrl = oas.authUrl(getBaseUrl(prefix, fileName), oeis);
+            res.setBz(blurUrl);
+            break;
+        default:
+            break;
+        }
+        res.setPath(finalUrl);
+        redisService.set(or.getId(), res, env.getResourceExpireInSeconds());
+        return res;
+    }
+
+    private String getBaseUrl(String prefix, String fileName) {
+        return String.format("%s://%s.%s/%s", env.getOssProtocol(), prefix, env.getOssHostSuffix(), fileName);
+    }
+
     @Data
-    private class OssResourceInfo {
+    private static class OssResourceInfo {
         private String path;
-        private long lastUpdate;
-        private long timeout;
         private String bz;
     }
 }

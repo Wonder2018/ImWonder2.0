@@ -68,7 +68,7 @@
 								</li>
 							</ul>
 							<a th:href="|/blog/details/${article.id}|" href="#">
-								<img th:if="${article.faceId} != null" th:src="${article.faceId}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
+								<img th:if="${article.face} != null" th:src="${article.face}" th:alt="${article.title}" class="blog-cover" src="/assets/img/bg/img1.jpg" alt="" />
 								<div th:text="${article.summary}" class="blog-abstract">Body 正文 Review 预览</div>
 								<div class="blog-readmore hvr-sweep-to-right">
 									继续阅读

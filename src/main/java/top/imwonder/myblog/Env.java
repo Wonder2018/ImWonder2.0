@@ -1,5 +1,7 @@
 package top.imwonder.myblog;
 
+import java.io.File;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,10 @@ public class Env {
     private String ossSecretKey;
     
     private Long ossExpireInSeconds;
+
+    private Long resourceExpireInSeconds;
+
+    private File articleRoot;
     
     // public File resource;
 

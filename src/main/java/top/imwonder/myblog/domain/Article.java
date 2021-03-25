@@ -1,7 +1,6 @@
 package top.imwonder.myblog.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -22,16 +21,12 @@ public class Article {
 
     private String faceId;
 
-    private String markdownId;
+    private String path;
+
+    private String keywords;
 
     private String summary;
 
     private Integer read;
-
-    private List<Tag> tags;
-
-    private String keywords;
-
-    private List<ArticleResource> resourceList;
     
 }

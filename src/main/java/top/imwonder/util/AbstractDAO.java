@@ -240,7 +240,7 @@ public abstract class AbstractDAO<T> {
         }, params);
     }
 
-    public T loadOne(Object... params) {
+    public T loadOneByPrimaryKey(Object... params) {
         return jt.query(loadOneSQL, new ResultSetExtractor<T>() {
             public T extractData(ResultSet rs) throws SQLException, DataAccessException {
                 if (rs.next())
@@ -251,7 +251,7 @@ public abstract class AbstractDAO<T> {
         }, params);
     }
 
-    public T loadOne(String clause, Object... params) {
+    public T loadOneByWhereClause(String clause, Object... params) {
         return jt.query(appendClause(loadMoreSQL, clause), new ResultSetExtractor<T>() {
             public T extractData(ResultSet rs) throws SQLException, DataAccessException {
                 if (rs.next())
