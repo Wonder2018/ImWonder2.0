@@ -35,6 +35,7 @@ build/
 target
 **/application-dev.yml
 **/application-product.yml
+src/main/resources/static/assets/fonts/icon
 src/test/java/top/imwonder/myblog/experiment/
 src/test/java/top/imwonder/myblog/record/
 wonderTmp
