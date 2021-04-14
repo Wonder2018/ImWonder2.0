@@ -1,13 +1,10 @@
 package top.imwonder.myblog;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 // @SpringBootTest
 class ApplicationTests {
 
-	@Autowired
-	private JdbcTemplate jt;
+	// @Autowired
+	// private JdbcTemplate jt;
 
 	// @Autowired
 	// private Gson gson;

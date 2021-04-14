@@ -1,9 +1,12 @@
 package top.imwonder.myblog.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import top.imwonder.util.AbstractDomain;
 
 @Data
-public class ArticleResource {
+@EqualsAndHashCode(callSuper = false)
+public class ArticleResource extends AbstractDomain {
 
     private String articleId;
 

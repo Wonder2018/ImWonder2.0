@@ -13,10 +13,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import top.imwonder.util.AbstractDomain;
 
 @Data
-public class User {
-    
+@EqualsAndHashCode(callSuper = false)
+public class User extends AbstractDomain {
+
     private String id;
 
     private String username;

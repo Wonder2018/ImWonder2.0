@@ -20,7 +20,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-public abstract class AbstractDAO<T> {
+public abstract class AbstractDAO<T extends AbstractDomain> {
 
     protected Logger log = LoggerFactory.getLogger(getClass());
 

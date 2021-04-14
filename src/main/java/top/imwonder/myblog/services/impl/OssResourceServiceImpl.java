@@ -1,9 +1,7 @@
 package top.imwonder.myblog.services.impl;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -99,29 +97,42 @@ public class OssResourceServiceImpl implements OssResourceService {
         return sp.getBucket(or.getPrefix());
     }
 
-    private synchronized OssResourceInfo tryToFindOssResourceInfo(String orId) {
-        List<OssResource> ors = orDAO.loadMore("where w_id =?", orId);
-        if (!ors.isEmpty()) {
-            return tryToFindOssResourceInfo(ors.get(0));
+    private OssResourceInfo tryToFindOssResourceInfo(String orId) {
+        OssResourceInfo res = redisService.get(orId);
+        if (res != null) {
+            return res;
+        } else {
+            return loadOssResourceInfo(orId);
         }
-        return new OssResourceInfo();
     }
 
-    private synchronized OssResourceInfo tryToFindOssResourceInfo(OssResource or) {
+    private OssResourceInfo tryToFindOssResourceInfo(OssResource or) {
         OssResourceInfo res = redisService.get(or.getId());
         if (res != null) {
             return res;
         } else {
-            res = new OssResourceInfo();
+            return loadOssResourceInfo(or);
         }
+    }
+
+    private OssResourceInfo loadOssResourceInfo(String orId) {
+        List<OssResource> ors = orDAO.loadMore("where w_id =?", orId);
+        if (!ors.isEmpty()) {
+            return loadOssResourceInfo(ors.get(0));
+        }
+        return new OssResourceInfo();
+    }
+
+    private OssResourceInfo loadOssResourceInfo(OssResource or) {
+        OssResourceInfo res = new OssResourceInfo();
         String prefix = or.getPrefix();
         String fileName = or.getPath();
         long oeis = env.getOssExpireInSeconds();
-        String finalUrl = oas.authUrl(getBaseUrl(prefix, fileName), oeis);
+        String finalUrl = getAuthedUrl(prefix, fileName, oeis);
         switch (or.getCategory()) {
         case "bg":
             fileName = fileName.replace(".webp", "blur.webp");
-            String blurUrl = oas.authUrl(getBaseUrl(prefix, fileName), oeis);
+            String blurUrl = getAuthedUrl(prefix, fileName, oeis);
             res.setBz(blurUrl);
             break;
         default:
@@ -132,8 +143,15 @@ public class OssResourceServiceImpl implements OssResourceService {
         return res;
     }
 
-    private String getBaseUrl(String prefix, String fileName) {
-        return String.format("%s://%s.%s/%s", env.getOssProtocol(), prefix, env.getOssHostSuffix(), fileName);
+    private String getAuthedUrl(String prefix, String fileName, long expires) {
+        String localAssetsPrefix = env.getLocalAssetsPrefix();
+        if (localAssetsPrefix != null && localAssetsPrefix.equals(prefix)) {
+            return "/blog-assets/" + fileName;
+        } else {
+            String baseUrl = String.format("%s://%s.%s/%s", env.getOssProtocol(), prefix, env.getOssHostSuffix(),
+                    fileName);
+            return oas.authUrl(baseUrl, expires);
+        }
     }
 
     @Data

@@ -38,8 +38,13 @@
       "sourceType": "top.imwonder.myblog.Env"
     },
     {
-      "name": "env.article-root",
+      "name": "env.assets-root",
       "type": "java.io.File",
+      "sourceType": "top.imwonder.myblog.Env"
+    },
+    {
+      "name": "env.local-assets-prefix",
+      "type": "java.lang.String",
       "sourceType": "top.imwonder.myblog.Env"
     }
   ],

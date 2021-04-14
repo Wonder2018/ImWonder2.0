@@ -12,6 +12,7 @@ import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -33,10 +34,16 @@ import top.touchface.md2x.entity.Options;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
+    @Autowired
+    private Env env;
+
     // 处理静态资源
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String asstesRoot = env.getAssetsRoot().getAbsolutePath();
+        System.out.println("file:" + asstesRoot);
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
+        registry.addResourceHandler("/blog-assets/**").addResourceLocations("file:" + asstesRoot + "/");
         registry.addResourceHandler("/robots.txt").addResourceLocations("classpath:/static/assets/robots.txt");
         registry.addResourceHandler("/favicon.ico").addResourceLocations("classpath:/static/assets/img/favicon.ico");
         registry.addResourceHandler("/sitemap.xml").addResourceLocations("file:./sitemap.xml");

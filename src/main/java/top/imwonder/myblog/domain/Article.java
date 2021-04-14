@@ -7,10 +7,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import top.imwonder.util.AbstractDomain;
 
 @Data
-public class Article {
-    
+@EqualsAndHashCode(callSuper = false)
+public class Article extends AbstractDomain {
+
     private String id;
 
     private String title;
@@ -28,5 +31,5 @@ public class Article {
     private String summary;
 
     private Integer read;
-    
+
 }

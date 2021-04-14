@@ -11,7 +11,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import top.imwonder.myblog.SystemProperties;
 import top.imwonder.myblog.controller.AbstractUiController;
-import top.imwonder.myblog.domain.Article;
 import top.imwonder.myblog.exception.WonderResourceNotFoundException;
 import top.imwonder.myblog.pojo.BlogInfo;
 import top.imwonder.myblog.services.BlogDetailsService;
@@ -39,21 +38,21 @@ public class BlogDetailsController extends AbstractUiController {
 
     @RequestMapping("/details/{blogId}")
     public String blogDetails(@PathVariable("blogId") String blogId, HttpServletRequest req, Model model) {
-        try {
-            BlogInfo bi = bds.loadBlogById(blogId);
-            if (bds.markedReadForUser(req, blogId)) {
-                bi.setRead(bi.getRead() + 1);
-                // bds.setReadCountForArticle(blogId, bi.getRead());
-            }
-            model.addAttribute("blogDetails", bi);
-            model.addAttribute("articles", bds.latestArticles(5));
-            initBg(model);
-            listTag(model);
-            return "blog/blogDetails";
-        } catch (Exception e) {
-            log.debug(e.getMessage());
-            throw new WonderResourceNotFoundException("404", "你要查看的博客不存在或已被删除！", e);
+        // try {
+        BlogInfo bi = bds.loadBlogById(blogId);
+        if (bds.markedReadForUser(req, blogId)) {
+            bi.setRead(bi.getRead() + 1);
+            bds.setReadCountForArticle(blogId, bi.getRead());
         }
+        model.addAttribute("blogDetails", bi);
+        model.addAttribute("articles", bds.latestArticles(5));
+        initBg(model);
+        listTag(model);
+        return "blog/blogDetails";
+        // } catch (WonderResourceNotFoundException e) {
+        // log.debug(e.getMessage());
+        // throw new WonderResourceNotFoundException("404", "你要查看的博客不存在或已被删除！", e);
+        // }
     }
 
     @RequestMapping(value = { "/resource/{resourceId}" })

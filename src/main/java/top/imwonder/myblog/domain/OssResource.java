@@ -7,10 +7,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import top.imwonder.util.AbstractDomain;
 
 @Data
-public class OssResource {
-    
+@EqualsAndHashCode(callSuper = false)
+public class OssResource extends AbstractDomain {
+
     private String id;
 
     private String name;

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import lombok.Data;
 import top.imwonder.myblog.Env;
 import top.imwonder.myblog.dao.ArticleDAO;
 import top.imwonder.myblog.dao.ArticleResourceDAO;
@@ -109,12 +107,12 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         try {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(blog.getPostTime());
-            String md = FileOperatingUtil.readForString(new File(env.getArticleRoot(), path));
+            String md = FileOperatingUtil.readForString(new File(env.getAssetsRoot(), path));
             html = md2x.parse(md);
             blog.setHtml(html);
             long ttl = injectBlogResource(blog);
             redisService.set(blog.getId(), blog.getHtml(), ttl);
-            return html;
+            return blog.getHtml();
         } catch (IOException e) {
             throw new WonderResourceNotFoundException("404", "你要查看的博客不存在或已被删除！", e);
         }

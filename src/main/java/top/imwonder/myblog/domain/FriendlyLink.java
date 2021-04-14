@@ -3,9 +3,12 @@ package top.imwonder.myblog.domain;
 import java.util.Date;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import top.imwonder.util.AbstractDomain;
 
 @Data
-public class FriendlyLink {
+@EqualsAndHashCode(callSuper = false)
+public class FriendlyLink extends AbstractDomain {
 
     /** HTTPS */
     public static final int PROTOCOL_HTTPS = 1;

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import top.imwonder.myblog.controller.AbstractUiController;
 import top.imwonder.myblog.services.admin.MenuService;
+import top.imwonder.myblog.services.admin.PermService;
 
 @Controller("adminIndexControler")
 @RequestMapping(value = "/wonderlandsadmin")
@@ -14,6 +15,9 @@ public class IndexController extends AbstractUiController {
 
     @Autowired
     private MenuService ms;
+
+    @Autowired
+    private PermService ps;
 
     @RequestMapping(value = { "/login", "login.html" })
     public String login(Model model) {
@@ -36,5 +40,11 @@ public class IndexController extends AbstractUiController {
     public String listMenu(Model model) {
         model.addAttribute("lmenu", ms.listMenus());
         return "admin/listMenu";
+    }
+
+    @RequestMapping("/perm/listPerm.html")
+    public String listPerm(Model model) {
+        model.addAttribute("lperm", ps.listPerms());
+        return "admin/listPerm";
     }
 }

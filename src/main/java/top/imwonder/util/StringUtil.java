@@ -19,16 +19,19 @@ import org.apache.tomcat.util.codec.binary.Base64;
 
 /**
  * StringUtil
- * 
+ *
  * @description: 字符串工具类
  **/
 public class StringUtil {
+
+    private StringUtil() {
+    }
 
     private static Pattern humPattern = Pattern.compile("[A-Z]");
 
     /**
      * 判断是否为空字符串最优代码
-     * 
+     *
      * @param str
      * @return 如果为空，则返回true
      */
@@ -38,7 +41,7 @@ public class StringUtil {
 
     /**
      * 判断字符串是否非空
-     * 
+     *
      * @param str 如果不为空，则返回true
      * @return
      */
@@ -48,7 +51,7 @@ public class StringUtil {
 
     /**
      * 判断字符串是否全部为空
-     * 
+     *
      * @param str 如果全部为空，则返回true
      * @return
      */
@@ -63,7 +66,7 @@ public class StringUtil {
 
     /**
      * 判断字符串是否全部非空
-     * 
+     *
      * @param str 如果全部非空，则返回true
      * @return
      */
@@ -112,6 +115,20 @@ public class StringUtil {
         }
         matcher.appendTail(sb);
         return sb.toString();
+    }
+
+    /**
+     * 首字母大写
+     *
+     * @param str
+     * @return
+     */
+    public static String upperFirstChar(String str) {
+        char chars[] = str.toCharArray();
+        if (chars[0] >= 'a' && chars[0] <= 'z') {
+            chars[0] -= 32;
+        }
+        return String.valueOf(chars);
     }
 
     /**

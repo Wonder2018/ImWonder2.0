@@ -166,7 +166,7 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>cn.joylau.code</groupId>
 				<artifactId>joylau-compressor-plugins</artifactId>
 				<version>1.2.RELEASE</version>
@@ -205,7 +205,7 @@
 						</htmlConfig>
 					</htmlConfigs>
 				</configuration>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 

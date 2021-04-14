@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import top.imwonder.myblog.controller.AbstractUiController;
-import top.imwonder.myblog.dao.ArticleDAO;
 import top.imwonder.myblog.dao.TagDAO;
 import top.imwonder.myblog.domain.Article;
 import top.imwonder.myblog.domain.Tag;

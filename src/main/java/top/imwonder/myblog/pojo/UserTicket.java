@@ -1,4 +1,4 @@
-package top.imwonder.myblog.domain;
+package top.imwonder.myblog.pojo;
 
 import java.util.ArrayList;
 import java.util.Collection;

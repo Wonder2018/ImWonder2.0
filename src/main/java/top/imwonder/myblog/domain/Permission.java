@@ -7,10 +7,13 @@
 package top.imwonder.myblog.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import top.imwonder.util.AbstractDomain;
 
 @Data
-public class Permission {
-    
+@EqualsAndHashCode(callSuper = false)
+public class Permission extends AbstractDomain {
+
     private String id;
 
     private String name;

@@ -24,14 +24,7 @@ public class Env {
 
     private Long resourceExpireInSeconds;
 
-    private File articleRoot;
-    
-    // public File resource;
+    private File assetsRoot;
 
-    // public void setResource(File resource){
-    //     if(!resource.exists()){
-    //         resource.mkdirs();
-    //     }
-    //     this.resource = resource;
-    // }
+    private String localAssetsPrefix;
 }

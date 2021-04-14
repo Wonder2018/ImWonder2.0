@@ -23,6 +23,9 @@ public class FileOperatingUtil {
 
     public static Pattern filePattern = Pattern.compile("[:*?\"<>|]");
 
+    private FileOperatingUtil() {
+    }
+
     public static String filenameFilter(String str) {
         return str == null ? null : filePattern.matcher(str).replaceAll("");
     }

@@ -11,7 +11,7 @@ import top.imwonder.myblog.dao.userdao.UserPwdDAO;
 import top.imwonder.myblog.domain.RolePermission;
 import top.imwonder.myblog.domain.User;
 import top.imwonder.myblog.domain.UserRole;
-import top.imwonder.myblog.domain.UserTicket;
+import top.imwonder.myblog.pojo.UserTicket;
 import top.imwonder.myblog.services.login.LoginOAService;
 
 @Service

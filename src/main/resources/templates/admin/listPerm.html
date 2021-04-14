@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>编辑权限</title>
+		<link rel="stylesheet" href="/assets/css/reset.css" />
+		<link rel="stylesheet" href="/assets/css/imwonder.css" />
+		<link th:href="${iconfontUrl}" rel="stylesheet" href="//at.alicdn.com/t/font_1735034_bb7wuginu26.css" />
+		<link rel="stylesheet" href="/assets/css/datatable.css" />
+		<link rel="stylesheet" href="/assets/css/admin/listPerm.css" />
+		<script src="/assets/js/public/jquery-3.4.1.min.js"></script>
+		<script src="/assets/js/common/datatable.js"></script>
+		<script src="/assets/js/admin/common.js"></script>
+		<script src="/assets/js/admin/listPerm.js"></script>
+		<script th:inline="JavaScript">
+			window._chn = /*[[${_csrf.headerName}]]*/ "cpn";
+			window._ctv = /*[[${_csrf.token}]]*/ "cpv";
+		</script>
+	</head>
+	<body>
+		<button dt-type="adro" onclick="datatable.add(tbjson,'.table')">添加权限</button>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>权限 ID</th>
+					<th>权限名称</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="perm,ite : ${lperm}" th:id="|tb${perm.id}|">
+					<td th:text="${ite.count}"></td>
+					<td th:text="${perm.id}" edit-type="comtext" edit-key="id"></td>
+					<td th:text="${perm.name}" edit-type="comtext" edit-key="name"></td>
+					<td>
+						<button dt-type="edit" th:onclick="datatable.edit([[${perm.id}]])">编辑</button>
+						<button dt-type="dlet" th:onclick="datatable.dlet([[${perm.id}]],[[${perm.name}]])">删除</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

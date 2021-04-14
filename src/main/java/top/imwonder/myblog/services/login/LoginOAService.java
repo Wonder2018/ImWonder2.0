@@ -4,7 +4,7 @@ import java.util.List;
 
 import top.imwonder.myblog.domain.RolePermission;
 import top.imwonder.myblog.domain.UserRole;
-import top.imwonder.myblog.domain.UserTicket;
+import top.imwonder.myblog.pojo.UserTicket;
 
 public interface LoginOAService {
     
