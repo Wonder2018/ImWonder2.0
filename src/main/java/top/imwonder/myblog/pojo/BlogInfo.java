@@ -8,12 +8,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import top.imwonder.myblog.domain.Article;
 import top.imwonder.myblog.domain.ArticleResource;
 import top.imwonder.myblog.domain.Tag;
+import top.imwonder.util.AbstractDomain;
 
 @Data
-public class BlogInfo {
+@EqualsAndHashCode(callSuper = false)
+public class BlogInfo extends AbstractDomain {
 
     private String id;
 
@@ -37,18 +40,9 @@ public class BlogInfo {
 
     private String face;
 
-    public BlogInfo copyFromArticle(Article article) {
-        this.id = article.getId();
-        this.title = article.getTitle();
-        this.postTime = article.getPostTime();
-        this.keywords = article.getKeywords();
-        this.summary = article.getSummary();
-        this.read = article.getRead();
-        this.face = article.getFaceId();
-        return this;
-    }
-
     public static BlogInfo createBlogInfoFromArticle(Article article) {
-        return new BlogInfo().copyFromArticle(article);
+        BlogInfo bi = new BlogInfo();
+        bi.copyFrom(article, true);
+        return bi;
     }
 }

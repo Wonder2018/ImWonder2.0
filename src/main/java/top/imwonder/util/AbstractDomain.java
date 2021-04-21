@@ -10,31 +10,10 @@ import top.imwonder.util.annotation.DomainName;
 @Slf4j
 public abstract class AbstractDomain {
 
-    public void copyFromDomain(AbstractDomain obj, boolean isCover) {
-        Class<? extends AbstractDomain> objType = obj.getClass();
-        Field fields[] = objType.getDeclaredFields();
+    public void copyFrom(Object obj, boolean isCover) {
+        Field fields[] = obj.getClass().getDeclaredFields();
         try {
             copyFields(obj, fields, isCover);
-        } catch (ReflectiveOperationException e) {
-            log.info(MessageUtil.getMsg("error.unexpected"));
-            log.debug(MessageUtil.getMsg("error.debug.simple", e.getMessage()));
-            e.printStackTrace();
-        }
-    }
-
-    public void copyFromPojo(Object obj, boolean isCover) {
-        Class<? extends AbstractDomain> targetType = this.getClass();
-        Field allFields[] = obj.getClass().getDeclaredFields();
-        ArrayList<Field> fields = new ArrayList<>();
-        for (Field field : allFields) {
-            DomainName domainName = field.getAnnotation(DomainName.class);
-            if (targetType != domainName.type()) {
-                continue;
-            }
-            fields.add(field);
-        }
-        try {
-            copyFields(obj, fields.toArray(new Field[0]), isCover);
         } catch (ReflectiveOperationException e) {
             log.info(MessageUtil.getMsg("error.unexpected"));
             log.debug(MessageUtil.getMsg("error.debug.simple", e.getMessage()));
@@ -105,10 +84,12 @@ public abstract class AbstractDomain {
 
     private String getTargetFieldName(Field field) {
         if (field.isAnnotationPresent(DomainName.class)) {
-            return field.getAnnotation(DomainName.class).name();
-        } else {
-            return field.getName();
+            DomainName domainName = field.getAnnotation(DomainName.class);
+            if (domainName.getClass().equals(getClass())) {
+                return domainName.name();
+            }
         }
+        return field.getName();
     }
 
     private String genGetterName(String fieldName) {

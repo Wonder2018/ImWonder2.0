@@ -81,7 +81,7 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         List<Tag> tags = tagDAO.loadMoreBySQL(LOAD_TAG_SQL, art.getId());
         List<ArticleResource> resourceList = arrDAO.loadMore(" where w_article_id = ? order by w_order asc", blogId);
         BlogInfo bi = new BlogInfo();
-        bi.copyFromArticle(art);
+        bi.copyFrom(art, true);
         bi.setTags(tags);
         bi.setResourceList(resourceList);
         bi.setHtml(cacheBlogHtml(bi, art.getPath()));

@@ -32,9 +32,20 @@
 	</head>
 	<body>
 		<div th:fragment="loading" th:if="${!isRobot}" class="loading-cover">
-			<img src="" alt="loading" class="loading-icon" />
-			<div class="loading-prog">
-				<span class="loading-line" style="width: 0%"><span>0%</span></span>
+			<div class="loading-animate">
+				<div class="running">
+					<div class="outer">
+						<div class="body">
+							<div class="arm behind"></div>
+							<div class="arm front"></div>
+							<div class="leg behind"></div>
+							<div class="leg front"></div>
+						</div>
+					</div>
+				</div>
+				<div class="loading-prog">
+					<span class="loading-line" style="width: 0%"><span>0%</span></span>
+				</div>
 			</div>
 		</div>
 		<nav th:fragment="nav(home)" class="nav">
@@ -105,8 +116,12 @@
 								</li>
 							</ul>
 							<ul class="wonder-snsl-list">
-								<li class="wonder-snsl-item hvr-radial-out"><a href="mailto:wonder6613@imwonder.top" style="color: #fff; text-decoration: none;"><span class="iconfont icon-mail"></span></a></li>
-								<li class="wonder-snsl-item hvr-radial-out"><a href="https://github.com/wonder2018" style="color: #fff; text-decoration: none;"><span class="iconfont icon-github"></span></a></li>
+								<li class="wonder-snsl-item hvr-radial-out">
+									<a href="mailto:wonder6613@imwonder.top" style="color: #fff; text-decoration: none"><span class="iconfont icon-mail"></span></a>
+								</li>
+								<li class="wonder-snsl-item hvr-radial-out">
+									<a href="https://github.com/wonder2018" style="color: #fff; text-decoration: none"><span class="iconfont icon-github"></span></a>
+								</li>
 							</ul>
 						</li>
 						<li class="news-card latest-article">

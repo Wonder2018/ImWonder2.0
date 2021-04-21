@@ -127,16 +127,12 @@ public class FriendlyLinkServiceImpl implements FriendlyLinkService {
 
     private FriendlyLink parseFromOpenForm(FriendlyLinkForm flf) {
         FriendlyLink fl = new FriendlyLink();
+        fl.copyFrom(flf, true);
         fl.setId(IdUtil.uuid());
         fl.setAddTime(new Date());
         fl.setDisabled(false);
-        fl.setEmail(flf.getEmail());
-        fl.setPassword(flf.getPwd());
         fl.setProtocol(flf.getUrl().startsWith("https") ? 1 : 2);
         fl.setVarified(false);
-        fl.setWebmaster(flf.getMaster());
-        fl.setSiteName(flf.getSiteName());
-        fl.setUrl(flf.getUrl());
         return fl;
 
     }
