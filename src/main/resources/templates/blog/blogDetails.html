@@ -3,9 +3,9 @@
 	<head th:replace="fragments :: common_header(~{::.primate},~{::title},~{::.comcss},~{::.pricss},~{::.initjson},~{::.comjs},~{::.prijs})">
 		<meta name="description" th:content="${blogDetails.summary}" class="primate" />
 		<title th:text="|${blogDetails.title} - I'm Wonder|">Title - I'm Wonder</title>
-		<link rel="stylesheet" href="/assets/css/public/github-markdown.css" class="comcss" />
-		<link rel="stylesheet" href="/assets/css/public/highlight/googlecode.css" class="comcss" />
-		<link rel="stylesheet" href="/assets/css/blog/blogDetails.css" class="pricss" />
+		<link rel="stylesheet" href="../static/assets/vendors/github-markdown.css" th:href="@{~/assets/vendors/github-markdown.css}" class="comcss" />
+		<link rel="stylesheet" href="../static/assets/vendors/highlight/googlecode.css" th:href="@{~/assets/vendors/highlight/googlecode.css}" class="comcss" />
+		<link rel="stylesheet" href="../static/assets/css/blog/blogDetails.css" th:href="@{~/assets/css/blog/blogDetails.css}" class="pricss" />
 		<script th:inline="JavaScript" class="initjson">
 			window.isRobot = /*[[${isRobot}]]*/ false;
 			window.bgList = /*[[${bgList}]]*/ [];

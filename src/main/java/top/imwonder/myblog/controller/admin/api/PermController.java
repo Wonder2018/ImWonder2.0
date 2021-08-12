@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import top.imwonder.myblog.domain.Permission;
 import top.imwonder.myblog.services.admin.PermService;
-import top.imwonder.util.StringUtil;
+import top.imwonder.util.Base64Util;
 
 @Controller("permControler")
 @RequestMapping("/wonderlandsadmin/api/perms")
@@ -25,7 +25,7 @@ public class PermController {
 
     @PostMapping("/{id}/{name}")
     public String add(Permission perm, Model model) {
-        perm.setId(StringUtil.decodeBase64ToString(perm.getId()));
+        perm.setId(Base64Util.decodeBase64String(perm.getId()));
         ps.addPerm(perm);
         model.addAttribute("code", 200);
         model.addAttribute("msg", "添加成功！");
@@ -34,7 +34,7 @@ public class PermController {
 
     @PutMapping("/{id}/{name}")
     public String update(Permission perm, Model model) {
-        perm.setId(StringUtil.decodeBase64ToString(perm.getId()));
+        perm.setId(Base64Util.decodeBase64String(perm.getId()));
         model.addAttribute("perm", ps.updatePerm(perm));
         model.addAttribute("code", 200);
         model.addAttribute("msg", "更新成功！");
@@ -43,9 +43,10 @@ public class PermController {
 
     @DeleteMapping(value = { "/{id}" })
     public String delete(@PathVariable("id") String id, Model model) {
-        ps.deletePerm(id);
+        ps.deletePerm(Base64Util.decodeBase64String(id));
         model.addAttribute("code", 200);
         model.addAttribute("msg", "删除成功！");
         return "json";
     }
+
 }

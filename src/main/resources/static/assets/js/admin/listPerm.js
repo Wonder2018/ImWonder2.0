@@ -1,38 +1,40 @@
-let updateAPI = "../api/perms/${id}/${name}";
-let insertAPI = "../api/perms/${id}/${name}";
-let deleteAPI = "../api/perms/${id}";
+let updateAPI = "api/perms/${id}/${name}";
+let insertAPI = "api/perms/${id}/${name}";
+let deleteAPI = "api/perms/${id}";
 let retObjKey = "perm";
 let tbjson = [
-	{
-		tagName: "td",
-	},
-	{
-		editType: "comtext",
-		editKey: "id",
-		tagName: "td",
-	},
-	{
-		editType: "comtext",
-		editKey: "name",
-		tagName: "td",
-	},
-	{
-		children: [
-			{
-				dtType: "edit",
-				onclick: "submit",
-				tagName: "button",
-				text: "保存",
-			},
-			{
-				dtType: "cancel",
-				onclick: "cancel",
-				tagName: "button",
-				text: "取消",
-			},
-		],
-		tagName: "td",
-	},
+    {
+        tagName: "td",
+    },
+    {
+        editType: "comtext",
+        editKey: "id",
+        tagName: "td",
+    },
+    {
+        editType: "comtext",
+        editKey: "name",
+        tagName: "td",
+    },
+    {
+        children: [
+            {
+                dtType: "edit",
+                onclick: "submit",
+                tagName: "button",
+                class: ["btn", "btn-success"],
+                text: "保存",
+            },
+            {
+                dtType: "cancel",
+                onclick: "cancel",
+                tagName: "button",
+                class: ["btn", "btn-danger"],
+                text: "取消",
+            },
+        ],
+        tagName: "td",
+    },
 ];
 
 /**
@@ -43,17 +45,17 @@ let tbjson = [
  * @returns {RESTBody}
  */
 function parseRequest(action, param) {
-	switch (action) {
-		case "update":
-			return parseUpdate(param);
-		case "insert":
-			return parseInsert(param);
-		case "delete":
-			return parseDelete(param);
-		default:
-			alert("异常调用！");
-			break;
-	}
+    switch (action) {
+        case "update":
+            return parseUpdate(param);
+        case "insert":
+            return parseInsert(param);
+        case "delete":
+            return parseDelete(param);
+        default:
+            alert("异常调用！");
+            break;
+    }
 }
 
 /**
@@ -63,13 +65,13 @@ function parseRequest(action, param) {
  * @returns {RESTBody}
  */
 function parseUpdate(param) {
-	let api = updateAPI.replace("${id}", param.id);
-	api = api.replace("${name}", param.name);
-	let restBody = new RESTBody(api, "PUT", {}, retObjKey);
-	restBody.setEnableCsrf(true);
-	restBody.setCsrfKey(_chn);
-	restBody.setCsrfToken(_ctv);
-	return restBody;
+    let api = updateAPI.replace("${id}", base64.encode(param.id));
+    api = api.replace("${name}", param.name);
+    let restBody = new RESTBody(api, "PUT", {}, retObjKey);
+    restBody.setEnableCsrf(true);
+    restBody.setCsrfKey(_chn);
+    restBody.setCsrfToken(_ctv);
+    return restBody;
 }
 
 /**
@@ -79,13 +81,13 @@ function parseUpdate(param) {
  * @returns {RESTBody}
  */
 function parseInsert(param) {
-	let api = insertAPI.replace("${id}", base64.encode(param.id));
-	api = api.replace("${name}", param.name);
-	let restBody = new RESTBody(api, "POST", {}, retObjKey);
-	restBody.setEnableCsrf(true);
-	restBody.setCsrfKey(_chn);
-	restBody.setCsrfToken(_ctv);
-	return restBody;
+    let api = insertAPI.replace("${id}", base64.encode(param.id));
+    api = api.replace("${name}", param.name);
+    let restBody = new RESTBody(api, "POST", {}, retObjKey);
+    restBody.setEnableCsrf(true);
+    restBody.setCsrfKey(_chn);
+    restBody.setCsrfToken(_ctv);
+    return restBody;
 }
 /**
  * 构造删除请求
@@ -94,9 +96,9 @@ function parseInsert(param) {
  * @returns {RESTBody}
  */
 function parseDelete(param) {
-	let restBody = new RESTBody(deleteAPI.replace("${id}", base64.encode(param.id)), "DELETE", {}, retObjKey);
-	restBody.setEnableCsrf(true);
-	restBody.setCsrfKey(_chn);
-	restBody.setCsrfToken(_ctv);
-	return restBody;
+    let restBody = new RESTBody(deleteAPI.replace("${id}", base64.encode(param.id)), "DELETE", {}, retObjKey);
+    restBody.setEnableCsrf(true);
+    restBody.setCsrfKey(_chn);
+    restBody.setCsrfToken(_ctv);
+    return restBody;
 }

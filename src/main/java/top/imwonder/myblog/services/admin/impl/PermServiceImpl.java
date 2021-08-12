@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import top.imwonder.myblog.dao.PermissionDAO;
 import top.imwonder.myblog.domain.Permission;
 import top.imwonder.myblog.services.admin.PermService;
-import top.imwonder.util.IdUtil;
 
 @Service
 public class PermServiceImpl implements PermService {
@@ -23,7 +22,6 @@ public class PermServiceImpl implements PermService {
 
     @Override
     public void addPerm(Permission perm) {
-        perm.setId(IdUtil.uuid());
         pDAO.insert(perm);
     }
 

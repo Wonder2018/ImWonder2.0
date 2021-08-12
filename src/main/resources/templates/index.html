@@ -10,7 +10,7 @@
 		/>
 		<title>I'm Wonder - 一只立志成为最强全栈的小猿！</title>
 		<link th:if="false" class="comcss" />
-		<link rel="stylesheet" href="/assets/css/index.css" class="pricss" />
+		<link rel="stylesheet" href="../static/assets/css/index.css" th:href="@{~/assets/css/index.css}" class="pricss" />
 		<script th:inline="JavaScript" class="initjson">
 			window.isRobot = /*[[${isRobot}]]*/ false;
 			window.bgList = /*[[${bgList}]]*/ [];

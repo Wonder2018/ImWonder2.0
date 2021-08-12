@@ -3,9 +3,9 @@
 	<head th:replace="fragments :: common_header(~{::.primate},~{::title},~{::.comcss},~{::.pricss},~{::.initjson},~{::.comjs},~{::.prijs})">
 		<meta name="description" content="将你的网站添加到我的友情链接列表中" class="primate" />
 		<title>互加友链 - I'm Wonder</title>
-		<link rel="stylesheet" href="/assets/css/public/github-markdown.css" class="comcss" />
-		<link rel="stylesheet" href="/assets/css/public/highlight/googlecode.css" class="comcss" />
-		<link rel="stylesheet" href="/assets/css/addFriendlyLink.css" class="pricss" />
+		<link rel="stylesheet" href="../static/assets/vendors/github-markdown.css" th:href="@{~/assets/vendors/github-markdown.css}" class="comcss" />
+		<link rel="stylesheet" href="../static/assets/vendors/highlight/googlecode.css" th:href="@{~/assets/vendors/highlight/googlecode.css}" class="comcss" />
+		<link rel="stylesheet" href="../static/assets/css/addFriendlyLink.css" th:href="@{~/assets/css/addFriendlyLink.css}" class="pricss" />
 		<script th:inline="JavaScript" class="initjson">
 			window._chn = /*[[${_csrf.headerName}]]*/ "cpn";
 			window._ctv = /*[[${_csrf.token}]]*/ "cpv";
