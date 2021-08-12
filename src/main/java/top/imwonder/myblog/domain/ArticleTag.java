@@ -1,12 +1,15 @@
 package top.imwonder.myblog.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import top.imwonder.util.AbstractDomain;
 
 @Data
-public class ArticleTag {
-    
+@EqualsAndHashCode(callSuper = false)
+public class ArticleTag extends AbstractDomain {
+
     private String tagId;
 
     private String articleId;
-    
+
 }

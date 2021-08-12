@@ -32,13 +32,11 @@ build/
 .vscode/
 
 ## Imwonder ##
-photo
 target
-reqofphp.log
-sitemap.xml
 **/application-dev.yml
 **/application-product.yml
+src/main/resources/static/assets/fonts/icon
 src/test/java/top/imwonder/myblog/experiment/
 src/test/java/top/imwonder/myblog/record/
-testBiliHeader.json
-nginx.config
+wonderTmp
+sitemap.xml

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.2</version>
+		<version>2.5.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -28,6 +28,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 
 		<dependency>
@@ -71,6 +76,13 @@
 			<version>1.13.1</version>
 		</dependency>
 
+		<!-- markdown: https://github.com/touchface/md2x-->
+		<dependency>
+			<groupId>top.touchface</groupId>
+			<artifactId>md2x</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.qiniu</groupId>
 			<artifactId>qiniu-java-sdk</artifactId>
@@ -83,13 +95,11 @@
 			<version>[1.3.5,]</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.github.nintha</groupId>
-			<artifactId>webp-imageio-core</artifactId>
-			<version>0.1.3</version>
-			<scope>system</scope>
-			<systemPath>${pom.basedir}/lib/webp-imageio-core-0.1.3.jar</systemPath>
-		</dependency>
+        <dependency>
+            <groupId>top.imwonder.util</groupId>
+            <artifactId>imwonder-util</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
 		<!-- runtime -->
 		<dependency>
@@ -141,6 +151,59 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+				<configuration>
+					<excludes>
+						<exclude>**/experiment/**</exclude>
+						<exclude>**/record/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<!-- <plugin>
+				<groupId>cn.joylau.code</groupId>
+				<artifactId>joylau-compressor-plugins</artifactId>
+				<version>1.2.RELEASE</version>
+				<executions>
+					<execution>
+						<id>resource-compressor</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>resource-compressor</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<cssConfigs>
+						<cssConfig>
+							<dir>/static/assets/css</dir>
+							<include>*.css</include>
+							<exclude>*.min.css</exclude>
+						</cssConfig>
+					</cssConfigs>
+					<jsConfigs>
+						<jsConfig>
+							<dir>/static/assets/js</dir>
+							<include>*.js</include>
+							<exclude>*.min.js</exclude>
+							<munge>true</munge>
+						</jsConfig>
+					</jsConfigs>
+					<htmlConfigs>
+						<htmlConfig>
+							<dir>/templates</dir>
+							<include>*.html</include>
+							<removeIntertagSpaces>true</removeIntertagSpaces>
+							<compressJavaScript>false</compressJavaScript>
+							<compressCss>true</compressCss>
+						</htmlConfig>
+					</htmlConfigs>
+				</configuration>
+			</plugin> -->
 		</plugins>
 	</build>
 

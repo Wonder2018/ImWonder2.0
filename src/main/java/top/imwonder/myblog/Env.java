@@ -1,5 +1,7 @@
 package top.imwonder.myblog;
 
+import java.io.File;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -19,13 +21,10 @@ public class Env {
     private String ossSecretKey;
     
     private Long ossExpireInSeconds;
-    
-    // public File resource;
 
-    // public void setResource(File resource){
-    //     if(!resource.exists()){
-    //         resource.mkdirs();
-    //     }
-    //     this.resource = resource;
-    // }
+    private Long resourceExpireInSeconds;
+
+    private File assetsRoot;
+
+    private String localAssetsPrefix;
 }

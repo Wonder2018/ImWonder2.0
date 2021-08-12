@@ -1,8 +1,8 @@
 /*
  * @Author: qh 
  * @Date: 2020-05-02 16:27:18 
- * @Last Modified by: Wonder2019
- * @Last Modified time: 2020-08-24 09:58:24
+ * @Last Modified by: Wonder2020
+ * @Last Modified time: 2021-05-09 18:08:37
  */
 package top.imwonder.util;
 
@@ -20,7 +20,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-public abstract class AbstractDAO<T> {
+public abstract class AbstractDAO<T extends AbstractDomain> {
 
     protected Logger log = LoggerFactory.getLogger(getClass());
 
@@ -213,10 +213,6 @@ public abstract class AbstractDAO<T> {
         return jt.update(insertSQL, getInsertParamValues(t));
     }
 
-    public int delete(Object id) {
-        return delete(new Object[] { id });
-    }
-
     public int delete(Object... params) {
         return jt.update(deleteSQL, params);
     }
@@ -244,11 +240,7 @@ public abstract class AbstractDAO<T> {
         }, params);
     }
 
-    public T loadOne(Object id) {
-        return loadOne(new Object[] { id });
-    }
-
-    public T loadOne(Object... params) {
+    public T loadOneByPrimaryKey(Object... params) {
         return jt.query(loadOneSQL, new ResultSetExtractor<T>() {
             public T extractData(ResultSet rs) throws SQLException, DataAccessException {
                 if (rs.next())
@@ -259,7 +251,7 @@ public abstract class AbstractDAO<T> {
         }, params);
     }
 
-    public T loadOne(String clause, Object... params) {
+    public T loadOneByWhereClause(String clause, Object... params) {
         return jt.query(appendClause(loadMoreSQL, clause), new ResultSetExtractor<T>() {
             public T extractData(ResultSet rs) throws SQLException, DataAccessException {
                 if (rs.next())

@@ -48,30 +48,20 @@ public abstract class AbstractUiController {
     @Autowired
     private SystemProperties sp;
 
-    private static List<OssResource> orList;
-
-    private static long lastUpdateBg = 0;
-
     @ModelAttribute
     public void initModel(HttpServletRequest req, Model model) {
         String ua = req.getHeader("User-Agent");
         model.addAttribute("isRobot", SpiderUtil.isSpider(ua));
         model.addAttribute("iconfontUrl", sp.getIconfontUrl());
+        listFriendlyLink(model);
     }
 
     protected void initBg(Model model) {
-        long lub = AbstractUiController.lastUpdateBg;
-        if (lub == 0 || System.currentTimeMillis() - lub > 3300000) {
-            AbstractUiController.lastUpdateBg = System.currentTimeMillis();
-            AbstractUiController.orList = orDAO.loadMore(" where w_category = ? order by w_order asc",
-                    new Object[] { "bg" });
-            for (OssResource item : AbstractUiController.orList) {
-                ors.calcPath(item);
-                // item.setPath("/assets/img/bg/img2.jpg");
-                // item.setBz("/assets/img/bg/img2blur.webp");
-            }
+        List<OssResource> orList = orDAO.loadMore(" where w_category = ? order by w_order asc", "bg");
+        for (OssResource item : orList) {
+            ors.calcPath(item);
         }
-        model.addAttribute("bgList", AbstractUiController.orList);
+        model.addAttribute("bgList", orList);
     }
 
     protected void listTag(Model model) {

@@ -31,6 +31,21 @@
       "name": "env.oss-expire-in-seconds",
       "type": "java.lang.Number",
       "sourceType": "top.imwonder.myblog.Env"
+    },
+    {
+      "name": "env.resource-expire-in-seconds",
+      "type": "java.lang.Number",
+      "sourceType": "top.imwonder.myblog.Env"
+    },
+    {
+      "name": "env.assets-root",
+      "type": "java.io.File",
+      "sourceType": "top.imwonder.myblog.Env"
+    },
+    {
+      "name": "env.local-assets-prefix",
+      "type": "java.lang.String",
+      "sourceType": "top.imwonder.myblog.Env"
     }
   ],
   "hints": []

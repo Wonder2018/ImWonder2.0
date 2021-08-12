@@ -11,7 +11,7 @@ import top.imwonder.myblog.dao.userdao.UserPwdDAO;
 import top.imwonder.myblog.domain.RolePermission;
 import top.imwonder.myblog.domain.User;
 import top.imwonder.myblog.domain.UserRole;
-import top.imwonder.myblog.domain.UserTicket;
+import top.imwonder.myblog.pojo.UserTicket;
 import top.imwonder.myblog.services.login.LoginOAService;
 
 @Service
@@ -29,7 +29,7 @@ public class LoginOAServiceImpl implements LoginOAService {
     @Override
     public UserTicket loadBaseInfoByLoginName(String loginName) {
         try {
-            User userInfo = upDAO.loadOne("where w_username=? and w_disable=0", new Object[] { loginName });
+            User userInfo = upDAO.loadOneByWhereClause("where w_username=? and w_disable=0", loginName);
             return new UserTicket(userInfo.getId(), loginName, userInfo.getPassword());
         } catch (Exception e) {
             return null;
@@ -38,7 +38,7 @@ public class LoginOAServiceImpl implements LoginOAService {
 
     @Override
     public List<UserRole> loadUserRole(String uid) {
-        return urDAO.loadMore("where w_user_id=?", new Object[] { uid });
+        return urDAO.loadMore("where w_user_id=?", uid);
     }
 
     @Override

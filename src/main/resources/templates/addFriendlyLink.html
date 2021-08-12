@@ -3,9 +3,9 @@
 	<head th:replace="fragments :: common_header(~{::.primate},~{::title},~{::.comcss},~{::.pricss},~{::.initjson},~{::.comjs},~{::.prijs})">
 		<meta name="description" content="将你的网站添加到我的友情链接列表中" class="primate" />
 		<title>互加友链 - I'm Wonder</title>
-		<link rel="stylesheet" href="/assets/css/public/github-markdown.css" class="comcss" />
-		<link rel="stylesheet" href="/assets/css/public/highlight/googlecode.css" class="comcss" />
-		<link rel="stylesheet" href="/assets/css/addFriendlyLink.css" class="pricss" />
+		<link rel="stylesheet" href="../static/assets/vendors/github-markdown.css" th:href="@{~/assets/vendors/github-markdown.css}" class="comcss" />
+		<link rel="stylesheet" href="../static/assets/vendors/highlight/googlecode.css" th:href="@{~/assets/vendors/highlight/googlecode.css}" class="comcss" />
+		<link rel="stylesheet" href="../static/assets/css/addFriendlyLink.css" th:href="@{~/assets/css/addFriendlyLink.css}" class="pricss" />
 		<script th:inline="JavaScript" class="initjson">
 			window._chn = /*[[${_csrf.headerName}]]*/ "cpn";
 			window._ctv = /*[[${_csrf.token}]]*/ "cpv";
@@ -54,7 +54,7 @@
 											协议的网站排在使用
 											<code>http</code>
 											协议的网站之前，更早申请的网站排在较后申请的网站之前。你也可以通过
-											<a href="mailto:wonder6613@mail.imwonder.top"><code>联系站长</code></a>
+											<a href="mailto:wonder6613@imwonder.top"><code>联系站长</code></a>
 											来调整你的网站排序。
 											<br /><br>
 											b.<span style="color: blue;">（当前处于开放申请阶段，不设任何限制！申请成功后你的网站链接将立即出现在本站下方“友情链接区域！”）</span><span style="text-decoration:line-through;">在收到申请后，你的网站链接将立即添加到本站友情链接一栏，本站也将在 15天 内，每间隔 5天 检查你提交的网站页面是否包含 Url “https://www.imwonder.top”，超过

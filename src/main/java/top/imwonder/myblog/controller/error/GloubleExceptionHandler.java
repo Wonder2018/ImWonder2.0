@@ -33,7 +33,7 @@ public class GloubleExceptionHandler implements AccessDeniedHandler {
         model.addAttribute("code", 500);
         String msg = ex.getMessage();
         log.warn(msg, ex);
-        model.addAttribute("msg", msg != null && msg.indexOf("SQL") > -1 ? "未知异常，请联系管理员" : msg);
+        model.addAttribute("msg", msg != null && msg.indexOf("SQL") > -1 ? "服务器异常，请联系管理员" : msg);
         return checkRequestType(req.getRequestURI(), req);
     }
 
@@ -76,7 +76,6 @@ public class GloubleExceptionHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest req, HttpServletResponse res, AccessDeniedException ex)
             throws IOException, ServletException {
-
         log.info("in hand!");
         req.setAttribute("msg", "非法访问，您无权限执行此操作");
         req.setAttribute("code", 403);

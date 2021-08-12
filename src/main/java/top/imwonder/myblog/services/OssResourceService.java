@@ -20,7 +20,7 @@ public interface OssResourceService {
      * 
      * @param or
      */
-    void calcPath(OssResource or);
+    OssResource calcPath(OssResource or);
 
     FileInfo uploadResource(File file, OssResource or);
 

@@ -2,7 +2,7 @@
  * @Author: Wonder2019 
  * @Date: 2020-05-01 22:09:23 
  * @Last Modified by: Wonder2020
- * @Last Modified time: 2021-02-16 13:00:21
+ * @Last Modified time: 2021-08-09 11:20:21
  */
 package top.imwonder.myblog.config;
 
@@ -12,6 +12,8 @@ import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -24,17 +26,38 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import lombok.extern.slf4j.Slf4j;
 import top.imwonder.myblog.Env;
 import top.imwonder.myblog.enumeration.EnumConverterFactory;
+import top.touchface.md2x.Md2x;
+import top.touchface.md2x.entity.Options;
 
+@Slf4j
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
+    @Autowired
+    private Env env;
+
+    @Value(value = "${spring.profiles.active}")
+    private String spa;
+
     // 处理静态资源
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
+        String asstesRoot = env.getAssetsRoot().getAbsolutePath();
+        System.out.println("file:" + asstesRoot);
+        if ("product".equals(spa)) {
+            log.info("spa => product");
+            registry.addResourceHandler("/assets/css/**").addResourceLocations("classpath:/static/assets/css/");
+            registry.addResourceHandler("/assets/js/**").addResourceLocations("classpath:/static/assets/js/");
+        } else {
+            log.info("spa => {}", spa);
+            registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
+        }
+
+        registry.addResourceHandler("/blog-assets/**").addResourceLocations("file:" + asstesRoot + "/");
         registry.addResourceHandler("/robots.txt").addResourceLocations("classpath:/static/assets/robots.txt");
         registry.addResourceHandler("/favicon.ico").addResourceLocations("classpath:/static/assets/img/favicon.ico");
         registry.addResourceHandler("/sitemap.xml").addResourceLocations("file:./sitemap.xml");
@@ -65,6 +88,12 @@ public class WebConfig implements WebMvcConfigurer {
         return new Gson();
     }
 
+    // md2x工具
+    @Bean
+    public Md2x md2x() {
+        return new Md2x(new Options());
+    }
+
     // 七牛云认证
     @Bean
     public Auth auth(Env env) {
@@ -92,7 +121,7 @@ public class WebConfig implements WebMvcConfigurer {
     // 通用http客户端
     @Bean
     public RestTemplate restTemplate() {
-    return new RestTemplate();
+        return new RestTemplate();
     }
 
     // @Bean

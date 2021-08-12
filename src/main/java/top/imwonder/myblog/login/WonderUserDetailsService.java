@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import top.imwonder.myblog.domain.RolePermission;
 import top.imwonder.myblog.domain.UserRole;
-import top.imwonder.myblog.domain.UserTicket;
+import top.imwonder.myblog.pojo.UserTicket;
 import top.imwonder.myblog.services.login.LoginOAService;
 
 @Slf4j

@@ -17,12 +17,6 @@ public class FriendlyLinkDisplayDAO extends AbstractDAO<FriendlyLink> {
     }
 
     @Override
-    public int delete(Object id) {
-        log.warn("此操作类只支持读取数据");
-        return 0;
-    }
-
-    @Override
     public int delete(Object... params) {
         log.warn("此操作类只支持读取数据");
         return 0;
@@ -46,5 +40,4 @@ public class FriendlyLinkDisplayDAO extends AbstractDAO<FriendlyLink> {
         return 0;
     }
 
-    
 }
